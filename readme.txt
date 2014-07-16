@@ -12,15 +12,15 @@ Soundy Audio Playlist allows any page or post to play and display an audio playl
 
 == Description ==
 
-The **Soundy Audio Playlist** plugin allows any page or post to play and display an audio playlist.
+**Soundy Audio Playlist** allows any page or post to play and display an audio playlist.
 
-This Soundy plugin can be used like its Soundy brother, Soundy Background Music, to have pages or post playing an audio playlist in the background instead of a single soundtrack. However, this plugin can do much more than this: by means of the [sdy_pl playlist] short code, the playlist can be displayed anywhere in the page content. The page visitors can then interact with this playlist and control their audio playback experience with the following user interface features:
+This Soundy plugin can be used like its Soundy brother, Soundy Background Music, to have pages or posts playing an audio playlist in the background instead of a single soundtrack. However, this plugin can do much more than this: by means of the [sdy_pl playlist] short code, the playlist can be displayed anywhere in the page content. The page visitors can then interact with this playlist and control their audio playback experience with the following user interface features:
 
 = Front-End Features =
 
 * Play/Pause button
-* Audio volume control with slider
-* Soundtrack time positioning with slider
+* Audio volume control slider
+* Soundtrack time positioning slider
 * Next and Previous buttons
 * Arrow key soundtrack selection
 * Mouse click soundtrack selection
@@ -32,7 +32,7 @@ This Soundy plugin can be used like its Soundy brother, Soundy Background Music,
 
 The soundtracks are played by means of the HTML 5 audio tag. This way, the plugin is compatible with all modern user devices (smartphones, tablets, laptops and desktops of all vendors).
 
-An author can have the playlist played by his page without displaying the playlist. He can have the Play/Pause button inserted or not. Or he can have the playlist with its full user interface displayed.
+An author can have the playlist played by his page without displaying the playlist. He can have the Play/Pause button inserted or not. Or he can have the playlist displayed with its full user interface.
 
 Defaults can be set by the administrator in the settings page of the plugin.
 
@@ -63,8 +63,8 @@ This Play/Pause button can be positioned in a corner of the document or in a cor
 
 = Docs & Support =
 
-You can find [Tutorial](http://www.webartisan.ch/en/products/sdy_pl/#war_tutorial), [FAQ](http://www.webartisan.ch/en/products/sdy_pl/#war_FAQ), [Examples](http://www.webartisan.ch/en/products/sdy_pl/#war_examples) and more detailed information about **Soundy Audio Playlist** plugin on [WebArtisan.ch](http://www.webartisan.ch/en/products/sdy_pl/). If you were unable to find the answer to your question on the FAQ or in any of the documentation, you should check [Soundy's Support Forum](http://wordpress.org/support/plugin/soundy-audio-playlist) on WordPress.org. If you can't locate any topics that pertain to your particular issue, post a new topic for it.
-**Soundy Audio Playlist** Plugin Home Page: [www.webartisan.ch/en/products/sdy_pl](http://www.webartisan.ch/en/products/sdy_pl/)
+You can find [Tutorial](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#war_tutorial), [FAQ](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#war_FAQ), [Examples](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#war_examples) and more detailed information about **Soundy Audio Playlist** plugin on [WebArtisan.ch](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/). If you were unable to find the answer to your question on the FAQ or in any of the documentation, you should check [Soundy's Support Forum](http://wordpress.org/support/plugin/soundy-audio-playlist) on WordPress.org. If you can't locate any topics that pertain to your particular issue, post a new topic for it.
+**Soundy Audio Playlist** Plugin Home Page: [webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/)
 
 == Installation ==
 
@@ -73,15 +73,16 @@ You can find [Tutorial](http://www.webartisan.ch/en/products/sdy_pl/#war_tutoria
 * **Soundy Audio Playlist** appears.
 * Click on "Install Now".
 * Click on "Activate Plugin".
-* To let a page or post play a soundtrack:
+* Go to Settings > Soundy Audio Playlist.
+* If you rapidly need a test playlist to experiment the plugin, click on the Test button and then on the Save Changes button.
 
 1. Go into the *Edit Page* or *Edit Post* tool of any page in the Admin area.
-1. Set the option *Enable Soundy* to *Yes* in the Soundy Audio Playlist meta box and update the page.
+1. Set the option *Enable Soundy Playlist* to *Yes* in the Soundy Audio Playlist meta box and update the page.
 1. The page will then play the default playlist when displayed.
 1. To have he playlist displayed in the content, insert the [sdy_pl playlist] short code anywhere in the content of this page.
 
 * To set up plugin defaults, go to Settings > **Soundy Audio Playlist** in the admin area and fill out the input fields.
-* For help, here is a [tutorial](http://www.webartisan.ch/en/products/sdy_pl/#wa_tutorial).
+* For help, here is a [tutorial](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#wa_tutorial).
 * Happy Soundy Music !
 
 = Updates =
