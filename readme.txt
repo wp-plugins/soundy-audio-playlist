@@ -135,11 +135,11 @@ PHP 5.3.0 has been released in June 2009. Today’s version is 5.5.12. (sources:
 
 == Screenshots ==
 
-1. **Default Audio Track Settings**
-1. **Play/Pause Button Settings**
-1. **Play/Pause Button Corner Settings**
-1. **Play/Pause Button Static Settings**
-1. **Page or Post Soundy Metabox**
+1. **Playlist Soundtracks Management Tool**
+1. **Playlist Columns Settings**
+1. **Playlist Designer**
+1. **Playlist CSS Settings**
+1. **Play/Pause Button Image Uploads**
 
 == Changelog ==
 
