@@ -187,7 +187,7 @@
 								 value="default" checked/>
 					<label for="war_sdy_pl_radio_soundtracks_default" style="margin-right: 1em;">Default</label>
                     <span class="war_comment">Need a page/post specific playlist? Solution:
-                    <button id="war_sdy_pl_pro_buy" type="button" class="war_soundy" style="margin-left: 5px;">Soundy Audio Playlist PRO</button></span>
+                    <button id="war_sdy_pl_pro_buy" type="button" class="war_sdy_pl" style="margin-left: 5px;">Soundy Audio Playlist PRO</button></span>
 				</div>
 			</td>
 		</tr>
