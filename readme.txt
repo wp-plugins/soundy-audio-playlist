@@ -14,7 +14,7 @@ Soundy Audio Playlist allows any page or post to play and display an audio playl
 
 **Soundy Audio Playlist** allows any page or post to play and display an audio playlist.
 
-This Soundy plugin can be used like its Soundy brother, Soundy Background Music, to have pages or posts playing an audio playlist in the background instead of a single soundtrack. However, this plugin can do much more than this: by means of the [sdy_pl playlist] short code, the playlist can be displayed anywhere in the page content. The page visitors can then interact with this playlist and control their audio playback experience with the following user interface features:
+This Soundy plugin can be used like its Soundy brother, [Soundy Background Music](http://wordpress.org/plugins/soundy-background-music/), to have pages or posts playing an audio playlist in the background instead of a single soundtrack. However, this plugin can do much more than this: by means of the [sdy_pl playlist] short code, the playlist can be displayed anywhere in the page content. The page visitors can then interact with this playlist and control their audio playback experience with the following user interface features:
 
 = Front-End Features =
 
@@ -22,7 +22,7 @@ This Soundy plugin can be used like its Soundy brother, Soundy Background Music,
 * Audio volume control slider
 * Soundtrack time positioning slider
 * Next and Previous buttons
-* Arrow key soundtrack selection
+* Arrow keys soundtrack selection
 * Mouse click soundtrack selection
 * Mouse double-click Play/Pause
 * Display of title, artist and composer of current playing soundtrack
@@ -74,12 +74,12 @@ You can find [Tutorial](http://webartisan.ch/en/products/soundy-audio-playlist/f
 * Click on "Install Now".
 * Click on "Activate Plugin".
 * Go to Settings > Soundy Audio Playlist.
-* If you rapidly need a test playlist to experiment the plugin, click on the Test button and then on the Save Changes button.
+* If you rapidly need a test playlist to experiment the plugin, click on the "Test" button and then on the "Save Changes" button.
 
 1. Go into the *Edit Page* or *Edit Post* tool of any page in the Admin area.
 1. Set the option *Enable Soundy Playlist* to *Yes* in the Soundy Audio Playlist meta box and update the page.
 1. The page will then play the default playlist when displayed.
-1. To have he playlist displayed in the content, insert the [sdy_pl playlist] short code anywhere in the content of this page.
+1. To have the playlist displayed in the content, insert the [sdy_pl playlist] short code anywhere in the content of this page.
 
 * To set up plugin defaults, go to Settings > **Soundy Audio Playlist** in the admin area and fill out the input fields.
 * For help, here is a [tutorial](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#wa_tutorial).
@@ -127,7 +127,7 @@ Yes it is, especially if you have a lot of traffic on your website. Putting your
 
 1. **On WP front-end, Soundy's Play/Pause button does not respond correctly. What's the problem ?**
 Soundy needs jQuery 1.10.2 which is the default jQuery library of the last versions of WordPress. However some themes load their own jQuery library. If this library is not up-to-date, Soundy's Play/Pause button gets into troubles.
-Using WordPress Default jQuery library is actually what Soundy does and this is what your theme also should do instead of loading its own old jQuery version. In Soundy Version 2.0 and later, you can now set the variable $use_own_jquery_lib_on_front_end to true in the main Soundy PHP file: soundy.php. To make this modification, go to the plugins page, click on the Edit link of the Soundy plugin, look for the variable and set it to true. This should fix the problem.
+Using WordPress Default jQuery library is actually what Soundy does and this is what your theme also should do instead of loading its own old jQuery version.
 
 1. **I get a PHP parsing error when activating the plugin. What's the problem ?**
 Soundy needs PHP 5.3 or a higher version. If your PHP parser is not up-to-date, Soundy gets into troubles.
