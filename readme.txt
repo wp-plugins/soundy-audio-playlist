@@ -77,7 +77,9 @@ You can find [Tutorial](http://webartisan.ch/en/products/soundy-audio-playlist/f
 * If you rapidly need a test playlist to experiment the plugin, click on the "Test" button and then on the "Save Changes" button.
 
 1. Go into the *Edit Page* or *Edit Post* tool of any page in the Admin area.
-1. Set the option *Enable Soundy Playlist* to *Yes* in the Soundy Audio Playlist meta box and update the page.
+1. Set the option *Enable Soundy Playlist* to *Yes* in the *General* tab of the Soundy Audio Playlist meta box.
+1. Set the option *Autoplay* to *Yes* in the *Play Options* tab of the Soundy Audio Playlist meta box.
+1. Update the page.
 1. The page will then play the default playlist when displayed.
 1. To have the playlist displayed in the content, insert the [sdy_pl playlist] short code anywhere in the content of this page.
 
