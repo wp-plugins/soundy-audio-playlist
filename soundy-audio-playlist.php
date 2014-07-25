@@ -358,20 +358,23 @@ class WarSoundyAudioPlaylist
 			update_option( 'war_sdy_pl_url_pause_hover', $this->pause_hover_url );
 		}
 
-        $image_play_normal  = get_option( 'war_sdy_pl_url_play_button' );
-        $image_play_hover   = get_option( 'war_sdy_pl_url_play_hover' );
-        $image_pause_normal = get_option( 'war_sdy_pl_url_pause_button' );
-        $image_pause_hover  = get_option( 'war_sdy_pl_url_pause_hover' );
+        $image_play_normal      = get_option( 'war_sdy_pl_url_play_button' );
+        $image_play_hover       = get_option( 'war_sdy_pl_url_play_hover' );
+        $image_pause_normal     = get_option( 'war_sdy_pl_url_pause_button' );
+        $image_pause_hover      = get_option( 'war_sdy_pl_url_pause_hover' );
+        $playlist_css_file_url  = get_option( 'war_sdy_pl_playlist_css_file_url' );
 
-        $image_play_normal  = str_replace( 'soundy-audio-playlist-pro', 'soundy-audio-playlist', $image_play_normal );
-        $image_play_hover   = str_replace( 'soundy-audio-playlist-pro', 'soundy-audio-playlist', $image_play_hover );
-        $image_pause_normal = str_replace( 'soundy-audio-playlist-pro', 'soundy-audio-playlist', $image_pause_normal );
-        $image_pause_hover  = str_replace( 'soundy-audio-playlist-pro', 'soundy-audio-playlist', $image_pause_hover );
+        $image_play_normal      = str_replace( 'soundy-audio-playlist-pro', 'soundy-audio-playlist', $image_play_normal );
+        $image_play_hover       = str_replace( 'soundy-audio-playlist-pro', 'soundy-audio-playlist', $image_play_hover );
+        $image_pause_normal     = str_replace( 'soundy-audio-playlist-pro', 'soundy-audio-playlist', $image_pause_normal );
+        $image_pause_hover      = str_replace( 'soundy-audio-playlist-pro', 'soundy-audio-playlist', $image_pause_hover );
+        $playlist_css_file_url  = str_replace( 'soundy-audio-playlist-pro', 'soundy-audio-playlist', $playlist_css_file_url );
 
-        update_option( 'war_sdy_pl_url_play_button',  $image_play_normal );
-        update_option( 'war_sdy_pl_url_play_hover',   $image_play_hover );
-        update_option( 'war_sdy_pl_url_pause_button', $image_pause_normal );
-        update_option( 'war_sdy_pl_url_pause_hover',  $image_pause_hover );
+        update_option( 'war_sdy_pl_url_play_button',        $image_play_normal );
+        update_option( 'war_sdy_pl_url_play_hover',         $image_play_hover );
+        update_option( 'war_sdy_pl_url_pause_button',       $image_pause_normal );
+        update_option( 'war_sdy_pl_url_pause_hover',        $image_pause_hover );
+        update_option( 'war_sdy_pl_playlist_css_file_url',  $playlist_css_file_url );
 
         if( ! get_option( 'war_sdy_pl_design_pp_img_data_play_normal' ) )
         {
