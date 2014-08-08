@@ -5,7 +5,7 @@
 		$buy = '<button id="war_sdy_pl_pro_buy" type="button" class="war_sdy_pl" style="margin-left: 20px; position: relative; top: -2px;">Soundy Audio Playlist PRO</button>';
 	?>
 	<h2>Soundy Audio Playlist Plugin Settings
-        <span class="war_comment" style="margin-left: 80px; font-size: 80%;">Need more than one playlist ? &nbsp;&nbsp;&nbsp; Solution: <?php echo $buy; ?></span></h2>
+        <span class="war_comment" style="margin-left: 80px; font-size: 80%;">Need more than one playlist ? &nbsp;&nbsp;&nbsp; Upgrade to: <?php echo $buy; ?></span></h2>
 	
 	<p>All these settings are default settings for all pages and posts.<?php echo $tip; ?></p>
 	
