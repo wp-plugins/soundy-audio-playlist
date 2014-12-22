@@ -1,0 +1,239 @@
+#war_canvas
+{
+	border: 1px solid #aaaaaa; 
+	z-index: 10; 
+	border-radius: 5px;
+	position: fixed; 
+	right: 50px;
+	bottom: 30px; 
+}
+
+#war_canvas_save,
+#war_canvas_final
+{
+	border: 1px solid #ff0000; 
+	z-index: 10; 
+	border-radius: 0px;
+	display: none;
+}
+
+.war_sdy_pl_design_pp_slider,
+.war_sdy_pl_design_pp_slider_red,
+.war_sdy_pl_design_pp_slider_green,
+.war_sdy_pl_design_pp_slider_blue
+{
+	width: 200px; 
+	display: inline-block; 
+	margin-right: 5px;
+	font-size: 10px !important;
+    cursor: pointer;
+}
+
+.war_sdy_pl_design_pp_slider .ui-slider-handle
+{
+	background: #2eaecc !important;
+	border-color: #0074a2 !important;
+    cursor: ew-resize !important;
+}
+
+.war_sdy_pl_design_pp_slider .ui-slider-handle:hover
+{
+	background: #1e8cbe !important;
+	border-color: #0074a2 !important;
+}
+
+.war_sdy_pl_design_pp_slider_red .ui-slider-range
+{ 
+	background: #ff0000 !important;
+}
+
+.war_sdy_pl_design_pp_slider_red .ui-slider-handle
+{
+	background: #ff0000 !important;
+	border-color: #aaaaaa !important;
+    cursor: ew-resize !important;
+}
+
+.war_sdy_pl_design_pp_slider_red .ui-slider-handle:hover
+{
+	background: #aa0000 !important;
+}
+
+.war_sdy_pl_design_pp_slider_green .ui-slider-range
+{ 
+	background: #00ff00 !important; 
+}
+
+.war_sdy_pl_design_pp_slider_green .ui-slider-handle
+{
+	background: #00ff00 !important;
+	border-color: #aaaaaa !important;
+    cursor: ew-resize !important;
+}
+
+.war_sdy_pl_design_pp_slider_green .ui-slider-handle:hover
+{
+	background: #00aa00 !important;
+}
+
+.war_sdy_pl_design_pp_slider_blue .ui-slider-range
+{ 
+	background: #0000ff !important; 
+}
+
+.war_sdy_pl_design_pp_slider_blue .ui-slider-handle
+{
+	background: #0000ff !important;
+	border-color: #aaaaaa !important;
+    cursor: ew-resize !important;
+}
+
+.war_sdy_pl_design_pp_slider_blue .ui-slider-handle:hover
+{
+	background: #0000aa !important;
+}
+
+.war_sdy_pl_design_pp_color
+{
+	width: 80px; 
+	height: 20px;
+}
+
+.war_sdy_pl_design_pp_color_rgb_label
+{
+	width: 50px; 
+	height: 20px;
+	display: inline-block; 
+}
+
+.war_sdy_pl_design_pp_color_red
+{
+	color: red !important;
+}
+
+.war_sdy_pl_design_pp_color_green
+{
+	color: green !important;
+}
+
+.war_sdy_pl_design_pp_color_blue
+{
+	color: blue !important;
+}
+
+.war_sdy_pl_design_pp_color_border_red
+{
+	border-color: red !important;
+}
+
+.war_sdy_pl_design_pp_color_border_green
+{
+	border-color: green !important;
+}
+
+.war_sdy_pl_design_pp_color_border_blue
+{
+	border-color: blue !important;
+}
+
+.war_sdy_pl_design_pp_validation_error
+{
+	color: red;
+	position: relative;
+	top: 1px;
+}
+
+input[type="text"].war_sdy_pl_design_pp_rgb_255
+{
+	width: 40px;
+	height: 20px;
+	z-index: 20;
+}
+
+input[type="text"].war_sdy_pl_design_pp_percent,
+input[type="text"].war_sdy_pl_design_pp_pixel
+{
+	width: 40px;
+	height: 20px;
+	z-index: 20;
+}
+
+button.war_sdy_pl_design_pp
+{
+	height: 30px !important;
+	line-height: 28px !important;
+	padding: 0 12px 20px !important;
+	color: #ffffff !important;
+	background-color: #2eaecc !important;
+	border-radius: 3px !important;
+	border: #0074a2 1px solid !important;
+	cursor: pointer !important;
+}
+
+button.war_sdy_pl_design_pp:hover
+{
+	background-color: #1e8cbe !important;
+}
+
+#war_sdy_pl_design_pp_page_preview_label
+{
+	vertical-align: baseline;
+}
+
+#war_sdy_pl_design_pp_page_preview_url
+{
+	vertical-align: baseline;
+	margin-bottom: 8px;
+}
+
+#war_sdy_pl_design_pp_img_preview_here
+{
+	cursor: pointer;
+	border: 1px solid #aaaaaa;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+/*
+div.war_sdy_pl_design_pp_progress
+{ 
+	display: none;
+	position: relative; 
+	width: 400px; 
+	border: 1px solid #ddd; 
+	padding: 1px; 
+	border-radius: 3px; 
+}
+
+div.war_sdy_pl_design_pp_progress_bar
+{
+	background-color: #B4F5B4; 
+	width: 0%; 
+	height: 20px; 
+	border-radius: 3px;
+}
+
+div.war_sdy_pl_design_pp_progress_percent
+{ 
+	position: absolute; 
+	display: inline-block; 
+	top: 3px; 
+	left: 48%;
+}
+*/
+
+@media only screen and (max-width: 480px) {
+
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+
+}
+ 
+@media only screen and (min-width: 1025px) {
+
+}
