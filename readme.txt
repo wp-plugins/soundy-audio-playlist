@@ -145,7 +145,7 @@ PHP 5.3.0 has been released in June 2009. Today’s version is 5.5.12. (sources:
 
 == Changelog ==
 
-= 1.1 &nbsp;&nbsp; - &nbsp;&nbsp; December 22nd, 2014 =
+= 1.1 &nbsp;&nbsp; - &nbsp;&nbsp; December 23rd, 2014 =
 * Playlist font size and playlist width can now be set in the playlist Designer of the plugin settings page as well as on a per page/post basis.
 
 = 1.0 &nbsp;&nbsp; - &nbsp;&nbsp; July 15th, 2014 =

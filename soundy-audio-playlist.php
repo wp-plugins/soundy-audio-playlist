@@ -309,6 +309,13 @@ class WarSoundyAudioPlaylist
 
         include( sprintf( "%s/templates/playlist.php", dirname( __FILE__ ) ) );
         $this->playlist = new WarSoundyAudioPlaylistPlaylist( $this );
+
+        if( $this->sdy_pl_version != get_option( 'war_sdy_pl_version' ) )
+        {
+            // Init playlist font size and width in playlist designer
+            $this->design_pl->activate();
+            update_option( 'war_sdy_pl_version', $this->sdy_pl_version );
+        }
 	}
 
 	public function activate() 
