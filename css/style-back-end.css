@@ -117,6 +117,13 @@ table.war_sdy_pl th
 	text-align: left !important;
 }
 
+table.war_sdy_pl_general th
+{
+    width: 30% !important;
+    vertical-align: top !important;
+    text-align: left !important;
+}
+
 table.war_sdy_pl_shortcodes th
 {
     width: 30% !important;
@@ -337,6 +344,23 @@ table.war_sdy_pl_no_border td
 {
     display: inline-block;
     vertical-align: middle;
+}
+
+div.war_sdy_pl_font_size_container
+{
+    display: block;
+    margin-top:    0px;
+    margin-bottom: 0px;
+    border: 0px solid #0000aa;
+    text-wrap: none;
+    white-space: nowrap;
+}
+
+.war_sdy_pl_validation_error
+{
+    color: red;
+    position: relative;
+    top: 1px;
 }
 
 div.war_sdy_pl_column_layout_container

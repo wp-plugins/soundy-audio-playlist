@@ -20,10 +20,323 @@ function WarSoundyAudioPlaylistAdminColumns( mode )
         _this.jquery_li_selected                    = _this.jquery_soundtracks.first();
         if( _this.is_metabox )
         {
+            _this.initOuterBoxWidth();
+            _this.initFontSize();
             _this.column_ordered_names_default  = _this.jquery_column_ordered_names_default.val().split( ',' );
         }
 
         _this.initColumns();
+
+        if( _this.is_metabox )
+        {
+            _this.initScrolling();
+        }
+    } );
+}
+
+WarSoundyAudioPlaylistAdminColumns.prototype.initScrolling = function()
+{
+    var _this = this;
+
+    var jquery_radio_scrolling_enable = jQuery( 'input:radio[name=war_sdy_pl_scrolling_enable]' );
+    var jquery_scrolling_height = jQuery( '#war_sdy_pl_scrolling_height' );
+
+    jquery_radio_scrolling_enable.change
+    (
+        function()
+        {
+            var value = jQuery( 'input:radio[name=war_sdy_pl_scrolling_enable]:checked').val();
+
+            if( value == 'yes' )
+            {
+                jQuery( '#war_sdy_pl_scrolling_height_container' ).show();
+                jQuery( '#war_sdy_pl_playlist' ).css( 'overflow-y', 'auto' );
+                if( jQuery( '#war_sdy_pl_playlist' ).children().length )
+                {
+                    var border_height = jQuery( '#war_sdy_pl_playlist').children().first().css( 'border-top-width' );
+                    border_height = border_height.replace( 'px', '' );
+                    var row_height = jQuery( '#war_sdy_pl_playlist').children().first().outerHeight();
+                    row_height -= border_height;
+                    var rows = jquery_scrolling_height.val();
+                    var height = rows * row_height;
+                    jQuery( '#war_sdy_pl_playlist' ).css( 'height', height );
+                }
+            }
+            else //if( value == 'no' )
+            {
+                jQuery( '#war_sdy_pl_scrolling_height_container' ).hide();
+                jQuery( '#war_sdy_pl_playlist' ).css( 'overflow-y', 'visible' );
+                jQuery( '#war_sdy_pl_playlist' ).css( 'height', '' );
+            }
+        }
+    );
+
+    jquery_scrolling_height.change
+    (
+        function()
+        {
+            if( jQuery( '#war_sdy_pl_playlist' ).children().length )
+            {
+                var border_height = jQuery( '#war_sdy_pl_playlist').children().first().css( 'border-top-width' );
+                border_height = border_height.replace( 'px', '' );
+                var row_height = jQuery( '#war_sdy_pl_playlist').children().first().outerHeight();
+                row_height -= border_height;
+                var rows = this.value;
+                var height = rows * row_height;
+                jQuery( '#war_sdy_pl_playlist' ).css( 'height', height );
+            }
+        }
+    );
+
+    jquery_radio_scrolling_enable.trigger( 'change' );
+}
+
+WarSoundyAudioPlaylistAdminColumns.prototype.initOuterBoxWidth = function()
+{
+    var _this = this;
+
+    var jquery_value  = jQuery( '#war_sdy_pl_playlist_outer_box_width_value' );
+    var jquery_unit   = jQuery( '#war_sdy_pl_playlist_outer_box_width_unit' );
+    var jquery_slider = jQuery( '#war_sdy_pl_slider_outer_box_width' );
+
+    var jquery_radio_outer_box_width = jQuery( 'input[name=war_sdy_pl_outer_box_width]' );
+    var jquery_validation_error = jQuery ( '#war_sdy_pl_playlist_outer_box_width_validation_error' );
+
+    if( jQuery( 'input[name=war_sdy_pl_outer_box_width][value=default]' ).prop( 'checked' ) )
+    {
+        jquery_value.css( 'backgroundColor', '' );
+        jquery_unit.css( 'backgroundColor', '' );
+    }
+    else
+    {
+        jquery_value.css( 'backgroundColor', '#c0e7f0' );
+        jquery_unit.css( 'backgroundColor', '#c0e7f0' );
+    }
+
+    jquery_radio_outer_box_width.change
+    (
+        function()
+        {
+            if( this.value == 'default' )
+            {
+                var outer_box_width_default_value = jQuery( '#war_sdy_pl_outer_box_width_value_default' ).val();
+                var outer_box_width_default_unit = jQuery( '#war_sdy_pl_outer_box_width_unit_default' ).val();
+                jQuery( '#war_sdy_pl_slider_outer_box_width' ).slider( 'value', outer_box_width_default_value );
+                jquery_value.val( outer_box_width_default_value );
+                jquery_unit.val( outer_box_width_default_unit );
+                if( outer_box_width_default_unit == '%' )
+                {
+                    jquery_slider.slider( { max: 100 } );
+                }
+                else
+                {
+                    jquery_slider.slider( { max: 2000 } );
+                }
+
+                jquery_value.css( 'backgroundColor', '' );
+                jquery_unit.css( 'backgroundColor', '' );
+
+                var val = outer_box_width_default_unit == '%' ? outer_box_width_default_value * 0.97 : outer_box_width_default_value;
+                jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'width', val + outer_box_width_default_unit );
+            }
+            else //if( this.value == 'custom' )
+            {
+                jquery_value.css( 'backgroundColor', '#c0e7f0' );
+                jquery_unit.css( 'backgroundColor', '#c0e7f0' );
+            }
+        }
+    );
+
+    var val = jquery_unit.val() == '%' ? jquery_value.val() * 0.97 : jquery_value.val();
+    jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'width', val + jquery_unit.val() );
+
+
+    var max_value = jquery_unit.val() == '%' ? 100 : 2000;
+
+    jquery_slider.slider
+    (
+        {
+            min:        0,
+            max:        max_value,
+            value:      jquery_value.val(),
+            range:      'min',
+            animate:    true,
+            slide:      function( event, ui )
+            {
+                jquery_validation_error.html( '' );
+                jquery_value.val( ui.value );
+                var val = jquery_unit.val() == '%' ? ui.value * 0.97 : ui.value;
+                jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'width', val + jquery_unit.val() );
+            },
+            stop:       function( event, ui )
+            {
+                jQuery( '#war_sdy_pl_outer_box_width_custom' ).prop( 'checked', true );
+                jquery_value.css( 'backgroundColor', '#c0e7f0' );
+                jquery_unit.css( 'backgroundColor', '#c0e7f0' );
+            }
+        }
+    );
+
+    jquery_value.change( function()
+    {
+        var unit = jquery_unit.val();
+        var value_str = this.value;
+        var value = parseInt( value_str );
+        if( value_str.match( /^\d+$/ ) )
+        {
+            jquery_validation_error.html( '' );
+            jquery_slider.slider( 'value', this.value );
+            var val = unit == '%' ? value * 0.97 : value;
+            jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'width', val + unit );
+            jQuery( '#war_sdy_pl_outer_box_width_custom' ).prop( 'checked', true );
+            jquery_value.css( 'backgroundColor', '#c0e7f0' );
+            jquery_unit.css( 'backgroundColor', '#c0e7f0' );
+        }
+        else
+        {
+            jquery_validation_error.html( 'Invalid input: ' + value_str );
+        }
+    } );
+
+    jquery_unit.change( function()
+    {
+        var unit = this.value;
+        var value = jquery_value.val();
+
+        if( unit == '%' )
+        {
+            jquery_slider.slider( { max: 100 } );
+            if( value > 100 )
+            {
+                jquery_slider.slider( { value: 100 } );
+                jquery_value.val( '100' );
+                value = 100;
+            }
+        }
+        else
+        {
+            jquery_slider.slider( { max: 2000 } );
+            if( value > 2000 )
+            {
+                jquery_slider.slider( { value: 2000 } );
+                jquery_value.val( '2000' );
+                value = 2000;
+            }
+        }
+
+        jQuery( '#war_sdy_pl_outer_box_width_custom' ).prop( 'checked', true );
+        jquery_value.css( 'backgroundColor', '#c0e7f0' );
+        jquery_unit.css( 'backgroundColor', '#c0e7f0' );
+
+        var val = unit == '%' ? value * 0.97 : value;
+        jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'width', val + unit );
+    } );
+}
+
+WarSoundyAudioPlaylistAdminColumns.prototype.initFontSize = function()
+{
+    var _this = this;
+
+    var jquery_value  = jQuery( '#war_sdy_pl_playlist_font_size_value' );
+    var jquery_unit   = jQuery( '#war_sdy_pl_playlist_font_size_unit' );
+    var jquery_slider = jQuery( '#war_sdy_pl_slider_font_size' );
+
+    var jquery_radio_font_size = jQuery( 'input[name=war_sdy_pl_font_size]' );
+    var jquery_validation_error = jQuery ( '#war_sdy_pl_playlist_font_size_validation_error' );
+
+
+    if( jQuery( 'input[name=war_sdy_pl_font_size][value=default]' ).prop( 'checked' ) )
+    {
+        jquery_value.css( 'backgroundColor', '' );
+        jquery_unit.css( 'backgroundColor', '' );
+    }
+    else
+    {
+        jquery_value.css( 'backgroundColor', '#c0e7f0' );
+        jquery_unit.css( 'backgroundColor', '#c0e7f0' );
+    }
+
+    jquery_radio_font_size.change
+    (
+        function()
+        {
+            if( this.value == 'default' )
+            {
+                var font_size_default_value = jQuery( '#war_sdy_pl_font_size_value_default' ).val();
+                var font_size_default_unit = jQuery( '#war_sdy_pl_font_size_unit_default' ).val();
+                jQuery( '#war_sdy_pl_slider_font_size' ).slider( 'value', font_size_default_value );
+                jquery_value.val( font_size_default_value );
+                jquery_unit.val( font_size_default_unit );
+
+                jquery_value.css( 'backgroundColor', '' );
+                jquery_unit.css( 'backgroundColor', '' );
+
+                jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'font-size', font_size_default_value + font_size_default_unit );
+            }
+            else //if( this.value == 'custom' )
+            {
+                jquery_value.css( 'backgroundColor', '#c0e7f0' );
+                jquery_unit.css( 'backgroundColor', '#c0e7f0' );
+            }
+        }
+    );
+
+    jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'font-size', jquery_value.val() + jquery_unit.val() );
+
+    jquery_slider.slider
+    (
+        {
+            min:        0,
+            max:        100,
+            value:      jquery_value.val(),
+            range:      'min',
+            animate:    true,
+            slide:      function( event, ui )
+            {
+                jquery_validation_error.html( '' );
+                jquery_value.val( ui.value );
+                jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'font-size', ui.value + jquery_unit.val() );
+            },
+            stop:       function( event, ui )
+            {
+                jQuery( '#war_sdy_pl_font_size_custom' ).prop( 'checked', true );
+                jquery_value.css( 'backgroundColor', '#c0e7f0' );
+                jquery_unit.css( 'backgroundColor', '#c0e7f0' );
+            }
+        }
+    );
+
+    jquery_value.change( function()
+    {
+        var unit = jquery_unit.val();
+        var value_str = this.value;
+        var value = parseInt( value_str );
+        if( value_str.match( /^\d+$/ ) )
+        {
+            jquery_validation_error.html( '' );
+            jquery_slider.slider( 'value', this.value );
+            jQuery( '#war_sdy_pl_font_size_custom' ).prop( 'checked', true );
+            jquery_value.css( 'backgroundColor', '#c0e7f0' );
+            jquery_unit.css( 'backgroundColor', '#c0e7f0' );
+
+            jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'font-size', value + unit );
+        }
+        else
+        {
+            jquery_validation_error.html( 'Invalid input: ' + value_str );
+        }
+    } );
+
+    jquery_unit.change( function()
+    {
+        var unit = this.value;
+        var value = jquery_value.val();
+
+        jQuery( '#war_sdy_pl_font_size_custom' ).prop( 'checked', true );
+        jquery_value.css( 'backgroundColor', '#c0e7f0' );
+        jquery_unit.css( 'backgroundColor', '#c0e7f0' );
+
+        jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'font-size', value + unit );
     } );
 }
 
@@ -32,10 +345,10 @@ WarSoundyAudioPlaylistAdminColumns.prototype.initColumns = function()
     var _this = this;
 
     /*
-    _this.initSoundtrackTitleAndArtist();
-    _this.initSliderTime();
-    _this.initSliderVolume();
-    */
+     _this.initSoundtrackTitleAndArtist();
+     _this.initSliderTime();
+     _this.initSliderVolume();
+     */
     _this.initColumnsOrder();
     if( ! sdy_pl_css_use_only )
     {
@@ -57,7 +370,6 @@ WarSoundyAudioPlaylistAdminColumns.prototype.initRadioOrderDefaultOrCustom = fun
 {
     var _this = this;
 
-
     var jquery_radio_order = jQuery( 'input[name=war_sdy_pl_column_order]' );
 
     jquery_radio_order.change
@@ -67,10 +379,12 @@ WarSoundyAudioPlaylistAdminColumns.prototype.initRadioOrderDefaultOrCustom = fun
             if( this.value == 'default' )
             {
                 _this.column_ordered_names = _this.column_ordered_names_default;
+                jQuery( '#war_sdy_pl_column_order_name_list').children().css( 'backgroundColor', '' );
             }
             else //if( this.value == 'custom' )
             {
                 _this.column_ordered_names = _this.jquery_column_ordered_names.val().split( ',' );
+                jQuery( '#war_sdy_pl_column_order_name_list').children().css( 'backgroundColor', '#c0e7f0' );
             }
             _this.orderColumnNameList();
             _this.orderColumnFields();
@@ -87,7 +401,7 @@ WarSoundyAudioPlaylistAdminColumns.prototype.orderColumnNameList = function()
     {
         var column_name = _this.column_ordered_names[ index ];
 
-        var jquery_column_item = jQuery( '#war_sdy_pl_column_order_item_' );
+        var jquery_column_item = jQuery( '#war_sdy_pl_column_order_item_' + column_name );
         jquery_column_item.detach();
         _this.jquery_column_order_name_list.append( jquery_column_item );
     }
@@ -132,7 +446,11 @@ WarSoundyAudioPlaylistAdminColumns.prototype.initColumnsOrder = function()
                                 _this.column_ordered_names = name_list.split( ',' );
                                 _this.orderColumnFields();
                                 _this.orderColumns();
-                                jQuery( '#war_sdy_pl_column_order_custom' ).prop( 'checked', true );
+                                if( _this.is_metabox )
+                                {
+                                    jQuery( '#war_sdy_pl_column_order_custom' ).prop( 'checked', true );
+                                    jQuery( '#war_sdy_pl_column_order_name_list').children().css( 'backgroundColor', '#c0e7f0' );
+                                }
                             }
         }
     );
@@ -307,6 +625,7 @@ WarSoundyAudioPlaylistAdminColumns.prototype.initRadioLayoutDefaultOrCustom = fu
                     jquery_field_width_unit.val( jquery_field_width_unit_default.html() );
                     jquery_field_width_unit.change();
                 }
+                jQuery( '.war_sdy_pl_column_layout_captions').css( 'backgroundColor', '' );
             }
             else //if( this.value == 'custom' )
             {
@@ -339,6 +658,7 @@ WarSoundyAudioPlaylistAdminColumns.prototype.initRadioLayoutDefaultOrCustom = fu
                     jquery_field_width_unit.val( jquery_field_width_unit_custom.html() );
                     jquery_field_width_unit.change();
                 }
+                jQuery( '.war_sdy_pl_column_layout_captions').css( 'backgroundColor', '#c0e7f0' );
             }
         }
     );
@@ -404,7 +724,11 @@ WarSoundyAudioPlaylistAdminColumns.prototype.initColumn = function( column_name 
                     },
         stop:       function( event, ui )
                     {
-                        jquery_radio_layout_custom.prop( 'checked', true );
+                        if( _this.is_metabox )
+                        {
+                            jquery_radio_layout_custom.prop( 'checked', true );
+                            jQuery( '.war_sdy_pl_column_layout_captions' ).css( 'backgroundColor', '#c0e7f0' );
+                        }
                     }
     } );
 
@@ -413,7 +737,11 @@ WarSoundyAudioPlaylistAdminColumns.prototype.initColumn = function( column_name 
 
     jquery_column_checkbox_do_display.click( function()
     {
-        jquery_radio_layout_custom.prop( 'checked', true );
+        if( _this.is_metabox )
+        {
+            jquery_radio_layout_custom.prop( 'checked', true );
+            jQuery( '.war_sdy_pl_column_layout_captions' ).css( 'backgroundColor', '#c0e7f0' );
+        }
     } );
 
     jquery_column_checkbox_do_display.change( function()
@@ -451,7 +779,11 @@ WarSoundyAudioPlaylistAdminColumns.prototype.initColumn = function( column_name 
 
     jquery_column_width_value.click( function()
     {
-        jquery_radio_layout_custom.prop( 'checked', true );
+        if( _this.is_metabox )
+        {
+            jquery_radio_layout_custom.prop( 'checked', true );
+            jQuery( '.war_sdy_pl_column_layout_captions' ).css( 'backgroundColor', '#c0e7f0' );
+        }
     } );
 
     jquery_column_width_value.change( function()
@@ -463,12 +795,16 @@ WarSoundyAudioPlaylistAdminColumns.prototype.initColumn = function( column_name 
 
     jquery_column_width_unit.click( function()
     {
-        jquery_radio_layout_custom.prop( 'checked', true );
+        if( _this.is_metabox )
+        {
+            jquery_radio_layout_custom.prop( 'checked', true );
+            jQuery( '.war_sdy_pl_column_layout_captions' ).css( 'backgroundColor', '#c0e7f0' );
+        }
     } );
 
     jquery_column_width_unit.change( function()
     {
-        if( this.value == 'px' || this.value == '%' || this.value == 'mm' )
+        if( ( this.value == 'px' || this.value == '%' || this.value == 'mm' ) && ( jquery_column_do_display.val() == 'yes' ) )
         {
             jquery_column_width_value_slider.show();
         }
@@ -522,7 +858,7 @@ WarSoundyAudioPlaylistAdminColumns.prototype.initPlaylistCSS = function()
     jquery_slider_handle_volume.css( 'background', sdy_pl_css_color_slider_handle );
     jquery_slider_handle_time.css(   'background', sdy_pl_css_color_slider_handle );
 
-    jQuery( '.war_sdy_pl_playlist_outer_box' ).css( 'background-color', sdy_pl_css_color_bg_outer_box );
+    jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'background-color', sdy_pl_css_color_bg_outer_box );
 
     jQuery( '#war_sdy_pl_playlist li' ).css(                  'background-color', sdy_pl_css_color_bg_even_soundtrack );
     jQuery( '#war_sdy_pl_playlist li:nth-child( odd )' ).css( 'background-color', sdy_pl_css_color_bg_odd_soundtrack );

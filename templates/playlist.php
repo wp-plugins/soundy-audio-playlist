@@ -27,50 +27,77 @@ class WarSoundyAudioPlaylistPlaylist
             $soundtracks = html_entity_decode( get_option( 'war_sdy_pl_soundtracks' ), ENT_COMPAT | ENT_HTML5, 'UTF-8' );
         }
 
+        $scrolling_enable = get_post_meta( get_the_ID(), 'war_sdy_pl_scrolling_enable', true );
+        $scrolling_enable = $scrolling_enable ? $scrolling_enable : 'no';
+        if( $scrolling_enable == 'yes' )
+        {
+            $scrolling_comment = '<span style="margin-left: 1%;">•</span><span style="margin-left: 1%;">List is scrollable</span>';
+        }
+        else
+        {
+            $scrolling_comment = '';
+        }
+
 		$playlist_code =
             '<div class="war_sdy_pl_playlist_outer_box">' .
                 (
                     $tab == 'columns' ? '' :
                     '<ul class="war_sdy_pl_playlist">' .
                         '<li class="war_sdy_pl_playlist_row_header">' .
-                            '<div class="war_sdy_pl_playlist_pp_button">' .
-                                sdy_pl_get_button_play_pause() .
-                            '</div>' .
-                            '<div class="war_sdy_pl_playlist_title_global">' .
-                                '<div class="war_sdy_pl_playlist_title">' .
-                                    sdy_pl_get_playlist_title( $context ) .
-                                '</div>' .
-                                '<div class="war_sdy_pl_playlist_volume_container">' .
-                                    sdy_pl_get_speaker_icon() .
-                                    sdy_pl_get_volume_slider() .
-                                '</div>' .
-                            '</div>' .
-                            '<div class="war_sdy_pl_playlist_header_right_hand">' .
-                                '<div class="war_sdy_pl_playlist_time_slider_global">' .
-                                    '<div class="war_sdy_pl_playlist_soundtrack_time_local">' .
-                                        sdy_pl_get_time() .
-                                    '</div>' .
-                                    '<div class="war_sdy_pl_playlist_time_slider_local">' .
-                                        sdy_pl_get_time_slider() .
-                                    '</div>' .
-                                    '<div class="war_sdy_pl_playlist_soundtrack_duration_local">' .
-                                        sdy_pl_get_duration() .
-                                    '</div>' .
-                                '</div>' .
-                                '<div class="war_sdy_pl_playlist_soundtrack_title_global">' .
-                                    '<div class="war_sdy_pl_playlist_previous_local">' .
-                                        sdy_pl_get_button_previous() .
-                                    '</div>' .
-                                    '<div class="war_sdy_pl_playlist_header_soundtrack_title">' .
-                                        '<div class="war_sdy_pl_playlist_header_soundtrack_title">' .
-                                            sdy_pl_get_title() .
+                            '<div class="war_sdy_pl_playlist_header_container">' .
+                                '<div class="war_sdy_pl_playlist_header_left_hand_container">' .
+                                    '<div class="war_sdy_pl_playlist_header_left_hand">' .
+                                        '<div class="war_sdy_pl_playlist_pp_button">' .
+                                            sdy_pl_get_button_play_pause() .
                                         '</div>' .
-                                        '<div class="war_sdy_pl_playlist_header_soundtrack_artist">' .
-                                            sdy_pl_get_artist() .
+                                        '<div class="war_sdy_pl_playlist_title_global">' .
+                                            '<div class="war_sdy_pl_playlist_title">' .
+                                                sdy_pl_get_playlist_title( $context ) .
+                                            '</div>' .
+                                            '<div class="war_sdy_pl_playlist_volume_container_row">' .
+                                                '<div class="war_sdy_pl_playlist_volume_container_cell">' .
+                                                    sdy_pl_get_speaker_icon() .
+                                                    sdy_pl_get_volume_slider() .
+                                                '</div>' .
+                                            '</div>' .
                                         '</div>' .
                                     '</div>' .
-                                    '<div class="war_sdy_pl_playlist_next_local">' .
-                                        sdy_pl_get_button_next() .
+                                '</div>' .
+                                '<div class="war_sdy_pl_playlist_header_right_hand_container">' .
+                                    '<div class="war_sdy_pl_playlist_header_right_hand">' .
+                                        '<div class="war_sdy_pl_playlist_time_slider_global">' .
+                                            '<div class="war_sdy_pl_playlist_soundtrack_time_local">' .
+                                                sdy_pl_get_time() .
+                                            '</div>' .
+                                            '<div class="war_sdy_pl_playlist_time_slider_local">' .
+                                                sdy_pl_get_time_slider() .
+                                            '</div>' .
+                                            '<div class="war_sdy_pl_playlist_soundtrack_duration_local">' .
+                                                sdy_pl_get_duration() .
+                                            '</div>' .
+                                        '</div>' .
+                                        '<div class="war_sdy_pl_playlist_soundtrack_title_global">' .
+                                            '<div class="war_sdy_pl_playlist_previous_local">' .
+                                                sdy_pl_get_button_previous() .
+                                            '</div>' .
+                                            '<div class="war_sdy_pl_playlist_header_soundtrack_title_and_artist">' .
+                                                '<div class="war_sdy_pl_playlist_header_soundtrack_title_and_artist_table">' .
+                                                    '<div class="war_sdy_pl_playlist_header_soundtrack_title_row">' .
+                                                        '<div class="war_sdy_pl_playlist_header_soundtrack_title">' .
+                                                            sdy_pl_get_title() .
+                                                        '</div>' .
+                                                    '</div>' .
+                                                    '<div class="war_sdy_pl_playlist_header_soundtrack_artist_row">' .
+                                                        '<div class="war_sdy_pl_playlist_header_soundtrack_artist">' .
+                                                            sdy_pl_get_artist() .
+                                                        '</div>' .
+                                                    '</div>' .
+                                                '</div>' .
+                                            '</div>' .
+                                            '<div class="war_sdy_pl_playlist_next_local">' .
+                                                sdy_pl_get_button_next() .
+                                            '</div>' .
+                                        '</div>' .
                                     '</div>' .
                                 '</div>' .
                             '</div>' .
@@ -99,6 +126,7 @@ class WarSoundyAudioPlaylistPlaylist
                             '<span id="war_sdy_pl_playlist_comment" style="margin-left: 1%; margin-right: 1%;">Click or use ↑ ↓ ← → to select</span>' .
                             '•' .
                             '<span style="margin-left: 1%;">Double-click to play or pause</span>' .
+                            $scrolling_comment .
                         '</div>' .
                     '</li>' .
                 '</ul>' .

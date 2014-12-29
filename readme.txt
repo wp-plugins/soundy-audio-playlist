@@ -3,7 +3,7 @@ Contributors: bducouedic
 Tags: audio, sound, music, playlist, background, soundtrack, background sound, background audio, background music, posts, pages
 Requires at least: 3.6
 Tested up to: 4.1
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#war_donate
@@ -12,27 +12,29 @@ Soundy Audio Playlist allows any page or post to play and display an audio playl
 
 == Description ==
 
-The **Soundy Audio Playlist** plugin allows any page or post to play and display an audio playlist.
+**Soundy Audio Playlist** allows any page or post to play and display an audio playlist.
 
-This Soundy plugin can be used like its Soundy brother, Soundy Background Music, to have pages or post playing an audio playlist in the background instead of a single soundtrack. However, this plugin can do much more than this: by means of the [sdy_pl playlist] short code, the playlist can be displayed anywhere in the page content. The page visitors can then interact with this playlist and control their audio playback experience with the following user interface features:
+This Soundy plugin can be used like its Soundy brother, [Soundy Background Music](http://wordpress.org/plugins/soundy-background-music/), to have pages or posts playing an audio playlist in the background instead of a single soundtrack. However, this plugin can do much more than this: by means of the [sdy_pl playlist] short code, the playlist can be displayed anywhere in the page content. The page visitors can then interact with this playlist and control their audio playback experience with the following user interface features:
 
 = Front-End Features =
 
 * Play/Pause button
-* Audio volume control with slider
-* Soundtrack time positioning with slider
+* Audio volume control slider
+* Soundtrack time positioning slider
 * Next and Previous buttons
-* Arrow key soundtrack selection
+* Arrow keys soundtrack selection
 * Mouse click soundtrack selection
 * Mouse double-click Play/Pause
 * Display of title, artist and composer of current playing soundtrack
+* Audio-Player is responsive
+* List of soundtracks can be made scrollable and height of scrolling area can be set in the plugin metabox on a per page/post basis.
 
-* In the free version of the plugin, the administrator can set up and maintain an audio playlist which can then be played and displayed by any page or post.
-* In the PRO version of the plugin, each page or post can have its own playlist set up and maintained by its author.
+* In the [free version](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/) of the plugin, the administrator can set up and maintain an audio playlist which can then be played and displayed by any page or post.
+* In the [PRO version](http://webartisan.ch/en/products/soundy-audio-playlist/pro-wordpress-plugin/) of the plugin, each page or post can have its own playlist set up and maintained by its author.
 
 The soundtracks are played by means of the HTML 5 audio tag. This way, the plugin is compatible with all modern user devices (smartphones, tablets, laptops and desktops of all vendors).
 
-An author can have the playlist played by his page without displaying the playlist. He can have the Play/Pause button inserted or not. Or he can have the playlist with its full user interface displayed.
+An author can have the playlist played by his page without displaying the playlist. He can have the Play/Pause button inserted or not. Or he can have the playlist displayed with its full user interface.
 
 Defaults can be set by the administrator in the settings page of the plugin.
 
@@ -63,8 +65,8 @@ This Play/Pause button can be positioned in a corner of the document or in a cor
 
 = Docs & Support =
 
-You can find [Tutorial](http://www.webartisan.ch/en/products/sdy_pl/#war_tutorial), [FAQ](http://www.webartisan.ch/en/products/sdy_pl/#war_FAQ), [Examples](http://www.webartisan.ch/en/products/sdy_pl/#war_examples) and more detailed information about **Soundy Audio Playlist** plugin on [WebArtisan.ch](http://www.webartisan.ch/en/products/sdy_pl/). If you were unable to find the answer to your question on the FAQ or in any of the documentation, you should check [Soundy's Support Forum](http://wordpress.org/support/plugin/soundy-audio-playlist) on WordPress.org. If you can't locate any topics that pertain to your particular issue, post a new topic for it.
-**Soundy Audio Playlist** Plugin Home Page: [www.webartisan.ch/en/products/sdy_pl](http://www.webartisan.ch/en/products/sdy_pl/)
+You can find [Tutorial](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#war_tutorial), [FAQ](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#war_FAQ), [Examples](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#war_examples) and more detailed information about **Soundy Audio Playlist** plugin on [WebArtisan.ch](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/). If you were unable to find the answer to your question on the FAQ or in any of the documentation, you should check [Soundy's Support Forum](http://wordpress.org/support/plugin/soundy-audio-playlist) on WordPress.org. If you can't locate any topics that pertain to your particular issue, post a new topic for it.
+**Soundy Audio Playlist** Plugin Home Page: [webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/)
 
 == Installation ==
 
@@ -73,15 +75,18 @@ You can find [Tutorial](http://www.webartisan.ch/en/products/sdy_pl/#war_tutoria
 * **Soundy Audio Playlist** appears.
 * Click on "Install Now".
 * Click on "Activate Plugin".
-* To let a page or post play a soundtrack:
+* Go to Settings > Soundy Audio Playlist.
+* If you rapidly need a test playlist to experiment the plugin, click on the "Test" button and then on the "Save Changes" button.
 
 1. Go into the *Edit Page* or *Edit Post* tool of any page in the Admin area.
-1. Set the option *Enable Soundy* to *Yes* in the Soundy Audio Playlist meta box and update the page.
+1. Set the option *Enable Soundy Playlist* to *Yes* in the *General* tab of the Soundy Audio Playlist meta box.
+1. Set the option *Autoplay* to *Yes* in the *Play Options* tab of the Soundy Audio Playlist meta box.
+1. Update the page.
 1. The page will then play the default playlist when displayed.
-1. To have he playlist displayed in the content, insert the [sdy_pl playlist] short code anywhere in the content of this page.
+1. To have the playlist displayed in the content, insert the [sdy_pl playlist] short code anywhere in the content of this page.
 
 * To set up plugin defaults, go to Settings > **Soundy Audio Playlist** in the admin area and fill out the input fields.
-* For help, here is a [tutorial](http://www.webartisan.ch/en/products/sdy_pl/#wa_tutorial).
+* For help, here is a [tutorial](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#wa_tutorial).
 * Happy Soundy Music !
 
 = Updates =
@@ -126,7 +131,7 @@ Yes it is, especially if you have a lot of traffic on your website. Putting your
 
 1. **On WP front-end, Soundy's Play/Pause button does not respond correctly. What's the problem ?**
 Soundy needs jQuery 1.10.2 which is the default jQuery library of the last versions of WordPress. However some themes load their own jQuery library. If this library is not up-to-date, Soundy's Play/Pause button gets into troubles.
-Using WordPress Default jQuery library is actually what Soundy does and this is what your theme also should do instead of loading its own old jQuery version. In Soundy Version 2.0 and later, you can now set the variable $use_own_jquery_lib_on_front_end to true in the main Soundy PHP file: soundy.php. To make this modification, go to the plugins page, click on the Edit link of the Soundy plugin, look for the variable and set it to true. This should fix the problem.
+Using WordPress Default jQuery library is actually what Soundy does and this is what your theme also should do instead of loading its own old jQuery version.
 
 1. **I get a PHP parsing error when activating the plugin. What's the problem ?**
 Soundy needs PHP 5.3 or a higher version. If your PHP parser is not up-to-date, Soundy gets into troubles.
@@ -134,15 +139,24 @@ PHP 5.3.0 has been released in June 2009. Today’s version is 5.5.12. (sources:
 
 == Screenshots ==
 
-1. **Default Audio Track Settings**
-1. **Play/Pause Button Settings**
-1. **Play/Pause Button Corner Settings**
-1. **Play/Pause Button Static Settings**
-1. **Page or Post Soundy Metabox**
+1. **Playlist Soundtracks Management Tool**
+1. **Playlist Columns Settings**
+1. **Playlist Designer**
+1. **Play/Pause Button Image Uploads**
+1. **Play/Pause Button Designer**
 
 == Changelog ==
 
-= 1.0 =
+= 1.3 &nbsp;&nbsp; - &nbsp;&nbsp; December 29th, 2014 =
+* Soundtracks List can now be made scrollable on a per page/post basis. This new setting is available in the Display tab of the plugin metabox in the Edit Page or Edit Post pages.
+
+= 1.2 &nbsp;&nbsp; - &nbsp;&nbsp; December 27th, 2014 =
+* Audio-Player is now responsive
+
+= 1.1 &nbsp;&nbsp; - &nbsp;&nbsp; December 23rd, 2014 =
+* Playlist font size and playlist width can now be set in the playlist Designer of the plugin settings page as well as on a per page/post basis.
+
+= 1.0 &nbsp;&nbsp; - &nbsp;&nbsp; July 15th, 2014 =
 * First Version
 
 == Upgrade Notice ==

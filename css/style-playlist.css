@@ -1,28 +1,26 @@
 div.war_sdy_pl_playlist_outer_box
 {
-	padding: 6px 6px 6px 6px;
-	border: 1px solid #aaaaaa;
-	border-radius: 3px;
+    padding: 6px 6px 6px 6px;
+    border: 1px solid #aaaaaa;
+    border-radius: 3px;
     vertical-align: top;
     text-align: center;
 }
 
-.entry-content ul.war_sdy_pl_playlist,
-ul.war_sdy_pl_playlist
+.entry-content ul.war_sdy_pl_playlist
 {
     vertical-align: middle;
     text-align: left;
-	list-style-type: none;
+    list-style-type: none;
     margin: 0 0 0 0;
-	padding: 0 0 0 0;
-	width: 100%;
+    padding: 0 0 0 0;
+    width: 100%;
 }
 
 /*
 #war_sdy_pl_playlist
 {
-  height: 212px;
-  overflow-y: auto;
+  overflow-x: auto;
 }
 */
 
@@ -32,7 +30,7 @@ ul.war_sdy_pl_playlist li
     padding-bottom:  5px;
     padding-left:    10px;
     padding-right:   10px;
-	border: 1px solid #aaaaaa;
+    border: 1px solid #aaaaaa;
 }
 
 #war_sdy_pl_playlist li
@@ -43,7 +41,6 @@ ul.war_sdy_pl_playlist li
     cursor: pointer;
     text-wrap: none;
     white-space: nowrap;
-    overflow: hidden;
 }
 
 #war_sdy_pl_playlist li:first-child
@@ -65,10 +62,10 @@ ul.war_sdy_pl_playlist li
 
 .war_sdy_pl_sortable_placeholder
 {
-	height: 1.5em; 
-	line-height: 1.2em;
-	background: #ccffcc;
-	border: 1px solid #ffffcc;
+    height: 1.5em;
+    line-height: 1.2em;
+    background: #ccffcc;
+    border: 1px solid #ffffcc;
 }
 
 li.war_sdy_pl_playlist_row_header
@@ -76,10 +73,10 @@ li.war_sdy_pl_playlist_row_header
     text-align: left;
     margin: 0px 0px 6px 0px;
     margin-left: 0px !important;
-	background: #cccccc;
+    background: #cccccc;
     border-radius: 3px;
-	cursor: auto;
-	font-weight: bold;
+    cursor: auto;
+    font-weight: bold;
     padding-top: 10px !important;
     padding-bottom: 10px !important;
     list-style-type: none;
@@ -104,10 +101,10 @@ li.war_sdy_pl_playlist_row_footer
     margin: 6px 0px 0px 0px;
     margin-left: 0px !important;
     text-align: left;
-	background: #cccccc;
+    background: #cccccc;
     border-radius: 3px;
-	cursor: auto;
-	font-weight: normal;
+    cursor: auto;
+    font-weight: normal;
     list-style-type: none;
 }
 
@@ -116,40 +113,73 @@ div.war_sdy_pl_playlist_row_footer_div
     margin-left: 1em;
 }
 
+div.war_sdy_pl_playlist_header_container
+{
+    display: inline-table;
+    vertical-align: middle;
+    width: 100%;
+}
+
+div.war_sdy_pl_playlist_header_left_hand_container
+{
+    display: table-cell;
+    border: 0px red solid;
+    text-align: left;
+}
+
+div.war_sdy_pl_playlist_header_left_hand
+{
+    display: inline-table;
+    border: 0px black solid;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 2%;
+}
+
 div.war_sdy_pl_playlist_pp_button
 {
-    padding: 7px;
-	display: inline-block;
-    vertical-align: middle;
+    display: table-cell;
+    padding: 0px;
+    vertical-align: top;
     text-align: left;
     cursor: pointer;
 }
 
 div.war_sdy_pl_playlist_title_global
 {
-	display: inline-block;
-	vertical-align: middle;
-	padding-top: 10px;
-	padding-bottom: 5px;
-	padding-left: 3%;
-    width: 300px;
+    display: table-cell;
+    border: 0px green solid;
+    vertical-align: top;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    padding-left: 5%;
+    text-wrap: normal;
+    white-space: normal;
 }
 
 div.war_sdy_pl_playlist_title
 {
-    display: inline-block;
+    display: table-row;
+    border: 0px red solid;
     vertical-align: middle;
-	font-size: 1.5em;
-    margin-bottom: 0.3em;
-    margin-right: 5%;
+    font-size: 1.5em;
+    text-wrap: normal;
+    white-space: normal;
 }
 
-div.war_sdy_pl_playlist_volume_container
+div.war_sdy_pl_playlist_volume_container_row
 {
-    display: inline-block;
+    display: table-row;
+}
+
+div.war_sdy_pl_playlist_volume_container_cell
+{
+    display: table-cell;
     vertical-align: middle;
     text-wrap: none;
     white-space: nowrap;
+    padding-top: 0.7em;
     border: 0px solid #000000;
 }
 
@@ -161,7 +191,6 @@ svg.war_sdy_pl_playlist_volume_icon
 
 div.war_sdy_pl_playlist_volume_slider
 {
-    width: 150px;
     font-size: 10px;
     display: inline-block;
     vertical-align: middle;
@@ -178,7 +207,7 @@ div.war_sdy_pl_playlist_volume_slider
     width: 15px;
     font-size: 15px;
     margin-left: -4px;
-    margin-top: -1px !important;
+    margin-top: -2px !important;
     background: #2eaecc;
     border-color: #0074a2;
     cursor: ew-resize;
@@ -189,61 +218,50 @@ div.war_sdy_pl_playlist_volume_slider
     outline: none;
 }
 
-div.war_sdy_pl_playlist_header_soundtrack_title
+div.war_sdy_pl_playlist_header_right_hand_container
 {
-	font-size: 1.1em;
-	line-height: 1.2em;
-}
-
-div.war_sdy_pl_playlist_header_soundtrack_artist
-{
-	font-size: 0.7em;
-	line-height: 1.7em;
+    display: table-cell;
+    border: 0px red solid;
+    text-align: right;
 }
 
 div.war_sdy_pl_playlist_header_right_hand
 {
-	display: inline-block;
-	float: right;
-	vertical-align: middle;
-	padding-top: 15px;
-	padding-right: 2%;
+    display: inline-table;
+    vertical-align: middle;
+    padding-top: 15px;
+    padding-right: 2%;
 }
 
 div.war_sdy_pl_playlist_time_slider_global
 {
+    display: table-row;
     vertical-align: middle;
-    text-wrap: none;
-    overflow: hidden;
     white-space: nowrap;
 }
 
 div.war_sdy_pl_playlist_soundtrack_time_local
 {
-    display: inline-block;
-    vertical-align: middle;
+    display: table-cell;
+    border: 0px red solid;
     text-align: right;
-    margin-right: 0;
-    width: 50px;
-    position: relative;
-    top: 1px;
+    vertical-align: middle;
 }
 
 div.war_sdy_pl_playlist_time_slider_local
 {
-	display: inline-block;
-	vertical-align: middle;
+    display: table-cell;
+    border: 0px red solid;
     text-align: center;
-    width: 340px;
-    height: 26px;
+    vertical-align: middle;
 }
 
 div.war_sdy_pl_playlist_time_slider
 {
-    width: 300px;
-    font-size: 10px;
     display: inline-block;
+    font-size: 10px;
     cursor: pointer;
+    margin: 9px 10px 5px 10px;
 }
 
 .war_sdy_pl_playlist_time_slider .ui-slider-range
@@ -259,7 +277,7 @@ div.war_sdy_pl_playlist_time_slider
     width: 8px;
     font-size: 15px;
     margin-left: -4px;
-    margin-top: -1px !important;
+    margin-top: -2px !important;
 }
 
 .war_sdy_pl_playlist_time_slider .ui-slider-handle:focus
@@ -269,57 +287,88 @@ div.war_sdy_pl_playlist_time_slider
 
 div.war_sdy_pl_playlist_soundtrack_duration_local
 {
-    display: inline-block;
-    vertical-align: middle;
+    display: table-cell;
     text-align: left;
+    vertical-align: middle;
     margin-left: 0;
-    width: 50px;
-    position: relative;
-    top: 1px;
 }
 
 div.war_sdy_pl_playlist_soundtrack_title_global
 {
+    display: table-row;
     vertical-align: middle;
-    text-wrap: none;
-    overflow: hidden;
-    white-space: nowrap;
+    text-wrap: normal;
+    white-space: normal;
+}
+
+div.war_sdy_pl_playlist_header_soundtrack_title_and_artist
+{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+div.war_sdy_pl_playlist_header_soundtrack_title_and_artist_table
+{
+    border: 0px black solid;
+    display: inline-table;
+    vertical-align: middle;
+    text-align: center;
+}
+
+div.war_sdy_pl_playlist_header_soundtrack_title_row
+{
+    display: table-row;
+}
+
+div.war_sdy_pl_playlist_header_soundtrack_title
+{
+    display: table-cell;
+    border: 0px red solid;
+    width: 100%;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 1.1em;
+    line-height: 1.2em;
+}
+
+
+div.war_sdy_pl_playlist_header_soundtrack_artist_row
+{
+    display: table-row;
+}
+
+div.war_sdy_pl_playlist_header_soundtrack_artist
+{
+    display: table-cell;
+    border: 0px red solid;
+    width: 100%;
+    text-align: center;
+    font-size: 0.7em;
+    line-height: 1.7em;
 }
 
 div.war_sdy_pl_playlist_previous_local
 {
-    display: inline-block;
+    display: table-cell;
     vertical-align: middle;
     text-align: right;
     margin-right: 0;
-    width: 50px;
-}
-
-div.war_sdy_pl_playlist_header_soundtrack_title
-{
-    display: inline-block;
-    vertical-align: middle;
-    text-align: center;
-    width: 340px;
+    width: 30px;
 }
 
 div.war_sdy_pl_playlist_next_local
 {
-    display: inline-block;
+    display: table-cell;
     vertical-align: middle;
     text-align: left;
     margin-left: 0;
-    width: 50px;
-}
-
-div.war_sdy_pl_playlist_header_soundtrack_title
-{
-	text-align: center;
+    width: 30px;
 }
 
 li.war_soundtrack_selected
 {
-	background-color: #c0e7f0 !important;
+    background-color: #c0e7f0 !important;
 }
 
 div.war_soundtrack_index,
@@ -332,14 +381,14 @@ div.war_soundtrack_url,
 div.war_soundtrack_volume,
 div.war_soundtrack_type
 {
-	display: inline-block;
-	vertical-align: middle;
+    display: inline-block;
+    vertical-align: middle;
     margin: 0 0 0 0;
-	margin-left: 1em;
+    margin-left: 1em;
     margin-right: 1em;
-	text-wrap: none;
-	overflow: hidden;
-	white-space: nowrap;
+    text-wrap: none;
+    overflow: hidden;
+    white-space: nowrap;
     text-align: left;
 }
 
@@ -357,28 +406,28 @@ div.war_soundtrack_index
 
 div.war_soundtrack_title
 {
-	width: 24%;
+    width: 24%;
 }
 
 div.war_soundtrack_artist
 {
-	width: 25%;
+    width: 25%;
 }
 
 div.war_soundtrack_composer
 {
-	width: 26%;
+    width: 26%;
 }
 
 div.war_soundtrack_time
 {
-	width: 8%;
-	text-align: right;
+    width: 8%;
+    text-align: right;
 }
 
 div.war_soundtrack_id
 {
-	width: 5%;
+    width: 5%;
 }
 
 svg.war_sdy_pl_button_previous,

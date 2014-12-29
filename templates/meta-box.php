@@ -33,16 +33,16 @@
       <li><a id="war_sdy_pl_tab_label_general"        href="#war_sdy_pl_tab_panel_general">General</a></li>
       <li><a id="war_sdy_pl_tab_label_content"        href="#war_sdy_pl_tab_panel_content">Playlist</a></li>
       <li><a id="war_sdy_pl_tab_label_play"           href="#war_sdy_pl_tab_panel_play">Play Options</a></li>
-      <li><a id="war_sdy_pl_tab_label_columns"        href="#war_sdy_pl_tab_panel_columns">Columns</a></li>
+      <li><a id="war_sdy_pl_tab_label_columns"        href="#war_sdy_pl_tab_panel_columns">Display</a></li>
       <li><a id="war_sdy_pl_tab_label_shortcodes"     href="#war_sdy_pl_tab_panel_shortcodes">Short Codes</a></li>
   </ul>
 
 
   <div id="war_sdy_pl_tab_panel_general">
       <p class="war_bold war_bigger">General Options</p>
-      <table class="form-table war_sdy_pl war_sdy_pl_form_table">
+      <table class="form-table war_sdy_pl_general war_sdy_pl_form_table">
           <tr>
-              <th class="war_sdy_pl">
+              <th>
                   <label for="war_sdy_pl_enable">Enable Soundy Audio Playlist</label>
               </th>
               <td>
@@ -59,6 +59,30 @@
                   <label for="war_sdy_pl_enable_no" style="margin-right: 1em;">No</label>
               </td>
           </tr>
+          <tr>
+              <th>
+                  <label for="war_sdy_pl_pp_corner_enable">Enable Play/Pause Button in Corner</label>
+              </th>
+              <td>
+                  <input type="radio"
+                         id="war_sdy_pl_pp_corner_enable_default"
+                         name="war_sdy_pl_pp_corner_enable"
+                         value="default" <?php echo ( $enable_pp_corner == 'default' ? 'checked' : '' ); ?>/>
+                  <label for="war_sdy_pl_pp_corner_enable_default" style="margin-right: 1em;">Default</label>
+
+                  <input type="radio"
+                         id="war_sdy_pl_pp_corner_enable_yes"
+                         name="war_sdy_pl_pp_corner_enable"
+                         value="yes" <?php echo ( $enable_pp_corner == 'yes' ? 'checked' : '' ); ?>/>
+                  <label for="war_sdy_pl_pp_corner_enable_yes" style="margin-right: 1em;">Yes</label>
+
+                  <input type="radio"
+                         id="war_sdy_pl_pp_corner_enable_no"
+                         name="war_sdy_pl_pp_corner_enable"
+                         value="no" <?php echo ( $enable_pp_corner == 'no' ? 'checked' : '' ); ?>/>
+                  <label for="war_sdy_pl_pp_corner_enable_no" style="margin-right: 1em;">No</label>
+              </td>
+          </tr>
       </table>
   </div>
 
@@ -71,15 +95,15 @@
 				<label for="war_sdy_pl_autoplay">Autoplay</label>
 			</th>
 			<td>
-				<input type="radio" 
-							 id="war_sdy_pl_autoplay_yes" 
-							 name="war_sdy_pl_autoplay" 
+				<input type="radio"
+							 id="war_sdy_pl_autoplay_yes"
+							 name="war_sdy_pl_autoplay"
 							 value="yes" <?php echo ( $autoplay == 'yes' ? 'checked' : '' ); ?>/>
 				<label for="war_sdy_pl_autoplay_yes" style="margin-right: 1em;">Yes</label>
-				
-				<input type="radio" 
-							 id="war_sdy_pl_autoplay_no" 
-							 name="war_sdy_pl_autoplay" 
+
+				<input type="radio"
+							 id="war_sdy_pl_autoplay_no"
+							 name="war_sdy_pl_autoplay"
 							 value="no" <?php echo ( $autoplay == 'no' ? 'checked' : '' ); ?>/>
 				<label for="war_sdy_pl_autoplay_no" style="margin-right: 1em;">No</label>
 			</td>
@@ -155,22 +179,22 @@
 				<label for="war_sdy_pl_loop">Loop</label>
 			</th>
 			<td>
-				<input type="radio" 
-							 id="war_sdy_pl_loop_yes" 
-							 name="war_sdy_pl_loop" 
+				<input type="radio"
+							 id="war_sdy_pl_loop_yes"
+							 name="war_sdy_pl_loop"
 							 value="yes" <?php echo ( $audio_loop == 'yes' ? 'checked' : '' ); ?>/>
 				<label for="war_sdy_pl_loop_yes" style="margin-right: 1em;">Yes</label>
-				
-				<input type="radio" 
-							 id="war_sdy_pl_loop_no" 
-							 name="war_sdy_pl_loop" 
+
+				<input type="radio"
+							 id="war_sdy_pl_loop_no"
+							 name="war_sdy_pl_loop"
 							 value="no" <?php echo ( $audio_loop == 'no' ? 'checked' : '' ); ?>/>
 				<label for="war_sdy_pl_loop_no" style="margin-right: 1em;">No</label>
 			</td>
 		</tr>
 	</table>
   </div>
-	
+
   <div id="war_sdy_pl_tab_panel_content">
       <p class="war_bold war_bigger">Playlist Soundtracks</p>
       <p>To display the playlist on the front-end use the short code: <span class="war_bold">[sdy_pl playlist]</span></p>
@@ -181,13 +205,13 @@
 			</th>
 			<td>
 				<div style="margin: 5px 5px 5px 0px">
-					<input type="radio" 
-								 id="war_sdy_pl_radio_soundtracks_default" 
-								 name="war_sdy_pl_soundtracks_def" 
+					<input type="radio"
+								 id="war_sdy_pl_radio_soundtracks_default"
+								 name="war_sdy_pl_soundtracks_def"
 								 value="default" checked/>
 					<label for="war_sdy_pl_radio_soundtracks_default" style="margin-right: 1em;">Default</label>
                     <span class="war_comment">Need a page/post specific playlist? Upgrade to:
-                    <button id="war_sdy_pl_pro_buy" type="button" class="war_soundy" style="margin-left: 5px;">Soundy Audio Playlist PRO</button></span>
+                    <button id="war_sdy_pl_pro_buy" type="button" class="war_sdy_pl" style="margin-left: 5px;">Soundy Audio Playlist PRO</button></span>
 				</div>
 			</td>
 		</tr>
@@ -196,9 +220,9 @@
 				<label>Playlist Title</label>
 			</th>
 			<td>
-				<input id="war_sdy_pl_playlist_title" 
-				       name="war_sdy_pl_playlist_title" 
-				       type="text" 
+				<input id="war_sdy_pl_playlist_title"
+				       name="war_sdy_pl_playlist_title"
+				       type="text"
 				       value="<?php echo ( $soundtracks == 'default' ? $playlist_title_default : $playlist_title ); ?>"
 				       class="war_sdy_pl_txt_input" />
 				<span id="war_sdy_pl_playlist_title_default" style="display: none;"><?php echo $playlist_title_default; ?></span>
@@ -210,7 +234,7 @@
 				<label>Soundtracks</label>
 			</th>
 			<td>
-				<?php 
+				<?php
 					$this->sdy_pl->add_field_soundtracks( true, $soundtracks, $soundtracks_default );
 					$this->sdy_pl->add_field_soundtrack_buttons( true, $yellow_select_id );
 				?>
@@ -228,12 +252,78 @@
   </div>
 
   <div id="war_sdy_pl_tab_panel_columns">
-      <p class="war_bold war_bigger">Playlist Columns</p>
+      <p class="war_bold war_bigger">Display</p>
       <p>To display the playlist on the front-end use the short code: <span class="war_bold">[sdy_pl playlist]</span></p>
       <table class="form-table war_sdy_pl war_sdy_pl_form_table">
           <tr>
               <th class="war_sdy_pl">
-                  <label for="war_sdy_pl_enable">Column Order</label>
+                  <label for="war_sdy_pl_scrolling_enable">Scrolling</label>
+              </th>
+              <td>
+                  <div style="margin-bottom: 10px; margin-top: 5px;">
+                      <input type="radio"
+                             id="war_sdy_pl_scrolling_enable_yes"
+                             name="war_sdy_pl_scrolling_enable"
+                             value="yes" <?php echo ( $scrolling_enable == 'yes' ? 'checked' : '' ); ?>/>
+                      <label for="war_sdy_pl_scrolling_enable_yes" style="margin-right: 1em;">Yes</label>
+
+                      <input type="radio"
+                             id="war_sdy_pl_scrolling_enable_no"
+                             name="war_sdy_pl_scrolling_enable"
+                             value="no" <?php echo ( $scrolling_enable == 'no' ? 'checked' : '' ); ?>/>
+                      <label for="war_sdy_pl_scrolling_enable_no" style="margin-right: 1em;">No</label>
+                  </div>
+
+                  <?php $this->sdy_pl->add_field_scrolling( 'meta_box' ); ?>
+              </td>
+          </tr>
+          <tr>
+              <th class="war_sdy_pl">
+                  <label for="war_sdy_pl_outer_box_width">Outer Box Width</label>
+              </th>
+              <td>
+                  <div style="margin-bottom: 10px; margin-top: 5px;">
+                      <input type="radio"
+                             id="war_sdy_pl_outer_box_width_default"
+                             name="war_sdy_pl_outer_box_width"
+                             value="default" <?php echo ( $outer_box_width == 'default' ? 'checked' : '' ); ?>/>
+                      <label for="war_sdy_pl_outer_box_width_default" style="margin-right: 1em;">Default</label>
+
+                      <input type="radio"
+                             id="war_sdy_pl_outer_box_width_custom"
+                             name="war_sdy_pl_outer_box_width"
+                             value="custom" <?php echo ( $outer_box_width == 'custom' ? 'checked' : '' ); ?>/>
+                      <label for="war_sdy_pl_outer_box_width_custom" style="margin-right: 1em;">Custom</label>
+                  </div>
+
+                  <?php $this->sdy_pl->add_field_outer_box_width( 'meta_box' ); ?>
+              </td>
+          </tr>
+          <tr>
+              <th class="war_sdy_pl">
+                  <label for="war_sdy_pl_font_size">Font Size</label>
+              </th>
+              <td>
+                  <div style="margin-bottom: 10px; margin-top: 5px;">
+                      <input type="radio"
+                             id="war_sdy_pl_font_size_default"
+                             name="war_sdy_pl_font_size"
+                             value="default" <?php echo ( $font_size == 'default' ? 'checked' : '' ); ?>/>
+                      <label for="war_sdy_pl_font_size_default" style="margin-right: 1em;">Default</label>
+
+                      <input type="radio"
+                             id="war_sdy_pl_font_size_custom"
+                             name="war_sdy_pl_font_size"
+                             value="custom" <?php echo ( $font_size == 'custom' ? 'checked' : '' ); ?>/>
+                      <label for="war_sdy_pl_font_size_custom" style="margin-right: 1em;">Custom</label>
+                  </div>
+
+                  <?php $this->sdy_pl->add_field_font_size( 'meta_box' ); ?>
+              </td>
+          </tr>
+          <tr>
+              <th class="war_sdy_pl">
+                  <label for="war_sdy_pl_column_order">Column Order</label>
               </th>
               <td>
                   <div style="margin-bottom: 10px; margin-top: 5px;">

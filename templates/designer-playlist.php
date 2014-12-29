@@ -3,10 +3,8 @@
 class WarSoundyAudioPlaylistDesignerPlaylist
 {
 	public $sdy_pl; // WarSoundyAudioPlaylist Object
-    public $value_outer_box_width               = '100';
-    public $unit_outer_box_width                = '%';
-    public $value_text_size                     = '8';
-    public $unit_text_size                      = 'pt';
+    public $outer_box_width_value               = '100';
+    public $outer_box_width_unit                = '%';
     public $color_bg_header_footer              = '#813ca0';
     public $color_txt_header_footer             = '#ffffff';
     public $color_slider_bar                    = '#00b3ff';
@@ -26,10 +24,13 @@ class WarSoundyAudioPlaylistDesignerPlaylist
     public $pixel_inner_box_corner_rounding     = '5';
     public $pixel_outer_box_padding             = '10';
     public $pixel_inner_box_margin              = '10';
+    public $font_size_value                     = '100';
+    public $font_size_unit                      = '%';
 
 	public function __construct( $sdy_pl_object )
 	{
 		$this->sdy_pl = $sdy_pl_object;
+        // $this->activate();
 
 	    if( ( isset( $_GET['page'] ) && ( $_GET['page'] == 'sdy_pl' ) ) )
         {
@@ -51,10 +52,8 @@ class WarSoundyAudioPlaylistDesignerPlaylist
 
 	public function activate()
 	{
-        add_option( 'war_sdy_pl_playlist_value_outer_box_width',                $this->value_outer_box_width );
-        add_option( 'war_sdy_pl_playlist_unit_outer_box_width',                 $this->unit_outer_box_width );
-        add_option( 'war_sdy_pl_playlist_value_text_size',                      $this->value_text_size );
-        add_option( 'war_sdy_pl_playlist_unit_text_size',                       $this->unit_text_size );
+        add_option( 'war_sdy_pl_playlist_outer_box_width_value',                $this->outer_box_width_value );
+        add_option( 'war_sdy_pl_playlist_outer_box_width_unit',                 $this->outer_box_width_unit );
 		add_option( 'war_sdy_pl_playlist_color_bg_header_footer',               $this->color_bg_header_footer );
         add_option( 'war_sdy_pl_playlist_color_txt_header_footer',              $this->color_txt_header_footer );
         add_option( 'war_sdy_pl_playlist_color_slider_bar',                     $this->color_slider_bar );
@@ -74,6 +73,8 @@ class WarSoundyAudioPlaylistDesignerPlaylist
         add_option( 'war_sdy_pl_playlist_pixel_inner_box_corner_rounding',      $this->pixel_inner_box_corner_rounding );
         add_option( 'war_sdy_pl_playlist_pixel_outer_box_padding',              $this->pixel_outer_box_padding );
         add_option( 'war_sdy_pl_playlist_pixel_inner_box_margin',               $this->pixel_inner_box_margin );
+        add_option( 'war_sdy_pl_playlist_font_size_value',                      $this->font_size_value );
+        add_option( 'war_sdy_pl_playlist_font_size_unit',                       $this->font_size_unit );
 	}
 
 	public function add_settings_section()
@@ -105,6 +106,8 @@ class WarSoundyAudioPlaylistDesignerPlaylist
         $this->add_setting( 'Inner Box Corner Rounding',            'inner_box_corner_rounding',    'pixel' );
         $this->add_setting( 'Outer Box Padding',                    'outer_box_padding',            'pixel' );
         $this->add_setting( 'Inner Box Margin',                     'inner_box_margin',             'pixel' );
+        $this->add_setting_outer_box_width();
+        $this->add_setting_font_size();
 	}
 
 	public function add_setting( $label, $name, $type )
@@ -172,7 +175,7 @@ class WarSoundyAudioPlaylistDesignerPlaylist
 		$value = $args[ 1 ];
 		if( $value == '' )
 		{
-			$value = ( int )get_option( 'war_sdy_pl_design_pl_percent_' . $name );
+			$value = ( int )get_option( 'war_sdy_pl_playlist_percent_' . $name );
 		}
 		if( $value <  10 ) $value = '0' . $value;
 		if( $value < 100 ) $value = '0' . $value;
@@ -182,7 +185,7 @@ class WarSoundyAudioPlaylistDesignerPlaylist
             <input  type="text"
                     class="war_sdy_pl_design_pl_percent"
                     value="<?php echo $value; ?>"
-                    name="war_sdy_pl_design_pl_percent_<?php echo $name; ?>"
+                    name="war_sdy_pl_playlist_percent_<?php echo $name; ?>"
                     id="war_sdy_pl_design_pl_percent_<?php echo $name; ?>" /> <span class="war_sdy_pl_design_pl_comment">%</span>
             <span   id="war_sdy_pl_design_pl_percent_<?php echo $name; ?>_validation_error"
                     class="war_sdy_pl_design_pl_validation_error"></span>
@@ -207,7 +210,79 @@ class WarSoundyAudioPlaylistDesignerPlaylist
                     class="war_sdy_pl_design_pl_validation_error"></span>
         <?php
     }
-    
+
+    public function add_setting_font_size()
+    {
+        register_setting( 'war_sdy_pl', 'war_sdy_pl_playlist_font_size_value' );
+        register_setting( 'war_sdy_pl', 'war_sdy_pl_playlist_font_size_unit' );
+        add_settings_field(
+            'war_sdy_pl_playlist_font_size',
+            'Font Size',
+            array( $this, 'add_setting_field_font_size' ),
+            'sdy_pl',
+            'war_sdy_pl_settings_section_designer_playlist'
+        );
+    }
+
+    public function add_setting_field_font_size()
+    {
+        $value = ( int )get_option( 'war_sdy_pl_playlist_font_size_value' );
+        if( $value <  10 ) $value = '0' . $value;
+        if( $value < 100 ) $value = '0' . $value;
+        $unit  = get_option( 'war_sdy_pl_playlist_font_size_unit' );
+        ?>
+        <div    id="war_sdy_pl_design_pl_slider_font_size_value"
+                class="war_sdy_pl_design_pl_slider"></div>
+        <input  type="text"
+                class="war_sdy_pl_design_pl_percent"
+                value="<?php echo $value; ?>"
+                name="war_sdy_pl_playlist_font_size_value"
+                id="war_sdy_pl_playlist_font_size_value" />
+        <select name="war_sdy_pl_playlist_font_size_unit"
+                id="war_sdy_pl_playlist_font_size_unit" style="width: 50px; height: 20px;">
+            <?php echo $this->sdy_pl->get_select_options( $unit, $this->sdy_pl->units_font_size ); ?>
+        </select>
+        <span   id="war_sdy_pl_playlist_font_size_validation_error"
+                class="war_sdy_pl_design_pl_validation_error"></span>
+        <?php
+    }
+
+    public function add_setting_outer_box_width()
+    {
+        register_setting( 'war_sdy_pl', 'war_sdy_pl_playlist_outer_box_width_value' );
+        register_setting( 'war_sdy_pl', 'war_sdy_pl_playlist_outer_box_width_unit' );
+        add_settings_field(
+            'war_sdy_pl_playlist_outer_box_width',
+            'Outer Box Width',
+            array( $this, 'add_setting_field_outer_box_width' ),
+            'sdy_pl',
+            'war_sdy_pl_settings_section_designer_playlist'
+        );
+    }
+
+    public function add_setting_field_outer_box_width()
+    {
+        $value = ( int )get_option( 'war_sdy_pl_playlist_outer_box_width_value' );
+        if( $value <  10 ) $value = '0' . $value;
+        if( $value < 100 ) $value = '0' . $value;
+        $unit  = get_option( 'war_sdy_pl_playlist_outer_box_width_unit' );
+        ?>
+        <div    id="war_sdy_pl_design_pl_slider_outer_box_width_value"
+                class="war_sdy_pl_design_pl_slider"></div>
+        <input  type="text"
+                class="war_sdy_pl_design_pl_thousand"
+                value="<?php echo $value; ?>"
+                name="war_sdy_pl_playlist_outer_box_width_value"
+                id="war_sdy_pl_playlist_outer_box_width_value" />
+        <select name="war_sdy_pl_playlist_outer_box_width_unit"
+                id="war_sdy_pl_playlist_outer_box_width_unit" style="width: 50px; height: 20px;">
+            <?php echo $this->sdy_pl->get_select_options( $unit, $this->sdy_pl->units_length ); ?>
+        </select>
+        <span   id="war_sdy_pl_playlist_outer_box_width_validation_error"
+                class="war_sdy_pl_design_pl_validation_error"></span>
+        <?php
+    }
+
     public function display_preview_playlist()
     {
         ?>

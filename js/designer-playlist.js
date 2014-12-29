@@ -30,6 +30,8 @@ function war_AudioPlaylistDesignerPlaylist()
         _this.initPixel( 'inner_box_corner_rounding',   40 );
         _this.initPixel( 'outer_box_padding',           40 );
         _this.initPixel( 'inner_box_margin',            40 );
+        _this.initOuterBoxWidth();
+        _this.initFontSize();
 
 		if( jQuery( '#war_sdy_pl_tabs' ).tabs( 'option', 'active' ) == _this.tab_index )
 		{
@@ -45,6 +47,7 @@ function war_AudioPlaylistDesignerPlaylist()
 			if( ui.newPanel.attr( 'id' ) == 'war_sdy_pl_tab_panel_designer_pl' )
 			{
 				_this.design_pl_tab_is_visible = true;
+                _this.initPlayPauseButton();
                 _this.setPreview();
 			}
 			else
@@ -115,9 +118,9 @@ war_AudioPlaylistDesignerPlaylist.prototype.setPreview = function()
     offset_top += _this.preview_marker_margin_height;
     var preview_height = jQuery( window ).height() - offset_top;
 
-    _this.jquery_preview = jQuery( '#war_sdy_pl_design_pl_preview' );
-    _this.jquery_preview.css( 'width',  preview_width );
-    _this.jquery_preview.css( 'height', preview_height );
+    var jquery_preview = jQuery( '#war_sdy_pl_design_pl_preview' );
+    jquery_preview.css( 'width',  preview_width );
+    jquery_preview.css( 'height', preview_height );
 }
 
 war_AudioPlaylistDesignerPlaylist.prototype.initPlayPauseButton = function()
@@ -126,29 +129,55 @@ war_AudioPlaylistDesignerPlaylist.prototype.initPlayPauseButton = function()
 
     var pseudo_playing = false;
 
+    var pp_images_to_use = jQuery( 'input[name=war_sdy_pl_pp_images_to_use]:checked' ).val();
+
+    if( pp_images_to_use == 'designer' && war_design_pp.is_initialised )
+    {
+        war_design_pp.saveButtonsImgDataForPreview();
+        var button_url_play_normal  = war_design_pp.img_data_play_normal;
+        var button_url_play_hover   = war_design_pp.img_data_play_hover;
+        var button_url_pause_normal = war_design_pp.img_data_pause_normal;
+        var button_url_pause_hover  = war_design_pp.img_data_pause_hover;
+    }
+    else if( pp_images_to_use == 'designer' )
+    {
+        var button_url_play_normal  = sdy_pl_button_url_play_normal.src;
+        var button_url_play_hover   = sdy_pl_button_url_play_hover.src;
+        var button_url_pause_normal = sdy_pl_button_url_pause_normal.src;
+        var button_url_pause_hover  = sdy_pl_button_url_pause_hover.src;
+    }
+    else
+    {
+        var button_url_play_normal  = jQuery( '#war_sdy_pl_url_play_button' ).val();
+        var button_url_play_hover   = jQuery( '#war_sdy_pl_url_play_hover' ).val();
+        var button_url_pause_normal = jQuery( '#war_sdy_pl_url_pause_button' ).val();
+        var button_url_pause_hover  = jQuery( '#war_sdy_pl_url_pause_hover' ).val();
+    }
+
     var jquery_audio_control    = jQuery( '.war_sdy_pl_audio_control' );
-    jquery_audio_control.prop( 'src', sdy_pl_button_url_play_normal.src );
+    jquery_audio_control.prop( 'src', button_url_play_normal );
+
     jquery_audio_control.hover(
         function()
         {
             if( pseudo_playing )
             {
-                jquery_audio_control.prop( 'src', sdy_pl_button_url_pause_hover.src );
+                jquery_audio_control.prop( 'src', button_url_pause_hover );
             }
             else
             {
-                jquery_audio_control.prop( 'src', sdy_pl_button_url_play_hover.src );
+                jquery_audio_control.prop( 'src', button_url_play_hover );
             }
         },
         function()
         {
             if( pseudo_playing )
             {
-                jquery_audio_control.prop( 'src', sdy_pl_button_url_pause_normal.src );
+                jquery_audio_control.prop( 'src', button_url_pause_normal );
             }
             else
             {
-                jquery_audio_control.prop( 'src', sdy_pl_button_url_play_normal.src );
+                jquery_audio_control.prop( 'src', button_url_play_normal );
             }
         }
     );
@@ -157,12 +186,12 @@ war_AudioPlaylistDesignerPlaylist.prototype.initPlayPauseButton = function()
         {
             if( pseudo_playing )
             {
-                jquery_audio_control.prop( 'src', sdy_pl_button_url_play_hover.src );
+                jquery_audio_control.prop( 'src', button_url_play_hover );
                 pseudo_playing = false;
             }
             else
             {
-                jquery_audio_control.prop( 'src', sdy_pl_button_url_pause_hover.src );
+                jquery_audio_control.prop( 'src', button_url_pause_hover );
                 pseudo_playing = true;
             }
         }
@@ -367,16 +396,16 @@ war_AudioPlaylistDesignerPlaylist.prototype.setColor = function( component, hex_
     {
         case 'bg_header_footer':
 
-            jQuery( '.war_sdy_pl_designer_preview_soundtrack_row_header' ).css(                    'background-color', hex_color_str  );
+            jQuery( '.war_sdy_pl_designer_preview_soundtrack_row_header' ).css(             'background-color', hex_color_str  );
             jQuery( 'li.war_sdy_pl_designer_preview_playlist_columns_caption_row' ).css(    'background-color', hex_color_str  );
-            jQuery( '.war_sdy_pl_designer_preview_soundtrack_row_footer' ).css(                    'background-color', hex_color_str  );
+            jQuery( '.war_sdy_pl_designer_preview_soundtrack_row_footer' ).css(             'background-color', hex_color_str  );
             break;
 
         case 'txt_header_footer':
 
-            jQuery( '.war_sdy_pl_designer_preview_soundtrack_row_header' ).css(                    'color', hex_color_str  );
+            jQuery( '.war_sdy_pl_designer_preview_soundtrack_row_header' ).css(             'color', hex_color_str  );
             jQuery( 'li.war_sdy_pl_designer_preview_playlist_columns_caption_row' ).css(    'color', hex_color_str  );
-            jQuery( '.war_sdy_pl_designer_preview_soundtrack_row_footer' ).css(                    'color', hex_color_str  );
+            jQuery( '.war_sdy_pl_designer_preview_soundtrack_row_footer' ).css(             'color', hex_color_str  );
             jQuery( '.war_designer_preview_icon_speaker_graphic_1' ).css(     'fill',   hex_color_str );
             jQuery( '.war_designer_preview_icon_speaker_graphic_2' ).css(     'stroke', hex_color_str );
             jQuery( '.war_designer_preview_icon_previous_next_graphic' ).css( 'fill',   hex_color_str );
@@ -407,7 +436,7 @@ war_AudioPlaylistDesignerPlaylist.prototype.setColor = function( component, hex_
 
         case 'bg_even_soundtrack':
 
-            jQuery( '#war_sdy_pl_designer_preview_playlist li' ).css( 'background', hex_color_str );
+            jQuery( '#war_sdy_pl_designer_preview_playlist li:nth-child( even )' ).css( 'background', hex_color_str );
             break;
 
         case 'bg_odd_soundtrack':
@@ -457,6 +486,7 @@ war_AudioPlaylistDesignerPlaylist.prototype.initPercent = function( attribute )
 	if( percent_str.match( /^\d+$/ ) && percent < 101 )
 	{
 		eval( '_this.' + attribute + '= percent' );
+        _this.setPercent( attribute, percent );
 	}
 	else
 	{
@@ -475,6 +505,7 @@ war_AudioPlaylistDesignerPlaylist.prototype.initPercent = function( attribute )
                         jquery_validation_error.html( '' );
                         jquery_attr.val( _this.make3( ui.value ) );
                         eval( '_this.' + attribute + '= ui.value' );
+                        _this.setPercent( attribute, ui.value );
 		       	    }
 	} ); 
 
@@ -487,6 +518,7 @@ war_AudioPlaylistDesignerPlaylist.prototype.initPercent = function( attribute )
 			jquery_validation_error.html( '' );
 			jquery_attr_slider.slider( 'value', this.value );
  			eval( '_this.' + attribute + '= this.value' );
+            _this.setPercent( attribute, percent );
  			this.value = _this.make3( this.value );
 		}
 		else
@@ -495,6 +527,21 @@ war_AudioPlaylistDesignerPlaylist.prototype.initPercent = function( attribute )
  			eval( 'this.value = _this.make3( _this.' + attribute + ')' );
 		}
 	} );
+}
+
+war_AudioPlaylistDesignerPlaylist.prototype.setPercent = function( component, value )
+{
+    var _this = this;
+
+    value += '%';
+
+    switch( component )
+    {
+        case 'font_size':
+
+            jQuery( 'div.war_sdy_pl_designer_preview_playlist_outer_box' ).css( 'font-size', value );
+            break;
+    }
 }
 
 war_AudioPlaylistDesignerPlaylist.prototype.initPixel = function( attribute, max_value )
@@ -617,12 +664,220 @@ war_AudioPlaylistDesignerPlaylist.prototype.setPixel = function( component, valu
     }
 }
 
+war_AudioPlaylistDesignerPlaylist.prototype.initFontSize = function()
+{
+    var _this = this;
+
+    var jquery_value = jQuery( '#war_sdy_pl_playlist_font_size_value' );
+    var jquery_unit  = jQuery( '#war_sdy_pl_playlist_font_size_unit' );
+    var jquery_slider = jQuery( '#war_sdy_pl_design_pl_slider_font_size_value' );
+    var jquery_validation_error = jQuery( '#war_sdy_pl_playlist_font_size_validation_error' );
+    var unit = jquery_unit.val();
+    var value_str = jquery_value.val();
+    var value = parseInt( value_str );
+    if( value_str.match( /^\d+$/ ) )
+    {
+        jQuery( 'div.war_sdy_pl_designer_preview_playlist_outer_box' ).css( 'font-size', value + unit );
+    }
+    else
+    {
+        jquery_validation_error.html( 'Invalid input: ' + value_str );
+    }
+
+    jquery_slider.slider(
+        {
+            min:        0,
+            max:        100,
+            value:      value,
+            range:      'min',
+            animate:    true,
+            slide:      function( event, ui )
+            {
+                var unit = jquery_unit.val();
+                jquery_validation_error.html( '' );
+                jquery_value.val( _this.make3( ui.value ) );
+                jQuery( 'div.war_sdy_pl_designer_preview_playlist_outer_box' ).css( 'font-size', ui.value + unit );
+            }
+        } );
+
+    jquery_value.change( function()
+    {
+        var unit = jquery_unit.val();
+        var value_str = this.value;
+        var value = parseInt( value_str );
+        if( value_str.match( /^\d+$/ ) )
+        {
+            jquery_validation_error.html( '' );
+            jquery_slider.slider( 'value', this.value );
+            jQuery( 'div.war_sdy_pl_designer_preview_playlist_outer_box' ).css( 'font-size', value + unit );;
+            this.value = _this.make3( this.value );
+        }
+        else
+        {
+            jquery_validation_error.html( 'Invalid input: ' + value_str );
+        }
+    } );
+
+    jquery_unit.change( function()
+    {
+        var unit = this.value;
+        var value = jquery_value.val();
+
+        jQuery( 'div.war_sdy_pl_designer_preview_playlist_outer_box' ).css( 'font-size', value + unit );
+    } );
+}
+
+war_AudioPlaylistDesignerPlaylist.prototype.initOuterBoxWidth = function()
+{
+    var _this = this;
+
+    var jquery_value = jQuery( '#war_sdy_pl_playlist_outer_box_width_value' );
+    var jquery_unit  = jQuery( '#war_sdy_pl_playlist_outer_box_width_unit' );
+    var jquery_slider = jQuery( '#war_sdy_pl_design_pl_slider_outer_box_width_value' );
+    var jquery_validation_error = jQuery( '#war_sdy_pl_playlist_outer_box_width_validation_error' );
+    var unit = jquery_unit.val();
+    var value_str = jquery_value.val();
+    var value = parseInt( value_str );
+    if( value_str.match( /^\d+$/ ) )
+    {
+        if( unit == '%' )
+        {
+            jquery_value.val( _this.make3( value ) );
+        }
+        else
+        {
+            jquery_value.val( _this.make4( value ) );
+        }
+        var val = ( unit == '%' ) ? value * 0.9 : value;
+        jQuery( 'div.war_sdy_pl_designer_preview_playlist_outer_box' ).css( 'width', val + unit );
+    }
+    else
+    {
+        jquery_validation_error.html( 'Invalid input: ' + value_str );
+    }
+
+    if( unit == '%' )
+    {
+        var max_value = 100;
+        jquery_value.removeClass( 'war_sdy_pl_design_pl_thousand' );
+        jquery_value.addClass( 'war_sdy_pl_design_pl_percent' );
+    }
+    else
+    {
+        var max_value = 2000;
+        jquery_value.removeClass( 'war_sdy_pl_design_pl_percent' );
+        jquery_value.addClass( 'war_sdy_pl_design_pl_thousand' );
+    }
+
+    jquery_slider.slider(
+    {
+        min:        0,
+        max:        max_value,
+        value:      value,
+        range:      'min',
+        animate:    true,
+        slide:      function( event, ui )
+        {
+            var unit = jquery_unit.val();
+            jquery_validation_error.html( '' );
+            if( unit == '%' )
+            {
+                jquery_value.val( _this.make3( ui.value ) );
+            }
+            else
+            {
+                jquery_value.val( _this.make4( ui.value ) );
+            }
+            var val = ( unit == '%' ) ? ui.value * 0.9 : ui.value;
+            jQuery( 'div.war_sdy_pl_designer_preview_playlist_outer_box' ).css( 'width', val + unit );
+        }
+    } );
+
+    jquery_value.change( function()
+    {
+        var unit = jquery_unit.val();
+        var value_str = this.value;
+        var value = parseInt( value_str );
+        if( value_str.match( /^\d+$/ ) )
+        {
+            jquery_validation_error.html( '' );
+            jquery_slider.slider( 'value', this.value );
+            var val = ( unit == '%' ) ? this.value * 0.9 : this.value;
+            jQuery( 'div.war_sdy_pl_designer_preview_playlist_outer_box' ).css( 'width', val + unit );
+            if( unit == '%' )
+            {
+                this.value = _this.make3( this.value );
+            }
+            else
+            {
+                this.value = _this.make4( this.value );
+            }
+        }
+        else
+        {
+            jquery_validation_error.html( 'Invalid input: ' + value_str );
+        }
+    } );
+
+    jquery_unit.change( function()
+    {
+        var unit = this.value;
+        var value = jquery_value.val();
+        if( unit == '%' )
+        {
+            jquery_value.removeClass( 'war_sdy_pl_design_pl_thousand' );
+            jquery_value.addClass( 'war_sdy_pl_design_pl_percent' );
+            jquery_slider.slider( { max: 100 } );
+            if( value > 100 )
+            {
+                jquery_slider.slider( { value: 100 } );
+                jquery_value.val( '100' );
+                value = 100;
+            }
+            else
+            {
+                jquery_value.val( _this.make3( value ) );
+            }
+        }
+        else
+        {
+            jquery_value.removeClass( 'war_sdy_pl_design_pl_percent' );
+            jquery_value.addClass( 'war_sdy_pl_design_pl_thousand' );
+            jquery_slider.slider( { max: 2000 } );
+            if( value > 2000 )
+            {
+                jquery_slider.slider( { value: 2000 } );
+                jquery_value.val( '2000' );
+                value = 2000;
+            }
+            else
+            {
+                jquery_value.val( _this.make4( value ) );
+            }
+        }
+        var val = ( unit == '%' ) ? value * 0.9 : value;
+        jQuery( 'div.war_sdy_pl_designer_preview_playlist_outer_box' ).css( 'width', val + unit );
+    } );
+}
+
 war_AudioPlaylistDesignerPlaylist.prototype.make3 = function( value )
 {
     var _this = this;
 
     value = parseInt( value );
     var value = value < 100 ? '0' + value : value;
+    value = value <  10 ? '0' + value : value;
+
+    return value;
+}
+
+war_AudioPlaylistDesignerPlaylist.prototype.make4 = function( value )
+{
+    var _this = this;
+
+    value = parseInt( value );
+    var value = value < 1000 ? '0' + value : value;
+    value = value < 100 ? '0' + value : value;
     value = value <  10 ? '0' + value : value;
 
     return value;

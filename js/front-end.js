@@ -15,6 +15,8 @@ function war_SoundyAudioPlaylistFrontEnd( args )
 	_this.button_url_pause_hover   = args.hover_url_pause;
 	_this.user_agent_is_IOS        = args.user_agent_is_IOS;
 
+    _this.autoplay = _this.user_agent_is_IOS ? 'no' : _this.autoplay;
+
 	jQuery.noConflict();
 
     _this.autoplay = ( _this.autoplay == 'yes' );
@@ -61,13 +63,19 @@ function war_SoundyAudioPlaylistFrontEnd( args )
 		_this.setEventHandlersForPlayPauseButtons();
 		_this.setEventHandlersForAudioPlayer();
         _this.initPlayMode();
-
         _this.initPlaylistColumns();
+
+        _this.makePlaylistResponsive();
 
         if( ! sdy_pl_css_use_only )
         {
             _this.initPlaylistCSS();
         }
+
+        jQuery( window ).resize( function()
+        {
+            _this.makePlaylistResponsive();
+        } );
 	} );
 }
 
@@ -320,7 +328,10 @@ war_SoundyAudioPlaylistFrontEnd.prototype.loadAudioPlayer = function( mode, audi
 	var audio_composer    = _this.current_soundtrack.children( '.war_soundtrack_composer' ).html();
     var audio_volume      = parseInt( _this.current_soundtrack.children( '.war_soundtrack_volume' ).html() );
 
-	_this.audio_control.attr( 'title', audio_title );
+    // Removes any HTML tag like: <span class="skimlinks-unlinked">...</span> in URL
+    var audio_url = audio_url.replace( /<[^>]+\>/g, '' );
+
+    _this.audio_control.attr( 'title', audio_title );
 	_this.audio_player_element.src      = audio_url;
 	_this.audio_player_element.type     = audio_type;
 	_this.audio_player_element.volume   = audio_volume / 100;
@@ -424,7 +435,8 @@ war_SoundyAudioPlaylistFrontEnd.prototype.setEventHandlersForPlayPauseButtons = 
 					_this.audio_player_element.pause();
 					_this.audio_control.attr( 'src', _this.button_url_play_hover );
 				}
-			} );
+			}
+        );
 			
 		_this.audio_control.hover( 
 			function() 
@@ -466,7 +478,7 @@ war_SoundyAudioPlaylistFrontEnd.prototype.setEventHandlersForPlayPauseButtons = 
 		} );
 
 		_this.audio_player.bind( 'play' , function()
-	  {
+	    {
 			if( _this.hovering )
 			{
 				_this.audio_control.attr( 'src', _this.button_url_pause_hover );
@@ -478,7 +490,7 @@ war_SoundyAudioPlaylistFrontEnd.prototype.setEventHandlersForPlayPauseButtons = 
 		} );
 
 		_this.audio_player.bind( 'pause' , function()
-	  {
+	    {
 			if( _this.hovering )
 			{
 				_this.audio_control.attr( 'src', _this.button_url_play_hover );
@@ -488,21 +500,6 @@ war_SoundyAudioPlaylistFrontEnd.prototype.setEventHandlersForPlayPauseButtons = 
 				_this.audio_control.attr( 'src', _this.button_url_play_normal );
 			}
 		} );
-			
-		if( _this.audio_player_element.autoplay )
-		{
-			if( _this.user_agent_is_IOS )
-			{
-				if( _this.hovering )
-				{
-					_this.audio_control.attr( 'src', _this.button_url_play_hover );
-				}
-				else
-				{
-					_this.audio_control.attr( 'src', _this.button_url_play_normal );
-				}
-			}
-		}
 	}
 }
 
@@ -540,11 +537,22 @@ war_SoundyAudioPlaylistFrontEnd.prototype.setEventHandlersForAudioPlayer = funct
 		}
 	} );
 	
-	if( _this.playlist_time_slider )
+	if( _this.playlist_time_slider.length )
 	{
 		_this.audio_player.bind( 'loadedmetadata', function()
 		{
-			_this.playlist_time_slider.slider( 'option', 'max', Math.round( _this.audio_player_element.duration ) ); 
+            if( _this.user_agent_is_IOS )
+            {
+                // IOS Duration Bug turn around
+                var duration_str = _this.current_soundtrack.children( '.war_soundtrack_time' ).html();
+                var dur = duration_str.split( ':' );
+                var duration = dur[ 0 ] * 60 + dur[ 1 ];
+            }
+            else
+            {
+                var duration = Math.round( _this.audio_player_element.duration );
+            }
+			_this.playlist_time_slider.slider( 'option', 'max', duration );
 		} );
 	}
 }
@@ -688,6 +696,43 @@ war_SoundyAudioPlaylistFrontEnd.prototype.orderColumns = function()
     );
 }
 
+war_SoundyAudioPlaylistFrontEnd.prototype.makePlaylistResponsive = function()
+{
+    var _this = this;
+
+    var inner_width = jQuery( 'li.war_sdy_pl_playlist_row_header' ).width();
+    var width_slider_volume = Math.min( Math.round( 0.23 * inner_width ), 250 );
+    var width_slider_time   = Math.min( Math.round( 0.30 * inner_width ), 400 );
+
+    if( inner_width > 600 )
+    {
+        jQuery( 'div.war_sdy_pl_playlist_header_left_hand_container' ).css( 'display', 'table-cell' );
+        jQuery( 'div.war_sdy_pl_playlist_header_right_hand_container' ).css( 'display', 'table-cell' );
+        jQuery( 'div.war_sdy_pl_playlist_header_left_hand_container' ).css( 'width', '50%' );
+        jQuery( 'div.war_sdy_pl_playlist_header_right_hand_container' ).css( 'width', '50%' );
+        jQuery( 'div.war_sdy_pl_playlist_header_right_hand_container' ).css( 'text-align', 'right' );
+    }
+    else
+    {
+        jQuery( 'div.war_sdy_pl_playlist_header_left_hand_container' ).css( 'display', 'table-row' );
+        jQuery( 'div.war_sdy_pl_playlist_header_right_hand_container' ).css( 'display', 'table-row' );
+        jQuery( 'div.war_sdy_pl_playlist_header_left_hand_container' ).css( 'width', '100%' );
+        jQuery( 'div.war_sdy_pl_playlist_header_right_hand_container' ).css( 'width', '100%' );
+        jQuery( 'div.war_sdy_pl_playlist_header_right_hand_container' ).css( 'text-align', 'center' );
+        width_slider_volume = Math.round( 1.8 * width_slider_volume );
+        width_slider_time   = Math.round( 1.8 * width_slider_time );
+    }
+
+    var width_button = jQuery( 'img.war_sdy_pl_audio_control' ).width();
+    var width_left = Math.round( jQuery( 'div.war_sdy_pl_playlist_header_left_hand_container' ).width() );
+    var width_title = width_left - width_button;
+    jQuery( 'div.war_sdy_pl_playlist_pp_button' ).css( 'min-width', width_button );
+    jQuery( 'div.war_sdy_pl_playlist_title_global' ).css( 'width', width_title  );
+
+    jQuery( 'div.war_sdy_pl_playlist_volume_slider' ).css( 'width', width_slider_volume );
+    jQuery( 'div.war_sdy_pl_playlist_time_slider' ).css( 'width', width_slider_time );
+}
+
 war_SoundyAudioPlaylistFrontEnd.prototype.initPlaylistCSS = function()
 {
     var _this = this;
@@ -728,7 +773,10 @@ war_SoundyAudioPlaylistFrontEnd.prototype.initPlaylistCSS = function()
     jquery_slider_handle_volume.css( 'background', sdy_pl_css_color_slider_handle );
     jquery_slider_handle_time.css(   'background', sdy_pl_css_color_slider_handle );
 
-    jQuery( '.war_sdy_pl_playlist_outer_box' ).css( 'background-color', sdy_pl_css_color_bg_outer_box );
+    jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'background-color', sdy_pl_css_color_bg_outer_box );
+    var val = sdy_pl_css_outer_box_width_unit == '%' ? 0.98 * sdy_pl_css_outer_box_width_value : sdy_pl_css_outer_box_width_value;
+    jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'width', val + sdy_pl_css_outer_box_width_unit );
+    jQuery( 'div.war_sdy_pl_playlist_outer_box' ).css( 'font-size', sdy_pl_css_font_size_value + sdy_pl_css_font_size_unit );
 
     jQuery( '#war_sdy_pl_playlist li' ).css(                  'background-color', sdy_pl_css_color_bg_even_soundtrack );
     jQuery( '#war_sdy_pl_playlist li:nth-child( odd )' ).css( 'background-color', sdy_pl_css_color_bg_odd_soundtrack );
@@ -775,6 +823,18 @@ war_SoundyAudioPlaylistFrontEnd.prototype.initPlaylistCSS = function()
     jQuery( 'li.war_sdy_pl_playlist_row_header' ).css(          'margin-bottom',    sdy_pl_css_pixel_inner_box_margin );
     jQuery( 'li.war_sdy_pl_playlist_columns_caption_row' ).css( 'margin-bottom',    sdy_pl_css_pixel_inner_box_margin );
     jQuery( 'li.war_sdy_pl_playlist_row_footer' ).css(          'margin-top',       sdy_pl_css_pixel_inner_box_margin );
+
+    if( sdy_pl_css_scrolling_enable == 'yes' )
+    {
+        var border_height = jQuery( '#war_sdy_pl_playlist').children().first().css( 'border-top-width' );
+        border_height = border_height.replace( 'px', '' );
+        var row_height = jQuery( '#war_sdy_pl_playlist').children().first().outerHeight();
+        row_height -= border_height;
+        var rows = sdy_pl_css_scrolling_height;
+        var height = rows * row_height;
+        jQuery( '#war_sdy_pl_playlist' ).css( 'overflow-y', 'auto' );
+        jQuery( '#war_sdy_pl_playlist' ).css( 'height', height );
+    }
 }
 
 war_SoundyAudioPlaylistFrontEnd.prototype.initShortcodePlaceholders = function()
@@ -798,6 +858,11 @@ war_SoundyAudioPlaylistFrontEnd.prototype.initShortcodePlaceholders = function()
     _this.jquery_placeholder_soundtrack_current_artist    = jQuery( '.war_sdy_pl_placeholder_soundtrack_current_artist' );
     _this.jquery_placeholder_soundtrack_current_composer  = jQuery( '.war_sdy_pl_placeholder_soundtrack_current_composer' );
     _this.jquery_placeholder_playlist_current_status      = jQuery( '.war_sdy_pl_placeholder_playlist_current_status' );
+
+    if( _this.jquery_placeholder_soundtrack_current_time )
+    {
+        _this.jquery_placeholder_soundtrack_current_time.html( '0:00' );
+    }
 
     _this.playlist_time_slider = jQuery( '.war_sdy_pl_playlist_time_slider' );
     if( _this.playlist_time_slider.length )

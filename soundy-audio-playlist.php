@@ -1,13 +1,13 @@
 <?php
 /**
  * @package Soundy_Audio_Playlist_PRO
- * @version 1.0
+ * @version 1.3
  */
 /*
 Plugin Name: Soundy Audio Playlist
 Plugin URI: http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/
 Description: This plugin allows any page or post to play and display an audio playlist.
-Version: 1.0
+Version: 1.3
 Author: Bertrand du Couédic
 Author URI: http://webartisan.ch/en/about
 License: GPL2
@@ -32,7 +32,7 @@ class WarSoundyAudioPlaylist
 {
 	public $sdy_pl_type                      = 'free';
 	public $sdy_pl_subtype                   = '';
-	public $sdy_pl_version                   = '1.0';
+	public $sdy_pl_version                   = '1.3';
 	public $sdy_pl_free_home_wp_url          = 'http://wordpress.org/plugins/soundy-audio-playlist/';
 	public $sdy_pl_pro_home_url              = 'http://webartisan.ch/en/products/soundy-audio-playlist/pro-wordpress-plugin/';
     public $sdy_pl_pro_updates_url           = 'http://webartisan.ch/products/updates/';
@@ -123,8 +123,19 @@ class WarSoundyAudioPlaylist
 		'mm' => 'mm',
 		'cm' => 'cm'
 	);
-	
-	public $audio_playlist_title_default = 'La Guitare Classique';
+
+    public $units_font_size = array(
+        'pt' => 'pt',
+        'px' => 'px',
+        '%'  => '%',
+        'in' => 'in',
+        'mm' => 'mm',
+        'cm' => 'cm',
+        'em' => 'em',
+        'pc' => 'pc'
+    );
+
+    public $audio_playlist_title_default = 'La Guitare Classique';
     public $audio_playlist = array(
         array(
             'id'       => 's1',
@@ -298,6 +309,13 @@ class WarSoundyAudioPlaylist
 
         include( sprintf( "%s/templates/playlist.php", dirname( __FILE__ ) ) );
         $this->playlist = new WarSoundyAudioPlaylistPlaylist( $this );
+
+        if( $this->sdy_pl_version != get_option( 'war_sdy_pl_version' ) )
+        {
+            // Init playlist font size and width in playlist designer
+            $this->design_pl->activate();
+            update_option( 'war_sdy_pl_version', $this->sdy_pl_version );
+        }
 	}
 
 	public function activate() 
@@ -317,29 +335,25 @@ class WarSoundyAudioPlaylist
         add_option( 'war_sdy_pl_playlist_css_file_url',     $this->playlist_css_file_url );
         add_option( 'war_sdy_pl_playlist_css_use_only',     $this->playlist_css_use_only );
 
-		if( ! get_option( 'war_sdy_pl_soundtracks' ) )
-		{
-			$audio_playlist = '';
-			$index = 0;
-			foreach( $this->audio_playlist as &$soundtrack )
-			{
-				$index++;
-				$index = ( $index < 10 ) ? ( '0' . $index ) : $index;
-				$audio_playlist .= '<li>';
-				$audio_playlist .= '<div class="war_soundtrack_index">'    . $index . '.'              . '</div>';
-				$audio_playlist .= '<div class="war_soundtrack_title">'    . $soundtrack[ 'title' ]    . '</div>';
-				$audio_playlist .= '<div class="war_soundtrack_artist">'   . $soundtrack[ 'artist' ]   . '</div>';
-				$audio_playlist .= '<div class="war_soundtrack_composer">' . $soundtrack[ 'composer' ] . '</div>';
-				$audio_playlist .= '<div class="war_soundtrack_url">'      . $soundtrack[ 'url' ]      . '</div>';
-				$audio_playlist .= '<div class="war_soundtrack_volume">'   . $soundtrack[ 'volume' ]   . '</div>';
-				$audio_playlist .= '<div class="war_soundtrack_time">'     . $soundtrack[ 'time' ]     . '</div>';
-				$audio_playlist .= '<div class="war_soundtrack_id">'       . $soundtrack[ 'id' ]       . '</div>';
-				$audio_playlist .= '<div class="war_soundtrack_type">'     . $soundtrack[ 'type' ]     . '</div>';
-				$audio_playlist .= '</li>';
-			}
-			update_option( 'war_sdy_pl_soundtracks', '' );
-			update_option( 'war_sdy_pl_default_soundtracks', $audio_playlist );
-		}
+        $audio_playlist = '';
+        $index = 0;
+        foreach( $this->audio_playlist as &$soundtrack )
+        {
+            $index++;
+            $index = ( $index < 10 ) ? ( '0' . $index ) : $index;
+            $audio_playlist .= '<li>';
+            $audio_playlist .= '<div class="war_soundtrack_index">'    . $index . '.'              . '</div>';
+            $audio_playlist .= '<div class="war_soundtrack_title">'    . $soundtrack[ 'title' ]    . '</div>';
+            $audio_playlist .= '<div class="war_soundtrack_artist">'   . $soundtrack[ 'artist' ]   . '</div>';
+            $audio_playlist .= '<div class="war_soundtrack_composer">' . $soundtrack[ 'composer' ] . '</div>';
+            $audio_playlist .= '<div class="war_soundtrack_url">'      . $soundtrack[ 'url' ]      . '</div>';
+            $audio_playlist .= '<div class="war_soundtrack_volume">'   . $soundtrack[ 'volume' ]   . '</div>';
+            $audio_playlist .= '<div class="war_soundtrack_time">'     . $soundtrack[ 'time' ]     . '</div>';
+            $audio_playlist .= '<div class="war_soundtrack_id">'       . $soundtrack[ 'id' ]       . '</div>';
+            $audio_playlist .= '<div class="war_soundtrack_type">'     . $soundtrack[ 'type' ]     . '</div>';
+            $audio_playlist .= '</li>';
+        }
+        update_option( 'war_sdy_pl_default_soundtracks', $audio_playlist );
 
 		if( ! get_option( 'war_sdy_pl_url_play_button' ) )
 		{ 
@@ -681,7 +695,7 @@ class WarSoundyAudioPlaylist
         add_settings_section
         (
             'war_sdy_pl_settings_section_columns',
-            'Playlist Columns',
+            'Display',
             array( $this, 'display_settings_section_columns_header' ),
             'sdy_pl'
         );
@@ -1879,6 +1893,103 @@ class WarSoundyAudioPlaylist
         }
         echo '</ul>';
         echo '<span class="war_comment" style="margin-left: 2%; position: relative; top: 3px;">Drag & Drop to change column order</span>';
+    }
+
+    public function add_field_scrolling( $context )
+    {
+        $height = get_post_meta( $this->post_id, 'war_sdy_pl_scrolling_height', true );
+        $height = $height ? $height : 10;
+        $options_height = array();
+        for( $i = 1; $i < 100; $i++ )
+        {
+            $nb_formatted = $i < 10 ? '0' . $i : $i;
+            $selected = $i == $height ? 'selected' : '';
+            $options_height[] = '<option value="' . $i .'" ' . $selected . '>' . $nb_formatted . '</option>';
+        }
+        $options_height = implode( '', $options_height );
+
+        echo '<div id="war_sdy_pl_scrolling_height_container">';
+        echo    '<select id="war_sdy_pl_scrolling_height" name="war_sdy_pl_scrolling_height" style="margin-left: 0px;">' . $options_height . '</select>';
+        echo    '<span style="margin-left: 10px;">rows in scrolling area</span>';
+        echo '</div>';
+    }
+
+    public function add_field_outer_box_width( $context )
+    {
+        $outer_box_width = get_post_meta( $this->post_id, 'war_sdy_pl_outer_box_width', true );
+        $outer_box_width = $outer_box_width ? $outer_box_width : 'default';
+
+        $outer_box_width_value_default = intval( get_option( 'war_sdy_pl_playlist_outer_box_width_value' ), 10 );
+        $outer_box_width_unit_default = get_option( 'war_sdy_pl_playlist_outer_box_width_unit' );
+
+        if( $context == 'settings' )
+        {
+            $outer_box_width_value = $outer_box_width_value_default;
+            $outer_box_width_unit  = $outer_box_width_unit_default;
+        }
+        else //if( $context == 'meta_box' )
+        {
+            echo '<input id="war_sdy_pl_outer_box_width_value_default"  type="hidden" value="' . $outer_box_width_value_default . '">';
+            echo '<input id="war_sdy_pl_outer_box_width_unit_default"  type="hidden" value="' . $outer_box_width_unit_default . '">';
+
+            if( $outer_box_width == "default" )
+            {
+                $outer_box_width_value = $outer_box_width_value_default;
+                $outer_box_width_unit  = $outer_box_width_unit_default;
+            }
+            else //if( $column_order == 'custom' )
+            {
+                $outer_box_width_value  = get_post_meta( $this->post_id, 'war_sdy_pl_playlist_outer_box_width_value', true );
+                $outer_box_width_unit   = get_post_meta( $this->post_id, 'war_sdy_pl_playlist_outer_box_width_unit', true );
+            }
+        }
+
+        echo '<div class="war_sdy_pl_outer_box_width_container">';
+        echo    '<div id="war_sdy_pl_slider_outer_box_width" class="war_sdy_pl_slider"></div>';
+        echo    '<input id="war_sdy_pl_playlist_outer_box_width_value" name="war_sdy_pl_playlist_outer_box_width_value" type="text" size="4" value="' . $outer_box_width_value . '">';
+        $unit_options = $this->get_select_options( $outer_box_width_unit, $this->units_length );
+        echo    '<select id="war_sdy_pl_playlist_outer_box_width_unit" name="war_sdy_pl_playlist_outer_box_width_unit" style="margin-left: 12px;">' . $unit_options . '</select>';
+        echo    '&nbsp;&nbsp;<span id="war_sdy_pl_playlist_outer_box_width_validation_error" class="war_sdy_pl_validation_error"></span>';
+        echo '</div>';
+    }
+    
+    public function add_field_font_size( $context )
+    {
+        $font_size = get_post_meta( $this->post_id, 'war_sdy_pl_font_size', true );
+        $font_size = $font_size ? $font_size : 'default';
+
+        $font_size_value_default = intval( get_option( 'war_sdy_pl_playlist_font_size_value' ), 10 );
+        $font_size_unit_default = get_option( 'war_sdy_pl_playlist_font_size_unit' );
+
+        if( $context == 'settings' )
+        {
+            $font_size_value = $font_size_value_default;
+            $font_size_unit  = $font_size_unit_default;
+        }
+        else //if( $context == 'meta_box' )
+        {
+            echo '<input id="war_sdy_pl_font_size_value_default"  type="hidden" value="' . $font_size_value_default . '">';
+            echo '<input id="war_sdy_pl_font_size_unit_default"  type="hidden" value="' . $font_size_unit_default . '">';
+
+            if( $font_size == "default" )
+            {
+                $font_size_value = $font_size_value_default;
+                $font_size_unit  = $font_size_unit_default;
+            }
+            else //if( $column_order == 'custom' )
+            {
+                $font_size_value  = get_post_meta( $this->post_id, 'war_sdy_pl_playlist_font_size_value', true );
+                $font_size_unit   = get_post_meta( $this->post_id, 'war_sdy_pl_playlist_font_size_unit', true );
+            }
+        }
+
+        echo '<div class="war_sdy_pl_font_size_container">';
+        echo    '<div id="war_sdy_pl_slider_font_size" class="war_sdy_pl_slider"></div>';
+        echo    '<input id="war_sdy_pl_playlist_font_size_value" name="war_sdy_pl_playlist_font_size_value" type="text" size="4" value="' . $font_size_value . '">';
+        $unit_options = $this->get_select_options( $font_size_unit, $this->units_font_size );
+        echo    '<select id="war_sdy_pl_playlist_font_size_unit" name="war_sdy_pl_playlist_font_size_unit" style="margin-left: 12px;">' . $unit_options . '</select>';
+        echo    '&nbsp;&nbsp;<span id="war_sdy_pl_playlist_font_size_validation_error" class="war_sdy_pl_validation_error"></span>';
+        echo '</div>';
     }
 
 	public function do_sanitize_field( $value )

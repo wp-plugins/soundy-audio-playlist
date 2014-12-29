@@ -26,6 +26,7 @@ function war_AudioPlaylistDesignerPlayPause()
 	_this.trans_hover_play_y         = _this.button_virtual_size + _this.button_virtual_gap + _this.button_virtual_size / 2;
 	_this.trans_hover_pause_x        = _this.button_virtual_size + _this.button_virtual_gap + _this.button_virtual_size / 2;
 	_this.trans_hover_pause_y        = _this.button_virtual_size + _this.button_virtual_gap + _this.button_virtual_size / 2;
+    _this.is_initialised = false;
 
 	jQuery( document ).ready( function()
 	{
@@ -87,6 +88,7 @@ function war_AudioPlaylistDesignerPlayPause()
 				_this.draw();
 			}
 		} );
+        _this.is_initialised = true;
 	} );
 }
 

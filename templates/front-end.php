@@ -117,6 +117,10 @@ class WarSoundyAudioPlaylistFrontEnd
             $pixel_outer_box_padding            = get_option( 'war_sdy_pl_playlist_pixel_outer_box_padding' );
             $pixel_inner_box_margin             = get_option( 'war_sdy_pl_playlist_pixel_inner_box_margin' );
 
+            $scrolling_enable = get_post_meta( $this->post_id, 'war_sdy_pl_scrolling_enable', true );
+            $scrolling_enable = $scrolling_enable ? $scrolling_enable : 'no';
+            $scrolling_height = get_post_meta( $this->post_id, 'war_sdy_pl_scrolling_height', true );
+
             $pixel_outline_width                = intval( $pixel_outline_width )                . 'px';
             $pixel_soundtrack_separator_width   = intval( $pixel_soundtrack_separator_width )   . 'px';
             $pixel_soundtrack_vertical_padding  = intval( $pixel_soundtrack_vertical_padding )  . 'px';
@@ -124,6 +128,32 @@ class WarSoundyAudioPlaylistFrontEnd
             $pixel_inner_box_corner_rounding    = intval( $pixel_inner_box_corner_rounding )    . 'px';
             $pixel_outer_box_padding            = intval( $pixel_outer_box_padding )            . 'px';
             $pixel_inner_box_margin             = intval( $pixel_inner_box_margin )             . 'px';
+        }
+
+        $outer_box_width  = get_post_meta( $this->post_id, 'war_sdy_pl_outer_box_width', true );
+        $outer_box_width = $outer_box_width ? $outer_box_width : 'default';
+        if( $outer_box_width == 'default' )
+        {
+            $outer_box_width_value  = get_option( 'war_sdy_pl_playlist_outer_box_width_value' );
+            $outer_box_width_unit   = get_option( 'war_sdy_pl_playlist_outer_box_width_unit' );
+        }
+        else
+        {
+            $outer_box_width_value  = get_post_meta( $this->post_id, 'war_sdy_pl_playlist_outer_box_width_value', true );
+            $outer_box_width_unit   = get_post_meta( $this->post_id, 'war_sdy_pl_playlist_outer_box_width_unit', true );
+        }
+
+        $font_size  = get_post_meta( $this->post_id, 'war_sdy_pl_font_size', true );
+        $font_size = $font_size ? $font_size : 'default';
+        if( $font_size == 'default' )
+        {
+            $font_size_value  = get_option( 'war_sdy_pl_playlist_font_size_value' );
+            $font_size_unit   = get_option( 'war_sdy_pl_playlist_font_size_unit' );
+        }
+        else
+        {
+            $font_size_value  = get_post_meta( $this->post_id, 'war_sdy_pl_playlist_font_size_value', true );
+            $font_size_unit   = get_post_meta( $this->post_id, 'war_sdy_pl_playlist_font_size_unit', true );
         }
 
         $column_layout  = get_post_meta( $this->post_id, 'war_sdy_pl_column_layout', true );
@@ -190,6 +220,12 @@ class WarSoundyAudioPlaylistFrontEnd
                     var sdy_pl_css_pixel_inner_box_corner_rounding      = '<?php echo $pixel_inner_box_corner_rounding; ?>';
                     var sdy_pl_css_pixel_outer_box_padding              = '<?php echo $pixel_outer_box_padding; ?>';
                     var sdy_pl_css_pixel_inner_box_margin               = '<?php echo $pixel_inner_box_margin; ?>';
+                    var sdy_pl_css_outer_box_width_value                = '<?php echo $outer_box_width_value; ?>';
+                    var sdy_pl_css_outer_box_width_unit                 = '<?php echo $outer_box_width_unit; ?>';
+                    var sdy_pl_css_font_size_value                      = '<?php echo $font_size_value; ?>';
+                    var sdy_pl_css_font_size_unit                       = '<?php echo $font_size_unit; ?>';
+                    var sdy_pl_css_scrolling_enable                     = '<?php echo $scrolling_enable; ?>';
+                    var sdy_pl_css_scrolling_height                     = '<?php echo $scrolling_height; ?>';
                 <?php else: ?>
                     var sdy_pl_css_use_only = true;
                 <?php endif; ?>
@@ -236,7 +272,7 @@ class WarSoundyAudioPlaylistFrontEnd
 			}
 		}
 
-		$pp_corner_enable = get_option( 'war_sdy_pl_pp_corner_enable' );
+		$pp_corner_enable = $this->sdy_pl->get_meta_data( 'war_sdy_pl_pp_corner_enable' );
 		if( $pp_corner_enable == 'yes' )
 		{
 			$button_position  = get_option( 'war_sdy_pl_pp_position' );

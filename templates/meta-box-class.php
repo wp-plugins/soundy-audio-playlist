@@ -31,6 +31,8 @@ class WarSoundyAudioPlaylistMetaBox
 
         $sdy_pl_enable            = get_post_meta( $this->post_id, 'war_sdy_pl_enable', true );
         $sdy_pl_enable            = $sdy_pl_enable ? $sdy_pl_enable : 'no';
+        $enable_pp_corner         = get_post_meta( $this->post_id, 'war_sdy_pl_pp_corner_enable', true );
+        $enable_pp_corner         = $enable_pp_corner ? $enable_pp_corner : 'default';
         $autoplay                 = get_post_meta( $this->post_id, 'war_sdy_pl_autoplay', true );
         $autoplay                 = $autoplay ? $autoplay : 'no';
         $play_mode                = get_post_meta( $this->post_id, 'war_sdy_pl_play_mode', true );
@@ -68,6 +70,15 @@ class WarSoundyAudioPlaylistMetaBox
         $column_order = get_post_meta( $this->post_id, 'war_sdy_pl_column_order', true );
         $column_order = $column_order ? $column_order : 'default';
 
+        $font_size = get_post_meta( $this->post_id, 'war_sdy_pl_font_size', true );
+        $font_size = $font_size ? $font_size : 'default';
+
+        $outer_box_width = get_post_meta( $this->post_id, 'war_sdy_pl_outer_box_width', true );
+        $outer_box_width = $outer_box_width ? $outer_box_width : 'default';
+
+        $scrolling_enable = get_post_meta( $this->post_id, 'war_sdy_pl_scrolling_enable', true );
+        $scrolling_enable = $scrolling_enable ? $scrolling_enable : 'no';
+
         include( sprintf( "%s/meta-box.php", dirname( __FILE__ ) ) );
     }
 
@@ -102,6 +113,42 @@ class WarSoundyAudioPlaylistMetaBox
         update_post_meta( $post_id,
             'war_sdy_pl_enable',
             $_POST[ 'war_sdy_pl_enable' ] );
+
+        update_post_meta( $post_id,
+            'war_sdy_pl_pp_corner_enable',
+            $_POST[ 'war_sdy_pl_pp_corner_enable' ] );
+
+        update_post_meta( $post_id,
+            'war_sdy_pl_scrolling_enable',
+            $_POST[ 'war_sdy_pl_scrolling_enable' ] );
+
+        update_post_meta( $post_id,
+            'war_sdy_pl_scrolling_height',
+            $_POST[ 'war_sdy_pl_scrolling_height' ] );
+
+        update_post_meta( $post_id,
+            'war_sdy_pl_outer_box_width',
+            $_POST[ 'war_sdy_pl_outer_box_width' ] );
+
+        update_post_meta( $post_id,
+            'war_sdy_pl_playlist_outer_box_width_value',
+            $_POST[ 'war_sdy_pl_playlist_outer_box_width_value' ] );
+
+        update_post_meta( $post_id,
+            'war_sdy_pl_playlist_outer_box_width_unit',
+            $_POST[ 'war_sdy_pl_playlist_outer_box_width_unit' ] );
+
+        update_post_meta( $post_id,
+            'war_sdy_pl_font_size',
+            $_POST[ 'war_sdy_pl_font_size' ] );
+
+        update_post_meta( $post_id,
+            'war_sdy_pl_playlist_font_size_value',
+            $_POST[ 'war_sdy_pl_playlist_font_size_value' ] );
+
+        update_post_meta( $post_id,
+            'war_sdy_pl_playlist_font_size_unit',
+            $_POST[ 'war_sdy_pl_playlist_font_size_unit' ] );
 
         update_post_meta( $post_id,
             'war_sdy_pl_autoplay',
