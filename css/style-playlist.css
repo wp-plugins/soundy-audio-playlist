@@ -41,6 +41,7 @@ ul.war_sdy_pl_playlist li
     cursor: pointer;
     text-wrap: none;
     white-space: nowrap;
+    overflow: hidden;
 }
 
 #war_sdy_pl_playlist li:first-child
