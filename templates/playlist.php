@@ -11,7 +11,8 @@ class WarSoundyAudioPlaylistPlaylist
 
 	public function get_playlist_code( $context = 'front_end', $tab = 'preview' )
 	{
-        if( $context == 'front_end' && ! $this->sdy_pl->enable ) return;
+        if( $context == 'front_end' && ! $this->sdy_pl->enable )
+            return '<span style="color: red;"> Soundy Audio Playlist is disabled. You can enable it in General tab of plugin meta box. </span>';
 
         if( $context == 'front_end' || $context == 'meta_box')
         {
@@ -20,7 +21,7 @@ class WarSoundyAudioPlaylistPlaylist
             {
                 $soundtracks = html_entity_decode( get_option( 'war_sdy_pl_soundtracks' ), ENT_COMPAT | ENT_HTML5, 'UTF-8' );
             }
-            if( ! $soundtracks ) return '';
+            if( ! $soundtracks ) return '<span style="color: red;"> Audio playlist is empty. </span>';
         }
         else //if( $context == 'settings'
         {
@@ -48,7 +49,7 @@ class WarSoundyAudioPlaylistPlaylist
                                 '<div class="war_sdy_pl_playlist_header_left_hand_container">' .
                                     '<div class="war_sdy_pl_playlist_header_left_hand">' .
                                         '<div class="war_sdy_pl_playlist_pp_button">' .
-                                            sdy_pl_get_button_play_pause() .
+                                            sdy_pl_get_button_play_pause( 'player' ) .
                                         '</div>' .
                                         '<div class="war_sdy_pl_playlist_title_global">' .
                                             '<div class="war_sdy_pl_playlist_title">' .

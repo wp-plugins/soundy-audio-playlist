@@ -1,13 +1,13 @@
 <?php
 /**
  * @package Soundy_Audio_Playlist_PRO
- * @version 1.3
+ * @version 2.0
  */
 /*
 Plugin Name: Soundy Audio Playlist
 Plugin URI: http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/
 Description: This plugin allows any page or post to play and display an audio playlist.
-Version: 1.3
+Version: 2.0
 Author: Bertrand du Couédic
 Author URI: http://webartisan.ch/en/about
 License: GPL2
@@ -32,7 +32,7 @@ class WarSoundyAudioPlaylist
 {
 	public $sdy_pl_type                      = 'free';
 	public $sdy_pl_subtype                   = '';
-	public $sdy_pl_version                   = '1.3';
+	public $sdy_pl_version                   = '2.0';
 	public $sdy_pl_free_home_wp_url          = 'http://wordpress.org/plugins/soundy-audio-playlist/';
 	public $sdy_pl_pro_home_url              = 'http://webartisan.ch/en/products/soundy-audio-playlist/pro-wordpress-plugin/';
     public $sdy_pl_pro_updates_url           = 'http://webartisan.ch/products/updates/';
@@ -53,6 +53,9 @@ class WarSoundyAudioPlaylist
 	public $color_yellow_start               = '#ffff00';
 	public $color_yellow_end                 = '#ffffaa';
 	public $time_to_get_soundtrack_duration  = 600; // milliseconds
+    public $responsive_mode                  = 'none';
+    public $responsive_table_number_of_rows  = 10;
+    public $responsive_scale_reference_window_width = 2048;
 
     public  $playlist_column_names            = 'index, title, artist, composer, time, id';
     public  $playlist_column_names_titles     = array
@@ -315,6 +318,8 @@ class WarSoundyAudioPlaylist
             // Init playlist font size and width in playlist designer
             $this->design_pl->activate();
             update_option( 'war_sdy_pl_version', $this->sdy_pl_version );
+
+            $this->initResponsive();
         }
 	}
 
@@ -409,11 +414,82 @@ class WarSoundyAudioPlaylist
 
         $this->design_pp->activate();
         $this->design_pl->activate();
+        $this->initResponsive();
 	}
 	
 	public function deactivate() 
 	{
 	}
+
+    public function initResponsive()
+    {
+        add_option( 'war_sdy_pl_responsive_mode', $this->responsive_mode );
+        add_option( 'war_sdy_pl_responsive_scale_reference_window_width', $this->responsive_scale_reference_window_width );
+
+        $table_rows = array(
+            array(
+                'comment'           => 'Low Res. Mobile',
+                'window_width_min'  => '',
+                'window_width_max'  => 400,
+                'button_size'       => 20,
+                'offset_x'          => 20,
+                'offset_y'          => 20
+            ),
+            array(
+                'comment'           => 'Medium Res. Mobile',
+                'window_width_min'  => 401,
+                'window_width_max'  => 800,
+                'button_size'       => 25,
+                'offset_x'          => 25,
+                'offset_y'          => 25
+            ),
+            array(
+                'comment'           => 'High Res. Mobile',
+                'window_width_min'  => 801,
+                'window_width_max'  => 1200,
+                'button_size'       => 30,
+                'offset_x'          => 30,
+                'offset_y'          => 30
+            ),
+            array(
+                'comment'           => 'Low Res. Screen',
+                'window_width_min'  => 1201,
+                'window_width_max'  => 1600,
+                'button_size'       => 35,
+                'offset_x'          => 35,
+                'offset_y'          => 35
+            ),
+            array(
+                'comment'           => 'Medium Res. Screen',
+                'window_width_min'  => 1601,
+                'window_width_max'  => 2000,
+                'button_size'       => 40,
+                'offset_x'          => 40,
+                'offset_y'          => 40
+            ),
+            array(
+                'comment'           => 'High Res. Screen',
+                'window_width_min'  => 2001,
+                'window_width_max'  => '',
+                'button_size'       => 50,
+                'offset_x'          => 50,
+                'offset_y'          => 50
+            )
+        );
+
+        for( $i = 0; $i < count( $table_rows ); $i++ )
+        {
+            $index = $i + 1;
+            $row = $table_rows[ $i ];
+
+            add_option( 'war_sdy_pl_responsive_comment_'          . $index, $row[ 'comment' ] );
+            add_option( 'war_sdy_pl_responsive_window_width_min_' . $index, $row[ 'window_width_min' ] );
+            add_option( 'war_sdy_pl_responsive_window_width_max_' . $index, $row[ 'window_width_max' ] );
+            add_option( 'war_sdy_pl_responsive_button_size_'      . $index, $row[ 'button_size' ] );
+            add_option( 'war_sdy_pl_responsive_offset_x_'         . $index, $row[ 'offset_x' ] );
+            add_option( 'war_sdy_pl_responsive_offset_y_'         . $index, $row[ 'offset_y' ] );
+        }
+    }
 
 	public function add_plugin_settings_menu() 
 	{
@@ -578,6 +654,7 @@ class WarSoundyAudioPlaylist
         $this->add_settings_section_play_pause_button();
         $this->design_pp->add_settings_section();
 		$this->add_settings_section_play_pause_position_corner();
+        $this->add_settings_section_play_pause_responsive();
 		$this->add_settings_section_play_pause_position_static();
 	}
 
@@ -893,8 +970,62 @@ class WarSoundyAudioPlaylist
 	    'war_sdy_pl_settings_section_play_pause_position_corner'
         );
 	}
-		
-	public function add_settings_section_play_pause_position_static()
+
+    public function add_settings_section_play_pause_responsive()
+    {
+        add_settings_section(
+            'war_sdy_pl_settings_section_play_pause_responsive',
+            'Play/Pause Button Responsiveness',
+            array( $this, 'display_settings_section_play_pause_responsive_header' ),
+            'sdy_pl'
+        );
+
+        register_setting( 'war_sdy_pl', 'war_sdy_pl_responsive_mode' );
+        register_setting( 'war_sdy_pl', 'war_sdy_pl_responsive_include_audio_player_button' );
+        add_settings_field(
+            'war_sdy_pl_responsive_mode',
+            'Responsive Mode',
+            array( $this, 'add_settings_field_responsive_mode' ),
+            'sdy_pl',
+            'war_sdy_pl_settings_section_play_pause_responsive'
+        );
+
+        for( $i = 1; $i <= $this->responsive_table_number_of_rows; $i++ )
+        {
+            register_setting( 'war_sdy_pl', 'war_sdy_pl_responsive_comment_' . $i, array( $this, 'do_sanitize_field' ) );
+            register_setting( 'war_sdy_pl', 'war_sdy_pl_responsive_window_width_min_' . $i );
+            register_setting( 'war_sdy_pl', 'war_sdy_pl_responsive_window_width_max_' . $i );
+            register_setting( 'war_sdy_pl', 'war_sdy_pl_responsive_button_size_' . $i );
+            register_setting( 'war_sdy_pl', 'war_sdy_pl_responsive_offset_x_' . $i );
+            register_setting( 'war_sdy_pl', 'war_sdy_pl_responsive_offset_y_' . $i );
+        }
+        add_settings_field(
+            'war_sdy_pl_responsive_table',
+            'Table Driven Mode',
+            array( $this, 'add_settings_field_responsive_table' ),
+            'sdy_pl',
+            'war_sdy_pl_settings_section_play_pause_responsive'
+        );
+
+        register_setting( 'war_sdy_pl', 'war_sdy_pl_responsive_scale_reference_window_width' );
+        add_settings_field(
+            'war_sdy_pl_responsive_scale_reference_window_width',
+            'Scale Driven Mode',
+            array( $this, 'add_settings_field_responsive_scale' ),
+            'sdy_pl',
+            'war_sdy_pl_settings_section_play_pause_responsive'
+        );
+
+        add_settings_field(
+            'war_sdy_pl_responsive_preview',
+            'Preview',
+            array( $this, 'add_settings_field_responsive_preview' ),
+            'sdy_pl',
+            'war_sdy_pl_settings_section_play_pause_responsive'
+        );
+    }
+
+    public function add_settings_section_play_pause_position_static()
 	{
 		add_settings_section
         (
@@ -948,7 +1079,184 @@ class WarSoundyAudioPlaylist
 		echo '&nbsp;&nbsp;&nbsp;&nbsp;The get version of each template tag returns the element instead of inserting it.';
 	}
 
-	public function add_settings_field_audio_file_URL( $args ) 
+    public function display_settings_section_play_pause_responsive_header()
+    {
+        echo 'In this tab you can control the responsiveness of the Play/Pause button.';
+    }
+
+    public function add_settings_field_responsive_mode( $args )
+    {
+        $responsive_mode = get_option( 'war_sdy_pl_responsive_mode' );
+        $responsive_mode = $responsive_mode ? $responsive_mode : 'none';
+        $include_player_button = get_option( 'war_sdy_pl_responsive_include_audio_player_button' );
+        $include_player_button = $include_player_button ? $include_player_button : 'no';
+        ?>
+        <input type="radio"
+               id="war_sdy_pl_responsive_mode_none"
+               name="war_sdy_pl_responsive_mode"
+               value="none"
+               style="margin: 5px 0 5px 0;" <?php echo ( $responsive_mode == 'none' ? 'checked' : '' ); ?>/>
+        <label for="war_sdy_pl_responsive_mode_none"
+               style="margin-top: 0;">No Responsiveness</label>
+        <br>
+        <input type="radio"
+               id="war_sdy_pl_responsive_mode_table"
+               name="war_sdy_pl_responsive_mode"
+               value="table"
+               style="margin: 5px 0 5px 0;" <?php echo ( $responsive_mode == 'table' ? 'checked' : '' ); ?>/>
+        <label for="war_sdy_pl_responsive_mode_table"
+               style="margin-top: 0;">Table Driven Responsive Mode</label>
+        <br>
+        <input type="radio"
+               id="war_sdy_pl_responsive_mode_scale"
+               name="war_sdy_pl_responsive_mode"
+               value="scale"
+               style="margin: 5px 0 5px 0;" <?php echo ( $responsive_mode == 'scale' ? 'checked' : '' ); ?>/>
+        <label for="war_sdy_pl_responsive_mode_scale"
+               style="margin-top: 0;">Scale Driven Responsive Mode</label>
+        <div id="war_sdy_pl_responsive_include_audio_player_button_container" style="margin-top: 25px;">
+            <input type="checkbox"
+                   value="yes"
+                   id="war_sdy_pl_responsive_include_audio_player_button"
+                   name="war_sdy_pl_responsive_include_audio_player_button"
+                <?php echo ( $include_player_button == 'yes' ? 'checked' : '' ); ?>/>
+            Make Audio Player Play/Pause button also responsive
+        </div>
+        <?php
+    }
+
+    public function add_settings_field_responsive_table( $args )
+    {
+        $responsive_mode = get_option( 'war_sdy_pl_responsive_table' );
+        $responsive_mode = $responsive_mode ? $responsive_mode : 'none';
+        ?>
+        <span class="war_comment">You can define window width ranges with corresponding button width/height and offsets.<br>
+            Button X and Y Offset Fields are used only for Play/Pause button positioned in a corner.<br>
+            Button Width/Height Field is used for all Play/Pause buttons.</span>
+        <ul class="war_sdy_pl_responsive_list">
+            <li class="war_sdy_pl_responsive_list_row_header">
+                <div class="war_sdy_pl_responsive_comment">Comment</div>
+                <div class="war_sdy_pl_responsive_list_field">From<br>Window<br>Width</div>
+                <div class="war_sdy_pl_responsive_list_field">To<br>Window<br>Width</div>
+                <div class="war_sdy_pl_responsive_list_field">Button<br>Width/<br>Height</div>
+                <div class="war_sdy_pl_responsive_list_field">Button<br>X<br>Offset</div>
+                <div class="war_sdy_pl_responsive_list_field">Button<br>Y<br>Offset</div>
+            </li>
+        </ul>
+        <ul id="war_sdy_pl_responsive_list"
+            class="war_sdy_pl_responsive_list">
+            <?php
+            for( $i = 1; $i <= $this->responsive_table_number_of_rows; $i++ )
+            {
+                ?>
+                <li>
+                    <div class="war_sdy_pl_responsive_comment">
+                        <input type="text"
+                               name="war_sdy_pl_responsive_comment_<?php echo $i; ?>"
+                               id="war_sdy_pl_responsive_comment_<?php echo $i; ?>"
+                               value="<?php echo get_option( 'war_sdy_pl_responsive_comment_' . $i ); ?>"
+                               size="20" />
+                    </div>
+                    <div class="war_sdy_pl_responsive_list_field">
+                        <input type="text"
+                               class="war_sdy_pl_responsive_input_field_integer"
+                               name="war_sdy_pl_responsive_window_width_min_<?php echo $i; ?>"
+                               id="war_sdy_pl_responsive_window_width_min_<?php echo $i; ?>"
+                               value="<?php echo get_option( 'war_sdy_pl_responsive_window_width_min_' . $i ); ?>"
+                               size="4" /> px
+                    </div>
+                    <div class="war_sdy_pl_responsive_list_field">
+                        <input type="text"
+                               class="war_sdy_pl_responsive_input_field_integer"
+                               name="war_sdy_pl_responsive_window_width_max_<?php echo $i; ?>"
+                               id="war_sdy_pl_responsive_window_width_max_<?php echo $i; ?>"
+                               value="<?php echo get_option( 'war_sdy_pl_responsive_window_width_max_' . $i ); ?>"
+                               size="4" /> px
+                    </div>
+                    <div class="war_sdy_pl_responsive_list_field">
+                        <input type="text"
+                               class="war_sdy_pl_responsive_input_field_integer"
+                               name="war_sdy_pl_responsive_button_size_<?php echo $i; ?>"
+                               id="war_sdy_pl_responsive_button_size_<?php echo $i; ?>"
+                               value="<?php echo get_option( 'war_sdy_pl_responsive_button_size_' . $i ); ?>"
+                               size="4" /> px
+                    </div>
+                    <div class="war_sdy_pl_responsive_list_field">
+                        <input type="text"
+                               class="war_sdy_pl_responsive_input_field_integer"
+                               name="war_sdy_pl_responsive_offset_x_<?php echo $i; ?>"
+                               id="war_sdy_pl_responsive_offset_x_<?php echo $i; ?>"
+                               value="<?php echo get_option( 'war_sdy_pl_responsive_offset_x_' . $i ); ?>"
+                               size="4" /> px
+                    </div>
+                    <div class="war_sdy_pl_responsive_list_field">
+                        <input type="text"
+                               class="war_sdy_pl_responsive_input_field_integer"
+                               name="war_sdy_pl_responsive_offset_y_<?php echo $i; ?>"
+                               id="war_sdy_pl_responsive_offset_y_<?php echo $i; ?>"
+                               value="<?php echo get_option( 'war_sdy_pl_responsive_offset_y_' . $i ); ?>"
+                               size="4" /> px
+                    </div>
+                </li>
+                <?php
+            }
+            ?>
+        </ul>
+        <ul class="war_sdy_pl_responsive_list">
+            <li class="war_sdy_pl_responsive_list_row_footer">
+                    <span style="font-size: 1em;">
+                        <span id="war_comment" style="margin-left: 1%;">You can change the order of the rows with drag & drop.</span>
+                    </span>
+            </li>
+        </ul>
+        <?php
+    }
+
+    public function add_settings_field_responsive_scale( $args )
+    {
+        ?>
+        <div class="war_comment" style="margin-bottom: 6px;">Play/Pause button width, height and offsets are scaled according to window width.<br>
+            The Reference Window Width is the window width for which the scale factor is 1.</div>
+        <div style="font-weight: bold;">Reference Window Width:</div>
+        <input id="war_sdy_pl_responsive_scale_reference_window_width"
+               name="war_sdy_pl_responsive_scale_reference_window_width"
+               class="war_sdy_pl_responsive_input_field_integer"
+               value="<?php echo get_option( 'war_sdy_pl_responsive_scale_reference_window_width' ); ?>"
+               size="4"
+               style="margin-top: 3px; margin-bottom: 3px;" /> px<br>
+        <button id="war_sdy_pl_responsive_scale_button_current_window_width"
+                type="button"
+                class="war_sdy_pl"
+                style="margin-top: 3px; margin-bottom: 3px;" />Insert Current Window Width</button>
+        <?php
+    }
+
+    public function add_settings_field_responsive_preview( $args )
+    {
+        ?>
+        <div class="war_comment" style="margin-bottom: 6px;">IMPORTANT: You must save your changes before using Preview.</div>
+        <div style="font-weight: bold;">Preview Window Width:</div>
+        <input id="war_sdy_pl_responsive_preview_window_width"
+               class="war_sdy_pl_responsive_input_field_integer"
+               value=""
+               size="4"
+               style="margin-top: 3px; margin-bottom: 3px;" /> px
+        <div style="margin-top: 3px; margin-bottom: 3px;">
+            <div style="font-weight: bold;">Page:</div>
+            <select id="war_sdy_pl_responsive_preview_url"
+                    class="war_sdy_pl_page_preview_url"
+                    style="margin-top: 3px; margin-bottom: 3px;">
+                <?php $this->add_page_preview_url_options() ?>
+            </select>
+        </div>
+        <button id="war_sdy_pl_responsive_button_preview"
+                type="button"
+                class="war_sdy_pl"
+                style="margin-top: 3px; margin-bottom: 3px;" />Preview</button>
+        <?php
+    }
+
+    public function add_settings_field_audio_file_URL( $args )
 	{
 		$this->add_field_audio_file_URL( false );
 	}

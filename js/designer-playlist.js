@@ -436,12 +436,16 @@ war_AudioPlaylistDesignerPlaylist.prototype.setColor = function( component, hex_
 
         case 'bg_even_soundtrack':
 
+            var soundtrack_selected_bg_color = jQuery( '.war_designer_preview_soundtrack_selected' ).css( 'background-color' );
             jQuery( '#war_sdy_pl_designer_preview_playlist li:nth-child( even )' ).css( 'background', hex_color_str );
+            jQuery( '.war_designer_preview_soundtrack_selected' ).css( 'background-color', soundtrack_selected_bg_color );
             break;
 
         case 'bg_odd_soundtrack':
 
+            var soundtrack_selected_bg_color = jQuery( '.war_designer_preview_soundtrack_selected' ).css( 'background-color' );
             jQuery( '#war_sdy_pl_designer_preview_playlist li:nth-child( odd )' ).css( 'background', hex_color_str );
+            jQuery( '.war_designer_preview_soundtrack_selected' ).css( 'background-color', soundtrack_selected_bg_color );
             break;
 
         case 'txt_soundtrack':

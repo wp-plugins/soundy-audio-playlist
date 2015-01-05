@@ -59,8 +59,9 @@
             <li><a id="war_sdy_pl_tab_label_designer_pl"    href="#war_sdy_pl_tab_panel_designer_pl">Playlist Designer</a></li>
             <li><a id="war_sdy_pl_tab_label_playlist_css"   href="#war_sdy_pl_tab_panel_playlist_css">Playlist CSS</a></li>
             <li><a id="war_sdy_pl_tab_label_play_buttons"   href="#war_sdy_pl_tab_panel_buttons">Buttons</a></li>
-            <li><a id="war_sdy_pl_tab_label_designer_pp"    href="#war_sdy_pl_tab_panel_designer_pp">Play/Pause Button Designer</a></li>
+            <li><a id="war_sdy_pl_tab_label_designer_pp"    href="#war_sdy_pl_tab_panel_designer_pp">Button Designer</a></li>
             <li><a id="war_sdy_pl_tab_label_position"       href="#war_sdy_pl_tab_panel_position">Corner Position</a></li>
+            <li><a id="war_sdy_pl_tab_label_responsive"     href="#war_sdy_pl_tab_panel_responsive">Button Responsiveness</a></li>
             <li><a id="war_sdy_pl_tab_label_tags"           href="#war_sdy_pl_tab_panel_tags">Tags</a></li>
 	    </ul>
         <div id="war_sdy_pl_tab_panel_playlist">
@@ -83,6 +84,9 @@
         </div>
         <div id="war_sdy_pl_tab_panel_position">
             <?php $this->do_settings_section( 'sdy_pl', 'war_sdy_pl_settings_section_play_pause_position_corner' ); ?>
+        </div>
+        <div id="war_sdy_pl_tab_panel_responsive">
+            <?php $this->do_settings_section( 'sdy_pl', 'war_sdy_pl_settings_section_play_pause_responsive' ); ?>
         </div>
         <div id="war_sdy_pl_tab_panel_tags">
             <?php $this->do_settings_section( 'sdy_pl', 'war_sdy_pl_settings_section_play_pause_position_static' ); ?>

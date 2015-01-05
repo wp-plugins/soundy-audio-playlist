@@ -64,14 +64,21 @@ function sdy_pl_volume_slider()
     echo sdy_pl_get_volume_slider();
 }
 
-function sdy_pl_get_button_play_pause()
+function sdy_pl_get_button_play_pause( $context = 'no_player' )
 {
-	return '<img class="war_sdy_pl_audio_control">';
+    if( $context == 'no_player' )
+    {
+        return '<img class="war_sdy_pl_audio_control war_sdy_pl_no_player">';
+    }
+    else
+    {
+        return '<img class="war_sdy_pl_audio_control">';
+    }
 }
 
-function sdy_pl_button_play_pause()
+function sdy_pl_button_play_pause( $context = 'no_player' )
 {
-	echo sdy_pl_get_button_play_pause();
+    echo sdy_pl_get_button_play_pause( $context );
 }
 
 function sdy_pl_get_button_previous()

@@ -65,16 +65,18 @@ function war_SoundyAudioPlaylistFrontEnd( args )
         _this.initPlayMode();
         _this.initPlaylistColumns();
 
-        _this.makePlaylistResponsive();
-
         if( ! sdy_pl_css_use_only )
         {
             _this.initPlaylistCSS();
         }
 
+        _this.makePlaylistResponsive();
+        _this.makePlayPauseButtonResponsive();
+
         jQuery( window ).resize( function()
         {
             _this.makePlaylistResponsive();
+            _this.makePlayPauseButtonResponsive();
         } );
 	} );
 }
@@ -1225,4 +1227,142 @@ war_SoundyAudioPlaylistFrontEnd.prototype.secondsToHms = function( d )
 	var m = Math.floor( d % 3600 / 60 );
 	var s = Math.floor( d % 3600 % 60 );
 	return ( ( h > 0 ? h + ':' : '' ) + ( m > 0 ? ( h > 0 && m < 10 ? '0' : '' ) + m + ':' : '0:' ) + ( s < 10 ? '0' : '' ) + s ); 
+}
+
+war_SoundyAudioPlaylistFrontEnd.prototype.makePlayPauseButtonResponsive = function()
+{
+    var _this = this;
+
+    if( war_sdy_pl_responsive_mode != 'none' )
+    {
+        if( war_sdy_pl_responsive_include_player_button )
+        {
+            var audio_control_selector = '.war_sdy_pl_audio_control';
+        }
+        else
+        {
+            var audio_control_selector = '.war_sdy_pl_audio_control.war_sdy_pl_no_player, .war_sdy_pl_audio_control.war_sdy_pl_pp_corner';
+        }
+
+        var window_width = jQuery( window ).width();
+
+        switch( war_sdy_pl_button_corner )
+        {
+            case 'upper_right':
+            default:
+                var prop_x = 'right';
+                var prop_y = 'top';
+                break;
+            case 'upper_left':
+                var prop_x = 'left';
+                var prop_y = 'top';
+                break;
+            case 'bottom_right':
+                var prop_x = 'right';
+                var prop_y = 'bottom';
+                break;
+            case 'bottom_left':
+                var prop_x = 'left';
+                var prop_y = 'bottom';
+                break;
+        }
+
+        if( war_sdy_pl_responsive_mode == 'table' )
+        {
+            for( var index in war_sdy_pl_responsive_table_rows )
+            {
+                var row = war_sdy_pl_responsive_table_rows[ index ];
+                if( row.button_size != -1 )
+                {
+                    if( row.window_width_min != -1 && row.window_width_max != -1 )
+                    {
+                        if( row.window_width_min <= window_width && window_width <= row.window_width_max )
+                        {
+                            jQuery( audio_control_selector ).css( 'width', row.button_size );
+                        }
+                    }
+                    else if( row.window_width_min != -1 )
+                    {
+                        if( row.window_width_min <= window_width )
+                        {
+                            jQuery( audio_control_selector ).css( 'width', row.button_size );
+                        }
+                    }
+                    else if( row.window_width_max != -1 )
+                    {
+                        if( window_width <= row.window_width_max )
+                        {
+                            jQuery( audio_control_selector ).css( 'width', row.button_size );
+                        }
+                    }
+                }
+            }
+
+            if( jQuery( '.war_sdy_pl_audio_control.war_sdy_pl_pp_corner' ).length )
+            {
+                for( var index in war_sdy_pl_responsive_table_rows )
+                {
+                    var row = war_sdy_pl_responsive_table_rows[ index ];
+                    if( row.offset_x != -1 || row.offset_y != -1 )
+                    {
+                        if( row.window_width_min != -1 && row.window_width_max != -1 )
+                        {
+                            if( row.window_width_min <= window_width && window_width <= row.window_width_max )
+                            {
+                                if( row.offset_x != -1 ) jQuery( '.war_sdy_pl_audio_control.war_sdy_pl_pp_corner' ).css( prop_x, row.offset_x );
+                                if( row.offset_y != -1 ) jQuery( '.war_sdy_pl_audio_control.war_sdy_pl_pp_corner' ).css( prop_y, row.offset_y );
+                            }
+                        }
+                        else if( row.window_width_min != -1 )
+                        {
+                            if( row.window_width_min <= window_width )
+                            {
+                                if( row.offset_x != -1 ) jQuery( '.war_sdy_pl_audio_control.war_sdy_pl_pp_corner' ).css( prop_x, row.offset_x );
+                                if( row.offset_y != -1 ) jQuery( '.war_sdy_pl_audio_control.war_sdy_pl_pp_corner' ).css( prop_y, row.offset_y );
+                            }
+                        }
+                        else if( row.window_width_max != -1 )
+                        {
+                            if( window_width <= row.window_width_max )
+                            {
+                                if( row.offset_x != -1 ) jQuery( '.war_sdy_pl_audio_control.war_sdy_pl_pp_corner' ).css( prop_x, row.offset_x );
+                                if( row.offset_y != -1 ) jQuery( '.war_sdy_pl_audio_control.war_sdy_pl_pp_corner' ).css( prop_y, row.offset_y );
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else // if( war_sdy_pl_responsive_mode == 'scale' )
+        {
+            var scale_factor = ( window_width * 0.7 / war_sdy_pl_responsive_reference_window_width ) + 0.3;
+
+            jQuery( audio_control_selector ).load
+            (
+                function()
+                {
+                    var button_size = jQuery( this ).width();
+                    var responsive_button_size = Math.round( button_size * scale_factor );
+                    jQuery( audio_control_selector ).css( 'width', responsive_button_size );
+                    jQuery( '.war_sdy_pl_audio_control.war_sdy_pl_pp_corner' ).css( 'width', responsive_button_size );
+
+                    var jquery_corner_button = jQuery( '.war_sdy_pl_audio_control.war_sdy_pl_pp_corner' );
+                    if( jquery_corner_button.length )
+                    {
+                        var offset_x = jquery_corner_button.css( prop_x );
+                        offset_x = offset_x.replace( 'px', '' );
+                        var offset_y = jquery_corner_button.css( prop_y );
+                        offset_y = offset_y.replace( 'px', '' );
+                        var responsive_offset_x = Math.round( offset_x * scale_factor );
+                        var responsive_offset_y = Math.round( offset_y * scale_factor );
+
+                        jquery_corner_button.css( prop_x, responsive_offset_x );
+                        jquery_corner_button.css( prop_y, responsive_offset_y );
+                    }
+
+                    jQuery( audio_control_selector ).unbind( 'load' );
+                }
+            );
+        }
+    }
 }

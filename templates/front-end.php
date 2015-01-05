@@ -172,6 +172,43 @@ class WarSoundyAudioPlaylistFrontEnd
         }
         $column_ordered_names_string = $column_ordered_names_string ? $column_ordered_names_string : $this->sdy_pl->playlist_column_names;
 
+        $responsive_mode = get_option( 'war_sdy_pl_responsive_mode' );
+        if( $responsive_mode != 'none' )
+        {
+            $responsive_include_player_button = get_option( 'war_sdy_pl_responsive_include_audio_player_button' );
+            if( $responsive_mode == 'table' )
+            {
+                $responsive_table_rows = array();
+                for( $i = 1; $i <= $this->sdy_pl->responsive_table_number_of_rows; $i++ )
+                {
+                    $window_width_min = get_option( 'war_sdy_pl_responsive_window_width_min_' . $i );
+                    $window_width_min = ( $window_width_min == '' ) ? -1 : $window_width_min;
+                    $window_width_max = get_option( 'war_sdy_pl_responsive_window_width_max_' . $i );
+                    $window_width_max = ( $window_width_max == '' ) ? -1 : $window_width_max;
+
+                    if( $window_width_min != -1 || $window_width_max != -1 )
+                    {
+                        $button_size = get_option( 'war_sdy_pl_responsive_button_size_' . $i );
+                        $button_size = ( $button_size == '' ) ? -1 : $button_size;
+                        $offset_x = get_option( 'war_sdy_pl_responsive_offset_x_' . $i );
+                        $offset_x = ( $offset_x == '' ) ? -1 : $offset_x;
+                        $offset_y = get_option( 'war_sdy_pl_responsive_offset_y_' . $i );
+                        $offset_y = ( $offset_y == '' ) ? -1 : $offset_y;
+                        $responsive_table_rows[] = '{ ' .
+                            'window_width_min: ' . $window_width_min . ',' .
+                            'window_width_max: ' . $window_width_max . ',' .
+                            'button_size: '      . $button_size . ',' .
+                            'offset_x: '         . $offset_x . ',' .
+                            'offset_y: '         . $offset_y .
+                            '}';
+                    }
+                }
+            }
+            else // if( $responsive_mode == 'scale' )
+            {
+                $responsive_reference_window_width = get_option( 'war_sdy_pl_responsive_scale_reference_window_width' );
+            }
+        }
 		?>
 			<script>
 				var war_sdy_pl_front_end = new war_SoundyAudioPlaylistFrontEnd(
@@ -246,6 +283,26 @@ class WarSoundyAudioPlaylistFrontEnd
                     }
                 ?>
 
+                var war_sdy_pl_responsive_mode = '<?php echo $responsive_mode; ?>';
+                var war_sdy_pl_responsive_include_player_button = '<?php echo $responsive_include_player_button; ?>';
+                var war_sdy_pl_button_corner = '<?php echo get_option( "war_sdy_pl_pp_corner" ); ?>';
+                <?php
+                    if( $responsive_mode != 'none' )
+                    {
+                        if( $responsive_mode == 'table' )
+                        {
+                            echo 'var war_sdy_pl_responsive_table_rows = new Array();';
+                            foreach( $responsive_table_rows as $row )
+                            {
+                                echo 'war_sdy_pl_responsive_table_rows.push( ' . $row . ' );';
+                            }
+                        }
+                        else // if( $responsive_mode == 'scale' )
+                        {
+                            echo 'var war_sdy_pl_responsive_reference_window_width = ' . $responsive_reference_window_width . ';';
+                        }
+                    }
+                ?>
             </script>
 		<?php
 	}
@@ -306,7 +363,7 @@ class WarSoundyAudioPlaylistFrontEnd
 			
 			$position_css_code = "position: $position; $dim_x: $button_x; $dim_y: $button_y;";
 		
-			$pp_code = '<img class="war_sdy_pl_audio_control" style="' . $position_css_code . '">';
+			$pp_code = '<img class="war_sdy_pl_audio_control war_sdy_pl_pp_corner" style="' . $position_css_code . '">';
 		}
 		else
 		{
@@ -321,7 +378,8 @@ class WarSoundyAudioPlaylistFrontEnd
         $sdy_pl_enable = get_post_meta( get_the_ID(), 'war_sdy_pl_enable', true );
         $sdy_pl_enable = $sdy_pl_enable ? $sdy_pl_enable : 'no';
         $this->sdy_pl->enable = ( $sdy_pl_enable == 'yes' );
-        if( $sdy_pl_enable == 'no' ) return;
+        $this->sdy_pl->enable = ( $sdy_pl_enable == 'yes' );
+        if( $sdy_pl_enable == 'no' ) return '<span style="color: red;"> Soundy Audio Playlist is disabled. You can enable it in General tab of plugin meta box. </span>';
 
 		if( $atts[ 0 ] )
 		{

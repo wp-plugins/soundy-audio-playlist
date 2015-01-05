@@ -3,7 +3,7 @@ Contributors: bducouedic
 Tags: audio, sound, music, playlist, background, soundtrack, background sound, background audio, background music, posts, pages
 Requires at least: 3.6
 Tested up to: 4.1
-Stable tag: 1.3
+Stable tag: 2.0
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#war_donate
@@ -27,6 +27,7 @@ This Soundy plugin can be used like its Soundy brother, [Soundy Background Music
 * Mouse double-click Play/Pause
 * Display of title, artist and composer of current playing soundtrack
 * Audio-Player is responsive
+* Tools in plugin settings to make Play/Pause button responsive
 * List of soundtracks can be made scrollable and height of scrolling area can be set in the plugin metabox on a per page/post basis.
 
 * In the [free version](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/) of the plugin, the administrator can set up and maintain an audio playlist which can then be played and displayed by any page or post.
@@ -146,6 +147,9 @@ PHP 5.3.0 has been released in June 2009. Today’s version is 5.5.12. (sources:
 1. **Play/Pause Button Designer**
 
 == Changelog ==
+
+= 2.0 &nbsp;&nbsp; - &nbsp;&nbsp; January 5th, 2015 =
+* Play/Pause button size and corner positioning can now be made responsive in "Button Responsiveness" tab of plugin settings page.
 
 = 1.3 &nbsp;&nbsp; - &nbsp;&nbsp; December 29th, 2014 =
 * Soundtracks List can now be made scrollable on a per page/post basis. This new setting is available in the Display tab of the plugin metabox in the Edit Page or Edit Post pages.
