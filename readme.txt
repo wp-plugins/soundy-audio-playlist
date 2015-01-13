@@ -151,7 +151,6 @@ PHP 5.3.0 has been released in June 2009. Today’s version is 5.5.12. (sources:
 = 2.1 &nbsp;&nbsp; - &nbsp;&nbsp; January 13th, 2015 =
 
 Fixed bugs in Import Command and Soundtrack List:
-
 * The Import command imported only MP3 files. The command imports now all MP3, OGG and WAVE files from the media library.
 * Quotes and apostrophes in soundtrack properties caused problems. These problems are now gone.
 
