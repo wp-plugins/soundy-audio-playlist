@@ -1,13 +1,13 @@
 <?php
 /**
  * @package Soundy_Audio_Playlist_PRO
- * @version 2.0
+ * @version 2.1
  */
 /*
 Plugin Name: Soundy Audio Playlist
 Plugin URI: http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/
 Description: This plugin allows any page or post to play and display an audio playlist.
-Version: 2.0
+Version: 2.1
 Author: Bertrand du Couédic
 Author URI: http://webartisan.ch/en/about
 License: GPL2
@@ -32,7 +32,7 @@ class WarSoundyAudioPlaylist
 {
 	public $sdy_pl_type                      = 'free';
 	public $sdy_pl_subtype                   = '';
-	public $sdy_pl_version                   = '2.0';
+	public $sdy_pl_version                   = '2.1';
 	public $sdy_pl_free_home_wp_url          = 'http://wordpress.org/plugins/soundy-audio-playlist/';
 	public $sdy_pl_pro_home_url              = 'http://webartisan.ch/en/products/soundy-audio-playlist/pro-wordpress-plugin/';
     public $sdy_pl_pro_updates_url           = 'http://webartisan.ch/products/updates/';
@@ -1357,8 +1357,8 @@ class WarSoundyAudioPlaylist
 
 	public function add_settings_field_playlist_title( $args )
 	{
-		$playlist_title = get_option( 'war_sdy_pl_playlist_title' );
-        $playlist_title_default = get_option( 'war_sdy_pl_playlist_title_default' );
+        $playlist_title = $this->html_entity_decode( get_option( 'war_sdy_pl_playlist_title' ) );
+        $playlist_title_default = $this->html_entity_decode( get_option( 'war_sdy_pl_playlist_title_default' ) );
 		?>
             <script>
                 jQuery( document ).ready
@@ -2305,6 +2305,11 @@ class WarSoundyAudioPlaylist
 		return htmlentities( sanitize_text_field( $value ), ENT_QUOTES, 'UTF-8' );
 	}
 
+    public function html_entity_decode( $value )
+    {
+        return( str_replace( '"', '&quot;', html_entity_decode( $value, ENT_QUOTES ) ) );
+    }
+
 	public function do_sanitize_field_no_hmtl_encode( $value )
 	{
 		return sanitize_text_field( $value );
@@ -2448,14 +2453,26 @@ class WarSoundyAudioPlaylist
         {
             $file_path = $path . '/' . $file_name;
             $finfo = finfo_file( finfo_open( FILEINFO_MIME_TYPE ), $file_path );
+            error_log( "\n$file_path\n", 3, ABSPATH . 'war_debug.log' );
+            error_log( "\n$finfo\n", 3, ABSPATH . 'war_debug.log' );
             if( $finfo == 'directory' && $file_name != '.' && $file_name != '..' )
             {
                 $this->readThroughMediaLibrary( $file_path );
             }
             // else if( strpos( $finfo, 'audio' ) === 0 )
-            else if( $finfo == 'audio/mpeg' || $finfo == 'audio/ogg' || $finfo == 'audio/wav' )
+            else if( $finfo == 'audio/mpeg' || $finfo == 'audio/ogg' || $finfo == 'application/ogg' || $finfo == 'audio/wav' || $finfo == 'audio/x-wav' )
             {
-                $type = $finfo;
+                switch( $finfo )
+                {
+                    case 'application/ogg':
+                        $type = 'audio/ogg';
+                        break;
+                    case 'audio/x-wav':
+                        $type = 'audio/wav';
+                        break;
+                    default:
+                        $type = $finfo;
+                }
                 $pos  = strrpos( $file_name, '.' );
                 $title = ( $pos === false ) ? $file_name : substr( $file_name, 0, $pos );
                 $title = preg_replace( '/[-_ ]+/', ' ', $title );

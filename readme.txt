@@ -3,7 +3,7 @@ Contributors: bducouedic
 Tags: audio, sound, music, playlist, background, soundtrack, background sound, background audio, background music, posts, pages
 Requires at least: 3.6
 Tested up to: 4.1
-Stable tag: 2.0
+Stable tag: 2.1
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#war_donate
@@ -147,6 +147,13 @@ PHP 5.3.0 has been released in June 2009. Today’s version is 5.5.12. (sources:
 1. **Play/Pause Button Designer**
 
 == Changelog ==
+
+= 2.1 &nbsp;&nbsp; - &nbsp;&nbsp; January 13th, 2015 =
+
+Fixed bugs in Import Command and Soundtrack List:
+
+* The Import command imported only MP3 files. The command imports now all MP3, OGG and WAVE files from the media library.
+* Quotes and apostrophes in soundtrack properties caused problems. These problems are now gone.
 
 = 2.0 &nbsp;&nbsp; - &nbsp;&nbsp; January 5th, 2015 =
 * Play/Pause button size and corner positioning can now be made responsive in "Button Responsiveness" tab of plugin settings page.

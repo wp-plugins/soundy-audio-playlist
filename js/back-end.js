@@ -1782,16 +1782,16 @@ WarSoundyAudioPlaylistAdmin.prototype.htmlEntities = function( str )
 {
 	var _this = this;
 	
-  //return String( str ).replace( /&/g, '&amp;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' );
-  return String( str ).replace( /&/g, '&amp;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' );
+  return String( str ).replace( /&/g, '&amp;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' )
+                      .replace( /\'/g, '&apos;' ).replace( /\"/g, '&quot;' );
 }
 
 WarSoundyAudioPlaylistAdmin.prototype.htmlEntitiesDecode = function( str )
 {
 	var _this = this;
 	
-  //return String( str ).replace( /&amp;/g, '&' ).replace( /&lt;/g, '<' ).replace( /&gt;/g, '>' ).replace( /&quot;/g, '"' );
-  return String( str ).replace( /&amp;/g, '&' ).replace( /&lt;/g, '<' ).replace( /&gt;/g, '>' );
+  return String( str ).replace( /&amp;/g, '&' ).replace( /&lt;/g, '<' ).replace( /&gt;/g, '>' )
+                      .replace( /&apos;/g, "'" ).replace( /&quot;/g, '"' );
 }
 
 WarSoundyAudioPlaylistAdmin.prototype.backupSoundtracks = function()
