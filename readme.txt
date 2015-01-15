@@ -30,7 +30,7 @@ This Soundy plugin can be used like its Soundy brother, [Soundy Background Music
 * Tools in plugin settings to make Play/Pause button responsive
 * List of soundtracks can be made scrollable and height of scrolling area can be set in the plugin metabox on a per page/post basis.
 
-* In the [free version](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/) of the plugin, the administrator can set up and maintain an audio playlist which can then be played and displayed by any page or post.
+* In the [FREE version](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/) of the plugin, the administrator can set up and maintain an audio playlist which can then be played and displayed by any page or post.
 * In the [PRO version](http://webartisan.ch/en/products/soundy-audio-playlist/pro-wordpress-plugin/) of the plugin, each page or post can have its own playlist set up and maintained by its author.
 
 The soundtracks are played by means of the HTML 5 audio tag. This way, the plugin is compatible with all modern user devices (smartphones, tablets, laptops and desktops of all vendors).
