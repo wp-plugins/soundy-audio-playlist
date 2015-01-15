@@ -1,13 +1,13 @@
 <?php
 /**
  * @package Soundy_Audio_Playlist_PRO
- * @version 2.1
+ * @version 2.2
  */
 /*
 Plugin Name: Soundy Audio Playlist
 Plugin URI: http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/
 Description: This plugin allows any page or post to play and display an audio playlist.
-Version: 2.1
+Version: 2.2
 Author: Bertrand du Couédic
 Author URI: http://webartisan.ch/en/about
 License: GPL2
@@ -32,7 +32,7 @@ class WarSoundyAudioPlaylist
 {
 	public $sdy_pl_type                      = 'free';
 	public $sdy_pl_subtype                   = '';
-	public $sdy_pl_version                   = '2.1';
+	public $sdy_pl_version                   = '2.2';
 	public $sdy_pl_free_home_wp_url          = 'http://wordpress.org/plugins/soundy-audio-playlist/';
 	public $sdy_pl_pro_home_url              = 'http://webartisan.ch/en/products/soundy-audio-playlist/pro-wordpress-plugin/';
     public $sdy_pl_pro_updates_url           = 'http://webartisan.ch/products/updates/';

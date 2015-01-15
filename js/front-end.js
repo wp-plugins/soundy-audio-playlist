@@ -530,7 +530,7 @@ war_SoundyAudioPlaylistFrontEnd.prototype.setEventHandlersForAudioPlayer = funct
 	} );
 
 	_this.audio_player.bind( 'pause' , function()
-  {
+    {
 		_this.is_playing = false;
 		
 		if( _this.jquery_placeholder_playlist_current_status.length )
@@ -543,10 +543,15 @@ war_SoundyAudioPlaylistFrontEnd.prototype.setEventHandlersForAudioPlayer = funct
 	{
 		_this.audio_player.bind( 'loadedmetadata', function()
 		{
+            var duration_str = _this.current_soundtrack.children( '.war_soundtrack_time' ).html();
+            if( duration_str == '∞' )
+            {
+                _this.playlist_time_slider.slider( 'option', 'max', '' );
+                return;
+            }
             if( _this.user_agent_is_IOS )
             {
                 // IOS Duration Bug turn around
-                var duration_str = _this.current_soundtrack.children( '.war_soundtrack_time' ).html();
                 var dur = duration_str.split( ':' );
                 var duration = dur[ 0 ] * 60 + dur[ 1 ];
             }
@@ -564,6 +569,21 @@ war_SoundyAudioPlaylistFrontEnd.prototype.initPlaylist = function()
 	var _this = this;
 	
 	var jquery_playlist = jQuery( '#war_sdy_pl_playlist' );
+
+    jquery_playlist.children().each( function( index, li )
+    {
+        var jquery_li = jQuery( li );
+
+        var jquery_time = jquery_li.children( '.war_soundtrack_time' );
+        var soundtrack_time = jquery_time.html();
+        // Removes Invalid Soundtrack Time
+        var reg_invalid_time = /[^0-9:]/;
+        if( reg_invalid_time.test( soundtrack_time ) )
+        {
+            jquery_time.html( '&infin;' );
+        }
+    } );
+
 	if( jquery_playlist.length )
 	{
 		_this.is_playlist_shortcode = true;

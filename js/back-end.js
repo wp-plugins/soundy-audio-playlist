@@ -42,6 +42,7 @@ WarSoundyAudioPlaylistAdmin.prototype.initSettingsTabs = function( args )
 	_this.bindMediaUploader( 'war_sdy_pl_url_play_hover',   'img_play_hover_library_button',   'image' );
 	_this.bindMediaUploader( 'war_sdy_pl_url_pause_button', 'img_pause_button_library_button', 'image' );
 	_this.bindMediaUploader( 'war_sdy_pl_url_pause_hover',  'img_pause_hover_library_button',  'image' );
+    _this.removeSkimLinks();
 	_this.initTabs();
 	_this.initEnterKey();
 	_this.initAudioFileURL();
@@ -76,6 +77,7 @@ WarSoundyAudioPlaylistAdmin.prototype.initMetaBox = function( args )
 	_this.is_metabox = true;
 
 	_this.bindMediaUploader( 'war_sdy_pl_audio_file_url', 'war_audio_library_button', 'audio' );
+    _this.removeSkimLinks();
 	_this.initTabs();
 	_this.initEnterKey();
 	_this.initAudioFileURL();
@@ -94,6 +96,33 @@ WarSoundyAudioPlaylistAdmin.prototype.initMetaBox = function( args )
 	_this.initSoundtrackYellowSelect();
 	_this.initSoundtrackYellowUnselect();
 	_this.initSubmitMetabox();
+}
+
+WarSoundyAudioPlaylistAdmin.prototype.removeSkimLinks = function()
+{
+    var _this = this;
+
+    var jquery_soundtracks_list = jQuery( '#war_sdy_pl_back_end_playlist' );
+
+    jquery_soundtracks_list.children().each( function( index, li )
+    {
+        var jquery_li = jQuery( li );
+
+        var jquery_url = jquery_li.children( '.war_back_end_soundtrack_url' );
+        var soundtrack_url = jquery_url.html();
+        // Removes any HTML tag like: <span class="skimlinks-unlinked">...</span> in URL
+        soundtrack_url = soundtrack_url.replace( /<[^>]+\>/g, '' );
+        jquery_url.html( soundtrack_url );
+
+        var jquery_time = jquery_li.children( '.war_back_end_soundtrack_time' );
+        var soundtrack_time = jquery_time.html();
+        // Removes Invalid Soundtrack Time
+        var reg_invalid_time = /[^0-9:]/;
+        if( reg_invalid_time.test( soundtrack_time ) )
+        {
+            jquery_time.html( '&infin;' );
+        }
+    } );
 }
 
 WarSoundyAudioPlaylistAdmin.prototype.initTabs = function()
@@ -638,10 +667,24 @@ WarSoundyAudioPlaylistAdmin.prototype.initAudioFileURL = function()
 	
 	jQuery( '#war_sdy_pl_audio_player' ).bind( 'loadedmetadata', function()
 	{
-		var seconds = Math.round( this.duration );
-		var hms_time = _this.secondsToHms( seconds );
-		if( this.src != jQuery( '#war_sdy_pl_audio_file_url' ).val() ) return;
-		jQuery( '#war_sdy_pl_audio_time' ).val( hms_time );
+        if( this.src != jQuery( '#war_sdy_pl_audio_file_url' ).val() ) return;
+
+        var reg_valid_duration = /^[0-9.]+$/;
+        if( reg_valid_duration.test( this.duration ) )
+        {
+            var seconds = Math.round( this.duration );
+            var hms_time = _this.secondsToHms( seconds );
+            var hms_time_2 = hms_time;
+        }
+        else
+        {
+            var hms_time = '&infin;';
+            jQuery( 'body' ).append( '<div id="war_sdy_pl_temp">&infin;</div>' );
+            var hms_time_2 = jQuery( '#war_sdy_pl_temp' ).text();
+            jQuery( '#war_sdy_pl_temp' ).remove();
+        }
+
+        jQuery( '#war_sdy_pl_audio_time' ).val( hms_time_2 );
 		if( _this.jquery_li_selected )
 		{
 			var soundtrack_url = _this.jquery_li_selected.children( '.war_back_end_soundtrack_url' ).html();
