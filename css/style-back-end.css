@@ -1,0 +1,530 @@
+.war_sdy_pl_back_end_playlist
+{
+	list-style-type: none; 
+	margin: 0; 
+	padding: 0; 
+	width: 95%;
+}
+
+#war_sdy_pl_back_end_playlist
+{
+  height: 212px;
+  overflow-y: auto;
+}
+
+.war_sdy_pl_back_end_playlist li
+{ 
+	margin: 0 3px 3px 3px; 
+	padding: 0.4em; 
+	padding-left: 1em; 
+	cursor: ns-resize;
+	border: 1px solid #aaaaaa;
+	border-radius: 3px;
+}
+
+.war_sdy_pl_back_end_playlist_sortable_placeholder
+{
+	height: 1.5em; 
+	line-height: 1.2em;
+	background: #ffffcc;
+	border: 1px solid #ffffcc;
+}
+
+.war_back_end_soundtrack_row_header
+{
+	background: #cccccc !important;
+	cursor: auto !important;
+	font-weight: bold !important;
+}
+
+.war_back_end_soundtrack_row_footer
+{
+	background: #cccccc !important;
+	cursor: auto !important;
+	font-weight: normal !important;
+}
+
+.war_back_end_soundtrack_selected
+{
+	background-color: #c0e7f0 !important;
+}
+
+.war_back_end_soundtrack_url,
+.war_back_end_soundtrack_volume,
+.war_back_end_soundtrack_type
+{
+	display: none;
+}
+
+.war_back_end_soundtrack_index
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 3%;
+}
+
+.war_back_end_soundtrack_title,
+.war_back_end_soundtrack_artist,
+.war_back_end_soundtrack_composer,
+.war_back_end_soundtrack_time,
+.war_back_end_soundtrack_id
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 1.5%;
+	text-wrap: none;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.war_back_end_soundtrack_title
+{
+	width: 24%;
+}
+
+.war_back_end_soundtrack_artist
+{
+	width: 25%;
+}
+
+.war_back_end_soundtrack_composer
+{
+	width: 26%;
+}
+
+.war_back_end_soundtrack_time
+{
+	width: 8%;
+	text-align: right;
+}
+
+.war_back_end_soundtrack_id
+{
+	width: 5%;
+}
+
+a:active,
+a:focus 
+{
+	outline: 0 !important;
+	text-decoration: none !important;
+}
+
+table.war_sdy_pl th 
+{
+	width: 15% !important;
+	vertical-align: top !important;
+	text-align: left !important;
+}
+
+table.war_sdy_pl_general th
+{
+    width: 30% !important;
+    vertical-align: top !important;
+    text-align: left !important;
+}
+
+table.war_sdy_pl_shortcodes th
+{
+    width: 30% !important;
+    padding: 8px 0 8px 0;
+    vertical-align: top !important;
+    text-align: left !important;
+}
+
+table.war_sdy_pl_shortcodes td
+{
+    padding: 8px 0 8px 0;
+    vertical-align: top !important;
+    text-align: left !important;
+}
+
+input[type=button].war_sdy_pl,
+button.war_sdy_pl,
+button.war_sdy_pl_soundtrack_button
+{
+	height: 30px;
+	line-height: 28px;
+	padding: 0 12px 20px;
+	color: #ffffff;
+	background-color: #2eaecc;
+	border-radius: 3px;
+	border: #0074a2 1px solid;
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+input[type=button].war_sdy_pl:hover,
+button.war_sdy_pl:hover, 
+button.war_sdy_pl_soundtrack_button:hover
+{
+	background-color: #1e8cbe;
+}
+
+button.war_sdy_pl_button_media_library_pp_button
+{
+	height: 30px;
+	line-height: 28px;
+	padding: 0 12px 20px;
+	color: #ffffff;
+	background-color: #2eaecc;
+	border-radius: 3px;
+	border: #0074a2 1px solid;
+	cursor: pointer;
+	vertical-align: top;
+	margin-right: 10px;
+}
+
+button.war_sdy_pl_button_media_library_pp_button:hover
+{
+	background-color: #1e8cbe;
+}
+
+.war_sdy_pl_soundtrack_button
+{
+	width: 80px;
+	vertical-align: middle;
+}
+
+.war_sdy_pl_label_field_container
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 10px;
+	margin-right: 20px;
+}
+
+.war_sdy_pl_label_field_container_full_width
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    width: 100%;
+    text-wrap: none;
+    white-space: nowrap;
+}
+
+.war_sdy_pl_soundtrack_button_container
+{
+	width: 120px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 10px;
+}
+
+.war_button_inactive,
+.war_button_inactive:hover
+{
+	background-color: #cccccc !important;
+	color: #333333 !important;
+	border: #aaaaaa 1px solid !important;
+	cursor: auto !important;
+}
+
+a.war_sdy_pl_hit_link
+{
+	color: #ffffff !important;
+	background-color: #2eaecc !important;
+	border-radius: 3px !important;
+	padding-left: 5px !important;
+	padding-right: 5px !important;
+}
+
+.war_sdy_pl_page_preview_label,
+input[type=text]
+{
+	vertical-align: middle;
+}
+
+.war_sdy_pl_label
+{
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+div.war_sdy_pl_label
+{
+    display: inline-block;
+    width: 80px;
+    margin-right: 10px;
+}
+
+.war_sdy_pl_page_preview_url
+{
+	vertical-align: middle;
+}
+
+audio.war_sdy_pl 
+{
+	margin: 0 0 0 2px !important;
+	vertical-align: middle !important;
+	width: 300px;
+	border-radius: 3px;
+}
+
+img.war_sdy_pl 
+{
+	margin: 0 0 0 0 !important;
+}
+
+table.war_sdy_pl_no_border,
+table.war_sdy_pl_no_border th,
+table.war_sdy_pl_no_border td 
+{
+	border: 0px solid red !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.war_sdy_pl_slider
+{
+	width: 300px;
+    font-size: 10px !important;
+	display: inline-block;
+	margin-right: 10px;
+    cursor: pointer;
+}
+
+.war_sdy_pl_slider .ui-slider-handle
+{
+	background: #2eaecc !important;
+	border-color: #0074a2 !important;
+	cursor: ew-resize !important;
+}
+
+.war_sdy_pl_slider .ui-slider-handle:hover
+{
+	background: #1e8cbe !important;
+	border-color: #0074a2 !important;
+}
+
+.war_sdy_pl_license_key_input
+{
+	width: 150px;
+}
+
+.war_sdy_pl_valid
+{
+	font-size: 130% !important;
+	color: #2eaecc !important;
+	vertical-align: middle;
+    margin-left: 1em;
+}
+
+.war_sdy_pl_invalid
+{
+	font-size: 130% !important;
+	color: #ff4719 !important;
+	vertical-align: middle;
+    margin-left: 1em;
+}
+
+.war_sdy_pl_txt_input 
+{
+	width: 85%;
+}
+
+.war_sdy_pl_audio_volume 
+{
+	width: 40px;
+}
+
+#war_sdy_pl_img_preview_here 
+{
+	display: none;
+	cursor: pointer;
+}
+
+.war_sdy_pl_form_table
+{
+	
+}
+
+.war_sdy_pl_container
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+div.war_sdy_pl_font_size_container
+{
+    display: block;
+    margin-top:    0px;
+    margin-bottom: 0px;
+    border: 0px solid #0000aa;
+    text-wrap: none;
+    white-space: nowrap;
+}
+
+.war_sdy_pl_validation_error
+{
+    color: red;
+    position: relative;
+    top: 1px;
+}
+
+div.war_sdy_pl_column_layout_container
+{
+    display: block;
+    margin-top:    3px;
+    margin-bottom: 3px;
+    border: 0px solid #0000aa;
+    text-wrap: none;
+    white-space: nowrap;
+}
+
+div.war_sdy_pl_column_layout_captions
+{
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+div.war_sdy_pl_column_do_display_container
+{
+    width: 70px;
+}
+
+div.war_sdy_pl_column_label
+{
+    width: 80px;
+}
+
+div.war_sdy_pl_slider_container_column
+{
+    width: 310px;
+}
+
+div.war_sdy_pl_column_width_value
+{
+    width: 70px;
+    border: 0px solid #0000aa;
+}
+
+div.war_sdy_pl_column_width_unit
+{
+    text-wrap: none;
+    white-space: nowrap;
+    border: 0px solid #0000aa;
+}
+
+#war_sdy_pl_column_order_name_list
+{
+    vertical-align: top;
+}
+
+#war_sdy_pl_column_order_name_list li
+{
+    float: left;
+    cursor: ew-resize;
+    border: 1px solid #aaaaaa;
+    margin: 0em 0.8em 0em 0em;
+    padding: 0.2em 0.6em 0.2em 0.6em;
+    border-radius: 3px;
+    background-color: #ffffff;
+}
+
+.war_sdy_pl_column_order_sortable_placeholder
+{
+    border: 1px solid #aaaaaa;
+    margin: 0em 0.4em 0em 0.4em;
+    padding: 0.2em 0.6em 0.2em 0.6em;
+    border-radius: 3px;
+    width: 70px;
+    height: 1.3em;
+    background-color: #ffffcc !important;
+}
+
+.war_sdy_pl_responsive_list li
+{
+    margin: 0 3px 3px 3px;
+    padding: 0.4em;
+    padding-left: 1em;
+    cursor: ns-resize;
+    border: 1px solid #aaaaaa;
+    border-radius: 3px;
+}
+
+.war_sdy_pl_responsive_list_field
+{
+    display: inline-block;
+    width: 130px;
+    min-width: 130px;
+}
+
+.war_sdy_pl_responsive_comment
+{
+    display: inline-block;
+    width: 215px;
+    min-width: 215px;
+    border: 0px red solid;
+}
+
+.war_sdy_pl_responsive_list_row_header
+{
+    background: #cccccc !important;
+    cursor: auto !important;
+    font-weight: bold !important;
+}
+
+.war_sdy_pl_responsive_list_row_footer
+{
+    background: #cccccc !important;
+    cursor: auto !important;
+    font-weight: normal !important;
+}
+
+.war_sdy_pl_responsive_sortable_placeholder
+{
+    height: 1.5em;
+    line-height: 1.2em;
+    background: #ffffcc;
+    border: 1px solid #ffffcc;
+}
+
+.war_comment
+{
+    color: #2eaecc !important;
+    vertical-align: middle;
+}
+
+.war_bold
+{
+    font-weight: bold;
+}
+
+.war_bigger
+{
+    font-size: 120%;
+}
+
+.war_hidden
+{
+    display: none;
+}
+
+.war_table_no_space td
+{
+    vertical-align: top;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+@media only screen and (max-width: 480px) 
+{
+
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) 
+{
+
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) 
+{
+
+}
+ 
+@media only screen and (min-width: 1025px) 
+{
+
+}
