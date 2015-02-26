@@ -1,0 +1,423 @@
+div#war_sdy_pl_design_pl_preview
+{
+	border: 1px solid #aaaaaa;
+    background-color: #eeeeee;
+	z-index: 10;
+	border-radius: 5px;
+	position: fixed; 
+	right: 30px;
+	bottom: 30px;
+    font-size: 0.9em;
+    line-height: 1.2em;
+    vertical-align: middle;
+    text-align: center;
+    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+div.war_sdy_pl_designer_preview_playlist_outer_box
+{
+    margin: 3%;
+    padding: 6px 6px 6px 6px;
+    border: 1px solid #aaaaaa;
+    border-radius: 3px;
+    vertical-align: top;
+    text-align: center;
+}
+
+ul.war_sdy_pl_designer_preview_playlist
+{
+    vertical-align: middle;
+    text-align: left;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    list-style-type: none;
+    width: 100%;
+    border: 0px solid #ff0000;
+}
+
+/*
+ul#war_sdy_pl_designer_preview_playlist
+{
+  height: 212px;
+  overflow-y: auto;
+}
+*/
+
+ul.war_sdy_pl_designer_preview_playlist li
+{
+    padding-top:     5px;
+    padding-bottom:  5px;
+    padding-left:    10px;
+    padding-right:   10px;
+    border: 1px solid #aaaaaa;
+}
+
+ul#war_sdy_pl_designer_preview_playlist
+{
+}
+
+ul#war_sdy_pl_designer_preview_playlist li
+{
+    border: 1px solid #aaaaaa;
+    margin: -1px 0px -1px 0px;
+    border-radius: 0px;
+    background-color: #ffffff;
+    text-wrap: none;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+ul#war_sdy_pl_designer_preview_playlist li:nth-child( odd )
+{
+    background-color: #eeeeee;
+}
+
+.war_sdy_pl_designer_preview_sortable_placeholder
+{
+    height: 1.5em;
+    line-height: 1.2em;
+    background: #ccffcc;
+    border: 1px solid #ffffcc;
+}
+
+li.war_sdy_pl_designer_preview_soundtrack_row_header
+{
+    margin: 0px 0px 6px 0px;
+    text-align: left;
+    background: #cccccc;
+    border-radius: 3px;
+    cursor: auto;
+    font-weight: bold;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    overflow: hidden;
+}
+
+li.war_sdy_pl_designer_preview_playlist_columns_caption_row
+{
+    margin: 0px 0px 6px 0px;
+    background: #cccccc;
+    cursor: auto;
+    font-weight: bold;
+    border-radius: 3px;
+    text-wrap: none;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+li.war_sdy_pl_designer_preview_soundtrack_row_footer
+{
+    margin: 6px 0px 0px 0px;
+    text-align: left;
+    background: #cccccc;
+    border-radius: 3px;
+    cursor: auto;
+    font-weight: normal;
+}
+
+div.war_sdy_pl_designer_preview_soundtrack_row_footer_div
+{
+    margin-left: 0.8em;
+}
+
+div.war_sdy_pl_designer_preview_playlist_pp_button
+{
+    display: inline-block;
+    padding: 7px;
+    vertical-align: middle;
+    text-align: left;
+    cursor: pointer;
+}
+
+div.war_sdy_pl_designer_preview_playlist_title_global
+{
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-left: 3%;
+    width: 32%;
+}
+
+div.war_sdy_pl_designer_preview_playlist_title
+{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.5em;
+    margin-bottom: 0.3em;
+    margin-right: 5%;
+}
+
+div.war_sdy_pl_designer_preview_playlist_volume_container
+{
+    display: inline-block;
+    vertical-align: middle;
+    text-wrap: none;
+    white-space: nowrap;
+    border: 0px solid #000000;
+}
+
+svg.war_sdy_pl_designer_preview_playlist_volume_icon
+{
+    vertical-align: middle;
+    margin-right: 5%;
+}
+
+div.war_sdy_pl_designer_preview_playlist_volume_slider
+{
+    width: 75px;
+    font-size: 6px !important;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    top: -1px;
+    background: #ff0000;
+}
+
+.war_sdy_pl_designer_preview_playlist_volume_slider .ui-slider-range
+{
+    background: #cccccc;
+}
+
+.war_sdy_pl_designer_preview_playlist_volume_slider .ui-slider-handle
+{
+    position: relative;
+    top: -4px !important;
+    font-size: 10px;
+    width: 8px;
+    background: #0000ff;
+    border-color: #0074a2;
+    cursor: ew-resize !important;
+}
+
+.war_sdy_pl_designer_preview_playlist_volume_slider .ui-slider-handle:focus
+{
+    outline: none;
+}
+
+div.war_sdy_pl_designer_preview_playlist_header_soundtrack_title
+{
+    font-size: 1.1em;
+    line-height: 1.2em;
+}
+
+div.war_sdy_pl_designer_preview_playlist_header_soundtrack_artist
+{
+    font-size: 0.7em;
+    line-height: 1.7em;
+}
+
+div.war_sdy_pl_designer_preview_playlist_header_right_hand
+{
+    display: inline-block;
+    float: right;
+    vertical-align: middle;
+    padding-top: 15px;
+    padding-right: 2%;
+}
+
+div.war_sdy_pl_designer_preview_playlist_time_slider_global
+{
+    vertical-align: middle;
+    text-wrap: none;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+div.war_sdy_pl_designer_preview_playlist_soundtrack_time_local
+{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: right;
+    margin-right: 0;
+    width: 32px;
+}
+
+div.war_sdy_pl_designer_preview_playlist_time_slider_local
+{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    width: 170px;
+}
+
+div.war_sdy_pl_designer_preview_playlist_time_slider
+{
+    width: 150px;
+    font-size: 6px !important;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    position: relative;
+    top: -1px;
+}
+
+.war_sdy_pl_designer_preview_playlist_time_slider .ui-slider-range
+{
+    background: #cccccc;
+}
+
+.war_sdy_pl_designer_preview_playlist_time_slider .ui-slider-handle
+{
+    position: relative;
+    top: -4px !important;
+    font-size: 10px;
+    width: 6px !important;
+    background: #2eaecc;
+    border-color: #0074a2;
+    cursor: ew-resize !important;
+}
+
+.war_sdy_pl_designer_preview_playlist_time_slider .ui-slider-handle:focus
+{
+    outline: none;
+}
+
+div.war_sdy_pl_designer_preview_playlist_soundtrack_duration_local
+{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    margin-left: 0;
+    width: 32px;
+}
+
+div.war_sdy_pl_designer_preview_playlist_soundtrack_title_global
+{
+    vertical-align: middle;
+    text-wrap: none;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 5px;
+}
+
+div.war_sdy_pl_designer_preview_playlist_previous_local
+{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: right;
+    margin-right: 0;
+    width: 32px;
+}
+
+div.war_sdy_pl_designer_preview_playlist_header_soundtrack_title
+{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    width: 170px;
+}
+
+div.war_sdy_pl_designer_preview_playlist_next_local
+{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    margin-left: 0;
+    width: 32px;
+}
+
+div.war_sdy_pl_designer_preview_playlist_header_soundtrack_title
+{
+    text-align: center;
+}
+
+li.war_designer_preview_soundtrack_selected
+{
+    background-color: #c0e7f0;
+}
+
+div.war_designer_preview_soundtrack_index,
+div.war_designer_preview_soundtrack_title,
+div.war_designer_preview_soundtrack_artist,
+div.war_designer_preview_soundtrack_composer,
+div.war_designer_preview_soundtrack_time,
+div.war_designer_preview_soundtrack_id,
+div.war_designer_preview_soundtrack_url,
+div.war_designer_preview_soundtrack_volume,
+div.war_designer_preview_soundtrack_type
+{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    margin: 0 0 0 0;
+    margin-left: 0.8em;
+    margin-right: 0.8em;
+    text-wrap: none;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+div.war_designer_preview_soundtrack_url,
+div.war_designer_preview_soundtrack_volume,
+div.war_designer_preview_soundtrack_type
+{
+    display: none;
+}
+
+div.war_designer_preview_soundtrack_index
+{
+    width: 5%;
+    border: 0px solid #ff0000;
+}
+
+div.war_designer_preview_soundtrack_title
+{
+    width: 23%;
+}
+
+div.war_designer_preview_soundtrack_artist
+{
+    width: 25%;
+    display: none;
+}
+
+div.war_designer_preview_soundtrack_composer
+{
+    width: 39%;
+}
+
+div.war_designer_preview_soundtrack_time
+{
+    width: 10%;
+    text-align: right;
+}
+
+div.war_designer_preview_soundtrack_id
+{
+    width: 5%;
+    display: none;
+}
+
+svg.war_sdy_pl_button_previous,
+svg.war_sdy_pl_button_next
+{
+    cursor: pointer;
+}
+
+g.war_designer_preview_icon_previous_next_graphic
+{
+    fill: #3c3c3c;
+}
+
+path.war_designer_preview_icon_speaker_graphic_1
+{
+    fill: #3c3c3c;
+}
+
+path.war_designer_preview_icon_speaker_graphic_2
+{
+    stroke: #3c3c3c;
+}
+
+div.ui-slider-handle:focus
+{
+    outline: none;
+}
+
+div.ui-slider-range
+{
+    background: #cccccc;
+}
