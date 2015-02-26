@@ -3,7 +3,7 @@ Contributors: bducouedic
 Tags: audio, sound, music, playlist, background, soundtrack, background sound, background audio, background music, posts, pages
 Requires at least: 3.6
 Tested up to: 4.1
-Stable tag: 2.2
+Stable tag: 2.3
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#war_donate
@@ -30,7 +30,7 @@ This Soundy plugin can be used like its Soundy brother, [Soundy Background Music
 * Tools in plugin settings to make Play/Pause button responsive
 * List of soundtracks can be made scrollable and height of scrolling area can be set in the plugin metabox on a per page/post basis.
 
-* In the [free version](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/) of the plugin, the administrator can set up and maintain an audio playlist which can then be played and displayed by any page or post.
+* In the [FREE version](http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/) of the plugin, the administrator can set up and maintain an audio playlist which can then be played and displayed by any page or post.
 * In the [PRO version](http://webartisan.ch/en/products/soundy-audio-playlist/pro-wordpress-plugin/) of the plugin, each page or post can have its own playlist set up and maintained by its author.
 
 The soundtracks are played by means of the HTML 5 audio tag. This way, the plugin is compatible with all modern user devices (smartphones, tablets, laptops and desktops of all vendors).
@@ -148,11 +148,14 @@ PHP 5.3.0 has been released in June 2009. Today’s version is 5.5.12. (sources:
 
 == Changelog ==
 
+= 2.3 &nbsp;&nbsp; - &nbsp;&nbsp; January 26th, 2015 =
+* WordPress's new file uploader is now called instead of the old file uploader when "Media Library" button is used to select a file from the media library.
+
 = 2.2 &nbsp;&nbsp; - &nbsp;&nbsp; January 15th, 2015 =
 * Modified the plugin to allow the use of Radio MP3 stream URLs like http://uk4.internet-radio.com:10911/;
 
 = 2.1 &nbsp;&nbsp; - &nbsp;&nbsp; January 13th, 2015 =
-Fixed bugs in Import Command and Soundtrack List:
+* Fixed bugs in Import Command and Soundtrack List:
 * The Import command imported only MP3 files. The command imports now all MP3, OGG and WAVE files from the media library.
 * Quotes and apostrophes in soundtrack properties caused problems. These problems are now gone.
 
