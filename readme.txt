@@ -3,7 +3,7 @@ Contributors: bducouedic
 Tags: audio, sound, music, playlist, background, soundtrack, background sound, background audio, background music, posts, pages
 Requires at least: 3.6
 Tested up to: 4.3
-Stable tag: 2.3
+Stable tag: 2.4
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#war_donate
@@ -147,6 +147,9 @@ PHP 5.3.0 has been released in June 2009. Today’s version is 5.5.12. (sources:
 1. **Play/Pause Button Designer**
 
 == Changelog ==
+
+= 2.4 &nbsp;&nbsp; - &nbsp;&nbsp; September 1st, 2015 =
+* Column labels like "Artist" and "Composer" are now centrally defined on lines 63 to 69 in plugin main file: soundy-audio-playlist.php. For example, you could replace the right hand side string "Artist" with the string "Speaker" on line 65 and the right hand side string "Composer" with the string "Subject" on line 66 in file soundy-audio-playlist.php.
 
 = 2.3 &nbsp;&nbsp; - &nbsp;&nbsp; January 26th, 2015 =
 * WordPress's new file uploader is now called instead of the old file uploader when "Media Library" button is used to select a file from the media library.
