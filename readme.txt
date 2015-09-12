@@ -3,7 +3,7 @@ Contributors: bducouedic
 Tags: audio, sound, music, playlist, background, soundtrack, background sound, background audio, background music, posts, pages
 Requires at least: 3.6
 Tested up to: 4.3
-Stable tag: 2.4
+Stable tag: 2.5
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://webartisan.ch/en/products/soundy-audio-playlist/free-wordpress-plugin/#war_donate
@@ -26,6 +26,7 @@ This Soundy plugin can be used like its Soundy brother, [Soundy Background Music
 * Mouse click soundtrack selection
 * Mouse double-click Play/Pause
 * Display of title, artist and composer of current playing soundtrack
+* Soundtrack Download if author allows it
 * Audio-Player is responsive
 * Tools in plugin settings to make Play/Pause button responsive
 * List of soundtracks can be made scrollable and height of scrolling area can be set in the plugin metabox on a per page/post basis.
@@ -147,6 +148,10 @@ PHP 5.3.0 has been released in June 2009. Today’s version is 5.5.12. (sources:
 1. **Play/Pause Button Designer**
 
 == Changelog ==
+
+= 2.5 &nbsp;&nbsp; - &nbsp;&nbsp; September 12th, 2015 =
+* Webmaster and authors have now the option to allow soundtrack downloading.
+* The option "Enable Soundtrack Download" appears in the General tab in the settings page of the plugin as well as in the General tab of the plugin metabox in each page or post.
 
 = 2.4 &nbsp;&nbsp; - &nbsp;&nbsp; September 1st, 2015 =
 * Column labels like "Artist" and "Composer" are now centrally defined on lines 63 to 69 in plugin main file: soundy-audio-playlist.php. For example, you could replace the right hand side string "Artist" with the string "Speaker" on line 65 and the right hand side string "Composer" with the string "Subject" on line 66 in file soundy-audio-playlist.php.
